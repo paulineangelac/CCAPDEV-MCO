@@ -1,0 +1,39 @@
+body{
+    background-image: url('../pictures/loginbg.jpg');
+    background-size: cover;
+}
+
+.signUpContainer{
+   width : 300px;
+    padding : 10px;
+    margin:100px auto;
+    background : rgba(255, 255, 255, 0.877);
+    border-radius : 10px;
+    box-shadow : 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.signUpBox{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.signUpBox h2{
+    text-align : center;
+    margin-bottom : 20px;
+}
+
+.signUpBox p {
+    text-align: center;
+}
+.signUpBox #submitButton{
+    width : 30%;
+    padding : 10px;
+    background : #4CAF50;
+    border : none;
+    border-radius : 5px;
+    color : white;
+    font-size : 16px;
+    cursor : pointer;
+}
+
+.signUpBox input[type="text"], .signUpBox input[type="password"],   .signUpBox input[type="email"]{
+    width:290px;
+    height:20px;
+}
