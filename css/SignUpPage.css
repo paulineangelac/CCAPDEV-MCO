@@ -1,6 +1,7 @@
 body{
     background-image: url('../pictures/loginbg.jpg');
     background-size: cover;
+    font-family: 'SF Pro Display ', Helvetica, Arial, sans-serif;
 }
 
 .signUpContainer{
@@ -10,9 +11,7 @@ body{
     background : rgba(255, 255, 255, 0.877);
     border-radius : 10px;
     box-shadow : 0 0 10px rgba(0, 0, 0, 0.3);
-}
-.signUpBox{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
 }
 .signUpBox h2{
     text-align : center;
