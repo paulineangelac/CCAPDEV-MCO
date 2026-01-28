@@ -1,11 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="../css/main.css" />
 </head>
-<body style="background-image:url('../pictures/temp.jpeg'); background-size:cover;">
-    <h1>Student Dashboard</h1>
-</body>
-</html>
+
+    <body>
+        <header class="navbar">
+            <div class="navbar__inner navbar__inner--wide">
+
+                <a class="brand" href="../index.html">
+                <span class="brand__logo" aria-hidden="true"></span>
+                <span class="brand__text">Lab Reservation</span>
+                </a> 
+
+                <div class="navbar__right">
+
+                <a class="profile-chip" href="profile.html" title="View profile">
+                    <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
+                    <span class="profile-chip__meta">
+                    <span class="profile-chip__name">Juan Dela Cruz</span>
+                    <span class="profile-chip__role">Student</span>
+                    </span>
+                </a>
+
+                <button class="menu-btn" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+        <header class="dashboard-header">
+            <h1>Student Dashboard</h1>
+            <p class="muted">Manage your lab reservations and check real-time availability.</p>
+        </header>
+
+        <section class="search-section card">
+            <form class="search-form">
+            <div class="search-group">
+                <label for="lab-select">Lab</label>
+                <select id="lab-select" name="lab">
+                <option value="">Select Laboratory</option>
+                <option value="goks-304B">G304B</option>
+                <option value="goks-306A">G306A</option>
+                <option value="andrew-1904">A1904</option>
+                </select>
+            </div>
+
+            <div class="search-group">
+                <label for="date-select">Date</label>
+                <input type="date" id="date-select" name="date">
+            </div>
+
+            <div class="search-group">
+                <label for="time-select">Time</label>
+                <select id="time-select" name="time">
+                <option value="">Select Time</option>
+                <option value="08:00">08:00 AM</option>
+                <option value="09:00">09:00 AM</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn--primary">Search Slots</button>
+            </form>
+        </section>
+
+        <div class="dashboard-grid">
+            <section class="reservations-column">
+                    <h3 class="section-title">Upcoming Reservations</h3>
+                    <div class="card">
+                        <p class="muted">You have no upcoming reservations! Use the search or select a lab to start.</p>
+                    </div>
+                </section>
+
+                <aside class="labs-column">
+                    <h3 class="section-title">View Available Lab Slots</h3>
+                    
+                    <a href="lab-view.html" class="lab-card card">
+                        <div class="lab-card__info">
+                            <span class="lab-name">Goks 304B</span>
+                            <span class="lab-status small">12 Seats Available</span>
+                        </div>
+                        <span class="chevron">→</span>
+                    </a>
+
+                     <a href="lab-view.html" class="lab-card card">
+                        <div class="lab-card__info">
+                            <span class="lab-name">Goks 306A</span>
+                            <span class="lab-status small">28 Seats Available</span>
+                        </div>
+                        <span class="chevron">→</span> 
+
+                    <a href="lab-view.html" class="lab-card card">
+                        <div class="lab-card__info">
+                            <span class="lab-name">Andrew 1904</span>
+                            <span class="lab-status small">5 Seats Available</span>
+                        </div>
+                        <span class="chevron">→</span>
+                    </a>
+                </aside>     
+            </div>
+        </main>
+    </body>
+    </html>

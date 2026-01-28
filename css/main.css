@@ -1,0 +1,272 @@
+/* for consistency */
+:root{
+  --green: #006B20;
+  --navy: #2D2F4E;
+  
+
+  --bg: #F6F7FB;
+  --card: #FFFFFF;
+  --text: #111827;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+
+  --radius: 14px;
+  --shadow: 0 10px 25px rgba(17, 24, 39, 0.06);
+
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+          "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+*{ box-sizing: border-box; }
+body{
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container{
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 16px;
+}
+.muted{ color: var(--muted); }
+.small{ font-size: 12px; }
+a{ color: inherit; text-decoration: none; }
+a:hover{ text-decoration: underline; }
+
+/* header */
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255,255,255,0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar__inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0; 
+}
+
+.navbar__inner--wide{
+  max-width: 1500px; 
+  margin: 0 auto;   
+  width: 100%;
+  padding: 14px 40px;
+  box-sizing: border-box; 
+}
+
+.brand{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: var(--navy);
+  white-space: nowrap;
+  flex: 1;
+}
+
+.brand__logo{
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(0, 107, 32, 0.14); 
+  border: 1px solid rgba(0, 107, 32, 0.25);
+  display: inline-block;
+}
+
+.navbar__right{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.profile-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.profile-chip:hover{
+  background: rgba(45, 47, 78, 0.06);
+  text-decoration: none; 
+}
+
+.profile-chip:hover .profile-chip__name{
+  text-decoration: underline;
+}
+
+.avatar{
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  object-fit: cover;
+}
+
+.profile-chip__meta{
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.profile-chip__name{
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--navy);
+}
+
+.profile-chip__role{
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.menu-btn{
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;         
+}
+
+.menu-btn:hover{
+  background: rgba(45, 47, 78, 0.06);
+}
+
+.menu-btn span{
+  display: block;
+  width: 18px;       
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  margin: 0;        
+}
+
+/* dashboard*/
+.dashboard-header {
+    margin: 32px 0 24px 0;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: var(--navy);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+/* search bar */
+.search-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.search-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.search-group label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.search-group input, 
+.search-group select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-family: inherit;
+  font-size: 14px;
+  background: #fcfcfc;
+}
+
+/* main button */
+.btn--primary {
+  background: var(--green);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn--primary:hover {
+  opacity: 0.9;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; 
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+}
+
+/* for the card styling */
+.lab-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px !important;
+    margin-bottom: 12px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.lab-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--green);
+    text-decoration: none;
+}
+
+.lab-card__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.lab-name {
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.lab-status {
+    color: var(--green);
+    font-weight: 600;
+}
