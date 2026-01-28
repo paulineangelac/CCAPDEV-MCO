@@ -1,9 +1,10 @@
 body{
     margin : 0;
     padding : 0;
-    background-image: url('../pictures/loginbg.jpg');
-    background-size: cover;
+    background: linear-gradient(160deg, #006b20 0%, #2d2f4e 70%);
     font-family: 'SF Pro Display ', Helvetica, Arial, sans-serif;
+    background-repeat:no-repeat;
+    min-height: 100vh;
 }
 .loginContainer{
     width : 300px;
@@ -31,6 +32,9 @@ body{
     color : white;
     font-size : 16px;
     cursor : pointer;
+}
+.loginBox #submitButton:hover {
+    background-color: #45a049;
 }
 .loginBox input[type="text"], .loginBox input[type="password"]{
     width:290px;

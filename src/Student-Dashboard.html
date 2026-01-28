@@ -48,10 +48,7 @@
             <div class="search-group">
                 <label for="lab-select">Lab</label>
                 <select id="lab-select" name="lab">
-                <option value="">Select Laboratory</option>
-                <option value="goks-304B">G304B</option>
-                <option value="goks-306A">G306A</option>
-                <option value="andrew-1904">A1904</option>
+                    <option value="">Select Laboratory</option>
                 </select>
             </div>
 
@@ -64,8 +61,8 @@
                 <label for="time-select">Time</label>
                 <select id="time-select" name="time">
                 <option value="">Select Time</option>
-                <option value="08:00">08:00 AM</option>
-                <option value="09:00">09:00 AM</option>
+                <option value="08:00 AM">08:00 AM</option>
+                <option value="09:00 AM">09:00 AM</option>
                 </select>
             </div>
 
@@ -77,7 +74,10 @@
             <section class="reservations-column">
                     <h3 class="section-title">Upcoming Reservations</h3>
                     <div class="card">
-                        <p class="muted">You have no upcoming reservations! Use the search or select a lab to start.</p>
+                        <div id ="booking-list">
+                            <p class="muted">You have no upcoming reservations! Use the search or select a lab to start.</p>
+                        </div>
+
                     </div>
                 </section>
 
@@ -109,5 +109,6 @@
                 </aside>     
             </div>
         </main>
+        <script src="../js/main.js"></script>
     </body>
     </html>
