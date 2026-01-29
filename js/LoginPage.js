@@ -1,6 +1,6 @@
 const records=[
-    {name: 'John Doe', bookings:[{room: 'Goks 304A', time: '08:00 AM', date: '2024-11-15'}], status:'Student'},
-    {name: 'Mary Jane', bookings:[], status:'Admin'}
+    {username: 'John Doe', bookings:[{room: 'Goks 304A', time: '08:00 AM', date: '2024-11-15'}], status:'Student'},
+    {username: 'Mary Jane', bookings:[], status:'Admin'}
 ]
 
 localStorage.setItem('allRecords', JSON.stringify(records));
@@ -16,7 +16,8 @@ loginForm.addEventListener('submit', function(event){
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
 
-    if(records.some(record => record.name === user) && pass === 'admin123'){
+    if(records.some(record => record.username === user) && pass === 'admin123'){
+        localStorage.setItem('logedInUser', user);
         window.location.href = 'Student-Dashboard.html';
     }
     else{
