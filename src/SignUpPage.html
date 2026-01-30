@@ -10,11 +10,19 @@
     <div class="signUpContainer">
         <div class ="signUpBox">
             <h2>Sign Up</h2>
-            <form action="/signup" method="POST">
+            <form method="POST">
+                <label for="fname">First Name:</label><br>
+                <input type="text" id="fname" name="fname"><br><br>
+
+                <label for="lname">Last Name:</label><br>
+                <input type="text" id="lname" name="lname"><br><br>
+
                 <label for="username">Username:</label><br>
                 <input type="text" id="username" name="username"><br><br>
+
                 <label for="email">Email:</label><br>
                 <input type="email" id="email" name="email"><br><br>
+
                 <label for="password">Password:</label><br>
                 <input type="password" id="password" name="password"><br><br>
 
@@ -26,5 +34,6 @@
             <p>Already have an account? <a href="LoginPage.html">Login</a></p>
         </div>
     </div>
+    <script src="SignIn.js"></script>
 </body>
 </html>
