@@ -5,7 +5,7 @@ loginForm.addEventListener('submit', function(event){
     event.preventDefault();
 
          
-    window.location.href = 'Student-Dashboard.html';
+    window.location.href = 'StudentDashboardPage.html';
 })
 
 /* End of Login Form Functionality */
