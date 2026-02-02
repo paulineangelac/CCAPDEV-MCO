@@ -16,71 +16,70 @@
                     <span class="brand__logo" aria-hidden="true"></span>
                     <span class="brand__text">Lab Reservation</span>
                 </a> 
+
                 <div class="navbar__right">
+                    <div id="topRightProfile">
+                        <a class="profile-chip" href="profile.html" title="View profile">
+                        <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
+                            <span class="profile-chip__meta">
+                                <span class="profile-chip__name">Full Name</span>
+                                <span class="profile-chip__role">status</span>
+                            </span>
+                        </a>
+                    </div>
 
-                <div id="topRightProfile">
-                    <a class="profile-chip" href="profile.html" title="View profile">
-                    <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
-                        <span class="profile-chip__meta">
-                            <span class="profile-chip__name">Full Name</span>
-                            <span class="profile-chip__role">status</span>
-                        </span>
-                    </a>
+                    <button class="menu-btn" aria-label="Open menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
-                
 
-                <button class="menu-btn" aria-label="Open menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-
-                </div>
             </div>
         </header>
 
         <main class="container">
-        <header class="dashboard-header">
-            <h1>Student Dashboard</h1>
-            <p class="muted">Manage your lab reservations and check real-time availability.</p>
-        </header>
+            <header class="dashboard-header">
+                <h1>Student Dashboard</h1>
+                <p class="muted">Manage your lab reservations and check real-time availability.</p>
+            </header>
 
-        <section class="search-section card">
-            <form class="search-form">
-            <div class="search-group">
-                <label for="lab-select">Lab</label>
-                <select id="lab-select" name="lab">
-                    <option value="">Select Laboratory</option>
-                </select>
-            </div>
+            <section class="search-section card">
+                <form class="search-form">
+                    <div class="search-group">
+                        <label for="lab-select">Lab</label>
+                        <select id="lab-select" name="lab">
+                            <option value="">Select Laboratory</option>
+                        </select>
+                    </div>
 
-            <div class="search-group">
-                <label for="date-select">Date</label>
-                <input type="date" id="date-select" name="date">
-            </div>
+                    <div class="search-group">
+                        <label for="date-select">Date</label>
+                        <input type="date" id="date-select" name="date">
+                    </div>
 
-            <div class="search-group">
-                <label for="time-select">Time</label>
-                <select id="time-select" name="time">
-                <option value="">Select Time</option>
-                <option value="08:00 AM">08:00 AM</option>
-                <option value="09:00 AM">09:00 AM</option>
-                </select>
-            </div>
+                    <div class="search-group">
+                        <label for="time-select">Time</label>
+                        <select id="time-select" name="time">
+                        <option value="">Select Time</option>
+                        <option value="08:00 AM">08:00 AM</option>
+                        <option value="09:00 AM">09:00 AM</option>
+                        </select>
+                    </div>
 
-            <button type="submit" class="btn btn--primary">Search Slots</button>
-            </form>
-        </section>
+                    <button type="submit" class="btn btn--primary">Search Slots</button>
+                </form>
+            </section>
 
-        <div class="dashboard-grid">
-            <section class="reservations-column">
+            <div class="dashboard-grid">
+                <section class="reservations-column">
                     <h3 class="section-title">Upcoming Reservations</h3>
                     <div class="card">
                         <div id ="booking-list">
                             <div class="bookings-div">
-                                <h3>G304A</h3>
-                                <p>9:00 am</p>
-                                <p>2026-1-17</p>
+                                    <h3>G304A</h3>
+                                    <p>9:00 am</p>
+                                    <p>2026-1-17</p>
                             </div>
                         </div>
 
@@ -88,33 +87,33 @@
                 </section>
 
                 <aside class="labs-column">
-                    <h3 class="section-title">View Available Lab Slots</h3>
-                    
-                    <a href="lab-view.html" class="lab-card card">
-                        <div class="lab-card__info">
-                            <span class="lab-name">Goks 304B</span>
-                            <span class="lab-status small">12 Seats Available</span>
-                        </div>
-                        <span class="chevron">→</span>
-                    </a>
+                        <h3 class="section-title">View Available Lab Slots</h3>
+                        
+                        <a href="lab-view.html" class="lab-card card">
+                            <div class="lab-card__info">
+                                <span class="lab-name">Goks 304B</span>
+                                <span class="lab-status small">12 Seats Available</span>
+                            </div>
+                            <span class="chevron">→</span>
+                        </a>
 
-                     <a href="lab-view.html" class="lab-card card">
-                        <div class="lab-card__info">
-                            <span class="lab-name">Goks 306A</span>
-                            <span class="lab-status small">28 Seats Available</span>
-                        </div>
-                        <span class="chevron">→</span> 
+                            <a href="lab-view.html" class="lab-card card">
+                            <div class="lab-card__info">
+                                <span class="lab-name">Goks 306A</span>
+                                <span class="lab-status small">28 Seats Available</span>
+                            </div>
+                            <span class="chevron">→</span> 
 
-                    <a href="lab-view.html" class="lab-card card">
-                        <div class="lab-card__info">
-                            <span class="lab-name">Andrew 1904</span>
-                            <span class="lab-status small">5 Seats Available</span>
-                        </div>
-                        <span class="chevron">→</span>
-                    </a>
+                        <a href="lab-view.html" class="lab-card card">
+                            <div class="lab-card__info">
+                                <span class="lab-name">Andrew 1904</span>
+                                <span class="lab-status small">5 Seats Available</span>
+                            </div>
+                            <span class="chevron">→</span>
+                        </a>
                 </aside>     
             </div>
         </main>
-        <script src="../js/main.js"></script>
+    <script src="../js/main.js"></script>
     </body>
-    </html>
+</html>
