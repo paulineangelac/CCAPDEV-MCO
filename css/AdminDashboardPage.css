@@ -1,0 +1,56 @@
+/* navbar */
+.navbar a {
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  text-decoration: none;
+}
+
+.admin-tabs.nav-pills .nav-link {
+  color: #006b20;
+  border-radius: 12px;
+  padding: 0.6rem 1.2rem;
+}
+
+.admin-tabs.nav-pills .nav-link.active,
+.admin-tabs.nav-pills .show > .nav-link {
+  background-color: #006b20 !important;
+  color: #fff !important;
+}
+
+/* Button */
+.btn-labtech {
+  background-color: #006b20 !important;
+  border-color: #006b20 !important;
+}
+
+.btn-labtech:hover {
+  background-color: #005a1b !important;
+  border-color: #005a1b !important;
+}
+
+/* Profile Card */
+.admin-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.admin-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.labtech-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.labtech-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
