@@ -132,6 +132,7 @@ a:hover{ text-decoration: underline; }
 }
 
 .menu-btn{
+  color: var(--navy); padding: 0; line-height: 0;
   width: 40px;
   height: 40px;
   border-radius: 999px;
@@ -144,6 +145,64 @@ a:hover{ text-decoration: underline; }
   justify-content: center;
   align-items: center;
   gap: 4px;         
+}
+
+/* user search bar*/
+.navbar-search {
+  flex: 1.1;
+  max-width: 350px;
+  position: relative;
+}
+
+.nav-search {
+  display:flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 950px;
+  background: #e6e9e8;
+  transition: background 0.2s ease;
+}
+
+.nav-search:hover {
+  background: rgba(45, 47, 78, 0.06);
+}
+
+.nav-search:focus-within {
+  background: #FFFFFF;
+  border-color: var(--green);
+}
+
+.navbar-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.navbar-search-input::placeholder {
+  color: var(--muted);
+  font-weight:500;
+}
+
+.nav-search-btn{
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.nav-search-btn:hover{
+  background: rgba(45, 47, 78, 0.08);
 }
 
 .menu-btn:hover{
@@ -159,6 +218,63 @@ a:hover{ text-decoration: underline; }
   margin: 0;        
 }
 
+/* dropdown menu */
+.menu-wrap{
+  position: relative;
+}
+
+.menu-panel{
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 210px;
+  padding: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.12);
+  display: none;
+  z-index: 999;
+}
+
+.menu-panel.is-open{
+  display: block;
+}
+
+.menu-item{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--navy);
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.menu-item:hover{
+  background: rgba(45, 47, 78, 0.06);
+  text-decoration: none;
+}
+
+.menu-divider{
+  height: 1px;
+  background: var(--border);
+  margin: 6px 6px;
+}
+
+.menu-item--danger{
+  color: #b91c1c;
+}
+
+.menu-item--danger:hover{
+  background: rgba(185, 28, 28, 0.08);
+}
+
 /* dashboard*/
 .dashboard-header {
     margin: 32px 0 24px 0;
@@ -172,9 +288,9 @@ a:hover{ text-decoration: underline; }
 
 .card {
   background: var(--card);
-  border: 1px solid var(--border);
+  border: none;
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   padding: 24px;
 }
 
@@ -227,9 +343,10 @@ a:hover{ text-decoration: underline; }
 }
 
 .dashboard-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr; 
-    gap: 24px;
+  display: grid;
+    grid-template-columns: 1.8fr 1fr; 
+    align-items: start;
+    gap: 32px; 
     margin-top: 24px;
 }
 
@@ -278,3 +395,81 @@ a:hover{ text-decoration: underline; }
   padding:10px;
 }
 
+.reservations-column .card {
+    padding: 20px;
+}
+
+#booking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.booking-card {
+    background: #fcfcfc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    transition: all 0.2s ease;
+}
+
+.booking-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.booking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.booking-lab {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--navy);
+}
+
+.booking-summary p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.booking-footer {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.btn-details {
+    background: #f3f4f6;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-details:hover {
+    background: #e5e7eb;
+}
+
+.status-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #059669;
+    background: #ecfdf5;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.status-tag.pending {
+    color: #d97706;
+    background: #fffbeb;
+}
