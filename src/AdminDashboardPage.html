@@ -1,171 +1,172 @@
 <!DOCTYPE html>
 <html lang="eng">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Lab Reservation Index Page</title>
-        <link rel="stylesheet" href="../css/StudentDashboardPage.css"/>
-        <link rel="stylesheet" href="../css/AdminDashboardPage.css"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    </head>
 
-    <body>
-        <!-- NAVBAR -->
-        <header class="navbar">
-            <div class="navbar__inner navbar__inner--wide">
-                <a class="brand" href="../src/IndexPage.html">
-                    <span class="brand__logo" aria-hidden="true"></span>
-                    <span class="brand__text">Lab Reservation</span>
-                </a> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Reservation Index Page</title>
+    <link rel="stylesheet" href="../css/StudentDashboardPage.css" />
+    <link rel="stylesheet" href="../css/AdminDashboardPage.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
 
-                <div class="navbar__right">
-                    <div id="topRightProfile">
-                        <a class="profile-chip" href="profile.html" title="View profile">
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="navbar__inner navbar__inner--wide">
+            <a class="brand" href="../src/IndexPage.html">
+                <span class="brand__logo" aria-hidden="true"></span>
+                <span class="brand__text">Lab Reservation</span>
+            </a>
+
+            <div class="navbar__right">
+                <div id="topRightProfile">
+                    <a class="profile-chip" href="profile.html" title="View profile">
                         <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
-                            <span class="profile-chip__meta">
-                                <span class="profile-chip__name">Admin</span>
-                                <span class="profile-chip__role">status</span>
-                            </span>
-                        </a>
-                    </div>
-
-                    <button class="menu-btn" aria-label="Open menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+                        <span class="profile-chip__meta">
+                            <span class="profile-chip__name">Admin</span>
+                            <span class="profile-chip__role">status</span>
+                        </span>
+                    </a>
                 </div>
+
+                <button class="menu-btn" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <header class="dashboard-header">
+            <h1>Admin Dashboard</h1>
+            <p class="muted">Create and manage laboratory technician accounts in real time.</p>
         </header>
 
-        <main class="container">
-            <header class="dashboard-header">
-                <h1>Admin Dashboard</h1>
-                <p class="muted">Create and manage laboratory technician accounts in real time.</p>
-            </header>
+        <ul class="nav nav-pills mb-4 admin-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#manage-labtechs" type="button"
+                    role="tab">
+                    Manage Lab Techs
+                </button>
+            </li>
 
-            <ul class="nav nav-pills mb-4 admin-tabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#manage-labtechs" type="button" role="tab">
-                        Manage Lab Techs
-                    </button>
-                </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#create-labtech" type="button"
+                    role="tab">
+                    Create Lab Tech
+                </button>
+            </li>
+        </ul>
 
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#create-labtech" type="button" role="tab">
-                        Create Lab Tech
-                    </button>
-                </li>
-            </ul>
+        <div class="tab-content">
+            <!-- MANAGE LAB TECHS -->
+            <div class="tab-pane fade show active" id="manage-labtechs" role="tabpanel">
 
-            <div class="tab-content">
-                <!-- MANAGE LAB TECHS -->
-                <div
-                    class="tab-pane fade show active"
-                    id="manage-labtechs"
-                    role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold mb-0">All Laboratory Technicians</h5>
 
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="fw-bold mb-0">All Laboratory Technicians</h5>
+                    <!-- SEARCH AND SORT -->
+                    <div class="d-flex gap-3">
+                        <input type="text" id="searchLabTech" class="form-control" placeholder="Search"
+                            style="max-width: 220px;">
 
-                        <!-- SEARCH AND SORT -->
-                        <div class="d-flex gap-3">
-                            <input type="text" id="searchLabTech" class="form-control" placeholder="Search" style="max-width: 220px;">
-                            
-                            <select class="form-select" style="max-width: 120px;">
+                        <select class="form-select" style="max-width: 120px;">
                             <option>All</option>
                             <option>Online</option>
                             <option>Offline</option>
-                            </select>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- LAB TECH PROFILES -->
+                <div class="row g-4">
+                    <div class="col-xl-4 col-md-6 labtech-card">
+                        <div class="admin-card d-flex align-items-center">
+                            <img src="../pictures/temp.jpeg" class="admin-avatar">
+
+                            <div class="ms-3 labtech-info">
+                                <h6 class="mb-1 fw-bold">Lucy MacLean</h6>
+                                <p class="mb-0 text-muted small">lucymaclean@gmail.com</p>
+                                <p class="mb-0 text-muted small">+63 912 3456 789</p>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-xl-4 col-md-6 labtech-card">
+                        <div class="admin-card d-flex align-items-center">
+                            <img src="../pictures/temp.jpeg" class="admin-avatar">
 
-                    <!-- LAB TECH PROFILES -->
-                    <div class="row g-4">
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
-
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Lucy MacLean</h6>
-                                    <p class="mb-0 text-muted small">lucymaclean@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
+                            <div class="ms-3 labtech-info">
+                                <h6 class="mb-1 fw-bold">Cooper Howard </h6>
+                                <p class="mb-0 text-muted small">cooperhoward@gmail.com</p>
+                                <p class="mb-0 text-muted small">+63 912 3456 789</p>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
+                    </div>
+                    <div class="col-xl-4 col-md-6 labtech-card">
+                        <div class="admin-card d-flex align-items-center">
+                            <img src="../pictures/temp.jpeg" class="admin-avatar">
 
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Cooper Howard </h6>
-                                    <p class="mb-0 text-muted small">cooperhoward@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
+                            <div class="ms-3 labtech-info">
+                                <h6 class="mb-1 fw-bold">Hank MacLean</h6>
+                                <p class="mb-0 text-muted small">hankmaclean@gmail.com</p>
+                                <p class="mb-0 text-muted small">+63 912 3456 789</p>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
+                    </div>
+                    <div class="col-xl-4 col-md-6 labtech-card">
+                        <div class="admin-card d-flex align-items-center">
+                            <img src="../pictures/temp.jpeg" class="admin-avatar">
 
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Hank MacLean</h6>
-                                    <p class="mb-0 text-muted small">hankmaclean@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
+                            <div class="ms-3 labtech-info">
+                                <h6 class="mb-1 fw-bold">Norman MacLean</h6>
+                                <p class="mb-0 text-muted small">normanmaclean@gmail.com</p>
+                                <p class="mb-0 text-muted small">+63 912 3456 789</p>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
+                    </div>
+                    <div class="col-xl-4 col-md-6 labtech-card">
+                        <div class="admin-card d-flex align-items-center">
+                            <img src="../pictures/temp.jpeg" class="admin-avatar">
 
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Norman MacLean</h6>
-                                    <p class="mb-0 text-muted small">normanmaclean@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
+                            <div class="ms-3 labtech-info">
+                                <h6 class="mb-1 fw-bold">Lee Moldaver</h6>
+                                <p class="mb-0 text-muted small">leemoldaver@gmail.com</p>
+                                <p class="mb-0 text-muted small">+63 912 3456 789</p>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
+                    </div>
+                    <div class="col-xl-4 col-md-6 labtech-card">
+                        <div class="admin-card d-flex align-items-center">
+                            <img src="../pictures/temp.jpeg" class="admin-avatar">
 
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Lee Moldaver</h6>
-                                    <p class="mb-0 text-muted small">leemoldaver@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
+                            <div class="ms-3 labtech-info">
+                                <h6 class="mb-1 fw-bold">Betty Pearson</h6>
+                                <p class="mb-0 text-muted small">bettypearson@gmail.com</p>
+                                <p class="mb-0 text-muted small">+63 912 3456 789</p>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
+                    </div>
+                    <div class="col-xl-4 col-md-6 labtech-card">
+                        <div class="admin-card d-flex align-items-center">
+                            <img src="../pictures/temp.jpeg" class="admin-avatar">
 
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Betty Pearson</h6>
-                                    <p class="mb-0 text-muted small">bettypearson@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
-
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Barb Howard</h6>
-                                    <p class="mb-0 text-muted small">barbhoward@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
+                            <div class="ms-3 labtech-info">
+                                <h6 class="mb-1 fw-bold">Barb Howard</h6>
+                                <p class="mb-0 text-muted small">barbhoward@gmail.com</p>
+                                <p class="mb-0 text-muted small">+63 912 3456 789</p>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- CREATE LAB TECH -->
-                <div class="tab-pane fade" id="create-labtech" role="tabpanel">
-                    <h5 class="fw-bold mb-4">Create Laboratory Technician</h4>
+            <!-- CREATE LAB TECH -->
+            <div class="tab-pane fade" id="create-labtech" role="tabpanel">
+                <h5 class="fw-bold mb-4">Create Laboratory Technician</h4>
                     <div class="card shadow-sm p-4">
                         <form>
                             <div class="row g-3">
@@ -208,52 +209,53 @@
                             </div>
                         </form>
                     </div>
-                </div>
             </div>
+        </div>
 
-            <section id="create-labtech-section" class="container my-5 d-none">
-                <h3 class="fw-bold mb-4">Create Laboratory Technician</h3>
+        <section id="create-labtech-section" class="container my-5 d-none">
+            <h3 class="fw-bold mb-4">Create Laboratory Technician</h3>
 
-                <form class="card p-4 shadow-sm">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">First Name</label>
-                            <input type="text" class="form-control" required>
-                        </div>
+            <form class="card p-4 shadow-sm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" class="form-control" required>
-                        </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" required>
-                        </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" required>
+                    </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Contact Number</label>
-                            <input type="tel" class="form-control">
-                        </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Contact Number</label>
+                        <input type="tel" class="form-control">
+                    </div>
 
-                        <div class="col-12">
-                            <label class="form-label">Assigned Laboratory</label>
-                            <select class="form-select">
+                    <div class="col-12">
+                        <label class="form-label">Assigned Laboratory</label>
+                        <select class="form-select">
                             <option>Computer Lab 1</option>
                             <option>Computer Lab 2</option>
                             <option>Computer Lab 3</option>
-                            </select>
-                        </div>
-
-                        <div class="col-12 text-end">
-                            <button type="submit" class="btn btn-warning px-4">
-                            Create Lab Tech
-                            </button>
-                        </div>
+                        </select>
                     </div>
-                </form>
-            </section>
-        </main>
+
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-warning px-4">
+                            Create Lab Tech
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
     <script src="../js/AdminDashboardPage.js"></script>
-    </body>
+</body>
+
 </html>
