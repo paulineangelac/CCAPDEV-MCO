@@ -48,6 +48,39 @@
     </header>
 
     <main class="container-xl py-3">
+        <!-- addded a updates/announcement section-->
+        <section class="announcements-section">
+            <div class="section-header d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center">
+                    <h3 class="fs-5 fw-bold text-navy mb-0">ITS Updates</h3>
+                    <span class="badge bg-success ms-3" style="font-size: 10px;">New</span>
+                </div>
+                <a href="#">See all</a>
+            </div>
+            <!--mini announcement cards-->
+            <div class="d-flex gap-3 flex-wrap">
+                <div class="announce-card ui-card d-flex align-items-center gap-2">
+                    <span class="announce-tag tag-maintenance">maintenance</span>
+                    <span class="announce-title">Gokongwei Hall Wi-Fi Upgrade</span>
+                    <span class="announce-date">Feb 10</span>
+                </div>
+                <div class="announce-card ui-card d-flex align-items-center gap-2">
+                    <span class="announce-tag tag-notice">notice</span>
+                    <span class="announce-title">Term 2 Software Requests Open</span>
+                    <span class="announce-date">Feb 01</span>
+                </div>
+                <div class="announce-card ui-card d-flex align-items-center gap-2">
+                    <span class="announce-tag tag-urgent">urgent</span>
+                    <span class="announce-title">Phishing Alert: DLSU Google Workspace</span>
+                    <span class="announce-date">Jan 29</span>
+                </div>
+                <div class="announce-card ui-card d-flex align-items-center gap-2">
+                    <span class="announce-tag tag-urgent">urgent</span>
+                    <span class="announce-title">Lab 402 Aircon Maintenance</span>
+                    <span class="announce-date">Jan 24</span>
+                </div>
+            </div>
+        </section>
         <!-- student chooses a lab, date and time to be redirected to the reservations page -->
         <section class="hero-card ui-card mt-3">
             <header class="dashboard-header">
@@ -97,48 +130,48 @@
                 <div class="ui-card">
                     <div id="booking-list" class="d-flex flex-column gap-3">
 
-                <div class="card" id="scroll-card">
-                    <div id="booking-list">
-                        <div class="booking-card">
-                            <div class="booking-header">
-                                <span class="booking-lab">Gokongwei 304A - Seat 12</span>
-                                <span class="status-tag">Confirmed</span>
-                            </div>
-                            <div class="booking-summary">
-                                <p>Today, 9:00 AM - 10:30 AM</p>
-                            </div>
-                            <div class="booking-footer">
-                                <button class="btn-details">Details</button>
-                            </div>
-                        </div>
+                        <div class="card" id="scroll-card">
+                            <div id="booking-list">
+                                <div class="booking-card">
+                                    <div class="booking-header">
+                                        <span class="booking-lab">Gokongwei 304A - Seat 12</span>
+                                        <span class="status-tag">Confirmed</span>
+                                    </div>
+                                    <div class="booking-summary">
+                                        <p>Today, 9:00 AM - 10:30 AM</p>
+                                    </div>
+                                    <div class="booking-footer">
+                                        <button class="btn-details">Details</button>
+                                    </div>
+                                </div>
 
-                        <div class="booking-card">
-                            <div class="booking-header">
-                                <span class="booking-lab">Gokongwei 306A - Seat 05</span>
-                                <span class="status-tag">Confirmed</span>
-                            </div>
-                            <div class="booking-summary">
-                                <p>Feb 04, 2026 | 1:00 PM - 2:30 PM</p>
-                            </div>
-                            <div class="booking-footer">
-                                <button class="btn-details">Details</button>
-                            </div>
-                        </div>
+                                <div class="booking-card">
+                                    <div class="booking-header">
+                                        <span class="booking-lab">Gokongwei 306A - Seat 05</span>
+                                        <span class="status-tag">Confirmed</span>
+                                    </div>
+                                    <div class="booking-summary">
+                                        <p>Feb 04, 2026 | 1:00 PM - 2:30 PM</p>
+                                    </div>
+                                    <div class="booking-footer">
+                                        <button class="btn-details">Details</button>
+                                    </div>
+                                </div>
 
-                        <div class="booking-card">
-                            <div class="booking-header">
-                                <span class="booking-lab">Andrew 1904 - Seat 22</span>
-                                <span class="status-tag pending">Pending</span>
-                            </div>
-                            <div class="booking-summary">
-                                <p>Feb 05, 2026 | 10:00 AM - 11:30 AM</p>
-                            </div>
-                            <div class="booking-footer">
-                                <button class="btn-details">Details</button>
+                                <div class="booking-card">
+                                    <div class="booking-header">
+                                        <span class="booking-lab">Andrew 1904 - Seat 22</span>
+                                        <span class="status-tag pending">Pending</span>
+                                    </div>
+                                    <div class="booking-summary">
+                                        <p>Feb 05, 2026 | 10:00 AM - 11:30 AM</p>
+                                    </div>
+                                    <div class="booking-footer">
+                                        <button class="btn-details">Details</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
             </section>
 
             <!--reccomended labs for the student -->
@@ -168,42 +201,13 @@
                     </div>
                     <span class="chevron">→</span>
                 </a>
-
-                <!-- addded a updates/announcement section-->
-                <section class="news-updates mt-4">
-                    <div class="section-header d-flex justify-content-between align-items-center mb-3">
-                        <div class="d-flex align-items-center">
-                            <h3 class="fs-4 fw-bold text-navy mb-0">ITS Updates</h3>
-                            <span class="badge bg-success ms-3" style="font-size: 10px;">New</span>
-                        </div>
-                        <a href="#">See all</a>
+                <a href="ReservationPage.html" class="lab-card ui-card">
+                    <div class="lab-card__info">
+                        <span class="lab-name">Andrew 1702</span>
+                        <span class="lab-status small">14 Seats Available</span>
                     </div>
-
-                    <div class="news-list">
-                        <div class="news-item item-blue">
-                            <div class="news-meta">
-                                <span class="news-category">System</span>
-                                <span class="news-date">Feb 10</span>
-                            </div>
-                            <div class="news-content">Gokongwei Wi-Fi Upgrade.</div>
-                        </div>
-
-                        <div class="news-item item-red">
-                            <div class="news-meta">
-                                <span class="news-category">Urgent</span>
-                                <span class="news-date">Jan 29</span>
-                            </div>
-                            <div class="news-content">Phishing Alert: Check emails.</div>
-                        </div>
-
-                        <div class="news-item item-green">
-                            <div class="news-meta">
-                                <span class="news-category">Notice</span>
-                                <span class="news-date">Feb 10</span>
-                            </div>
-                            <div class="news-content">Lab 402 Aircon Maintenance scheduled for this weekend.</div>
-                        </div>
-                </section>
+                    <span class="chevron">→</span>
+                </a>
             </aside>
         </div>
     </main>
