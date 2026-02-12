@@ -291,7 +291,11 @@ a:hover{ text-decoration: underline; }
   border: none;
   border-radius: var(--radius);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-  padding: 24px;
+  padding: 24px;  
+}
+#scroll-card{
+  height:300px;
+  overflow:scroll;
 }
 
 /* search bar */
@@ -397,6 +401,11 @@ a:hover{ text-decoration: underline; }
 
 .reservations-column .card {
     padding: 20px;
+}
+.reservations-column{
+  width:auto;
+  height:400px;
+  overflow:hidden;
 }
 
 #booking-list {

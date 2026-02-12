@@ -1,0 +1,122 @@
+body{
+    background-color:#F6F7FB;  
+}
+
+.main-container{
+    margin:100px auto;
+    display:grid;
+    grid-template-areas: 
+    "header header header"
+    "section section section"
+    "section section section"
+    "footer footer footer"
+    ;
+    width:1200px;
+    height: auto;
+}
+#profile-pic-div{
+    margin:10px;
+    padding:10px;
+}
+#student-information-div{
+    margin:10px;
+    padding:10px;
+}
+
+.profile-pic-header{
+    align-content:center;
+    padding:10px;
+    grid-area:header;
+    background-color:white;
+    margin:10px;
+    border-radius:10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display:flex;
+}
+#bio-box{
+    height:200px;
+    width:620px;
+    background-color:#f0f0f0;
+    border-radius:10px;
+    padding:10px;
+    margin-top:10px;
+    overflow:scroll;
+}
+#main-bio-box{
+    margin:10px;
+    padding:10px;
+}
+.reservations{
+    width:auto;
+    height:400px;
+    padding:20px;
+    grid-area:section;
+    background-color:white;
+    margin:10px;
+    border-radius:10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/*.profile-info{
+    padding:20px;
+    grid-area:aside;
+    background-color:white;
+    margin:10px;
+    border-radius:10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}*/
+footer{
+    grid-area:footer;
+    margin:10px;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+}
+#upload-profile-pic{
+    width: 200px;
+    margin:5px;
+    padding:0px;
+}
+#logout-btn{
+    background-color:white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: red;
+    cursor:pointer;
+}
+#bio-btn{
+    background-color:white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor:pointer;
+}
+#bio-btn:hover{
+    background-color:#f0f0f0;
+}
+#profile-pic{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin:5px;
+}
+
+#input-footer{
+    display:flex;
+    flex-direction:column;
+}
+#input-footer p{
+    margin:5px;
+    padding:0px;
+    font-size:10px;
+    color:var(--muted);
+}

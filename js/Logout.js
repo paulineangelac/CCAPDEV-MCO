@@ -10,6 +10,6 @@ logoutForm.addEventListener('submit', function(event){
 
 /* Logout Functionality */
 function logout() {
-    window.location.href = 'LoginPage.html';
+    window.location.href = 'IndexPage.html';
 }
 /* End of Logout Functionality */
