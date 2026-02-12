@@ -2,6 +2,7 @@ const menuBtn = document.getElementById("menuBtn");
 const userMenu = document.getElementById("userMenu");
 const logoutBtn = document.getElementById("logoutBtn");
 
+
 function closeMenu() {
     userMenu.classList.remove("is-open");
     menuBtn.setAttribute("aria-expanded", "false");
@@ -35,3 +36,4 @@ document.addEventListener("keydown", (e) => {
 logoutBtn.addEventListener("click", () => {
     window.location.href = "../src/LoginPage.html";
 });
+
