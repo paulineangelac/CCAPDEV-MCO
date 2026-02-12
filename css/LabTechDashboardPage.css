@@ -1,0 +1,423 @@
+/* for consistency */
+:root {
+  --green: #006B20;
+  --navy: #2D2F4E;
+  --bg: #F6F7FB;
+  --card: #FFFFFF;
+  --text: #111827;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+  --radius: 14px;
+  --shadow: 0 10px 25px rgba(17, 24, 39, 0.06);
+
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+          "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* { 
+  box-sizing: border-box; 
+}
+
+body{
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.muted { 
+  color: var(--muted); 
+}  
+
+a { 
+  color: inherit; text-decoration: none; 
+} 
+
+a:hover { 
+  text-decoration: none; 
+}
+
+
+/* --NAVBAR/HEADER-- */
+.app-navbar{
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.86);
+  border-bottom: 2px solid var(--border);
+}
+
+ /* centered content in navbar and added max width */
+.nav-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  max-width: 1500px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 14px 40px;
+  box-sizing: border-box;
+}
+
+/* brand/logo */
+.brand { 
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: var(--navy);
+  white-space: nowrap;
+  flex: 1;
+}
+
+/*logo placeholder */
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(0, 107, 32, 0.14); 
+}
+
+/* profile area */
+.profile-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.profile-chip:hover{
+  background: rgba(45, 47, 78, 0.06);
+  text-decoration: none; 
+} 
+ /* profile picture */
+.avatar{
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  object-fit: cover;
+}
+
+ .profile-trigger{
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.profile-trigger:focus{
+  outline: none;
+}
+
+/* --USER SEARCH BAR--*/
+.nav-search {
+  display:flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease, box-shadow 0.2 ease;
+}
+
+.nav-search:hover {
+  border-color: #d1d5db;
+}
+
+.nav-search:focus-within {
+  border-color: rgba(0,107,32,0.55);
+  box-shadow: none;
+}
+
+.navbar-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.navbar-search-input::placeholder {
+  color: var(--muted);
+  font-weight:500;
+}
+
+.nav-search-btn{
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+#scroll-card{
+display:none;
+}
+
+
+/*--DASHBOARD--*/
+.page-title {
+  margin: 0;
+  font-size: 35px;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.ui-card {
+  background: var(--card);
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  padding: 24px;
+}
+
+/* for the card styling */
+.lab-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px !important;
+    margin-bottom: 12px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.lab-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--green);
+    text-decoration: none;
+}
+
+.lab-card__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.lab-name {
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.lab-status {
+    color: var(--green);
+    font-weight: 600;
+}
+
+.reservations-column .ui-card {
+    padding: 30px;
+}
+
+.booking-card {
+    background: #fcfcfc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    transition: all 0.2s ease;
+}
+
+.lab-card {
+    background: #fcfcfc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    transition: all 0.2s ease;
+}
+
+.lab-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.booking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    gap: 12px;
+}
+
+.booking-lab {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--navy);
+}
+
+.booking-summary p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.booking-footer {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end; 
+    gap: 5px;
+}
+
+.btn-details {
+    background: #f3f4f6;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-disabled {
+    background: #f3f4f6;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    transition: background 0.2s;
+    cursor:not-allowed;
+    opacity: 0.5;
+}
+
+
+.btn-details:hover {
+    background: #e5e7eb;
+}
+
+.status-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #059669;
+    background: #ecfdf5;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.status-tag.pending {
+    color: #d97706;
+    background: #fffbeb;
+}
+
+.status-tag.closed {
+  color: #aa2504;
+  background: #f57272;
+}
+
+/*--UPDATES SECTION*/
+.news-updates {
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.news-item {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: flex-start;
+    
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+
+.news-meta {
+    display: flex;
+    flex-direction: column;   /* stack SYSTEM + date */
+    gap: 2px;
+    flex: 0 0 85px;           /* give column fixed width */
+}
+
+.news-category {
+    font-size: 12px;          /* slightly bigger */
+    font-weight: 800;
+    letter-spacing: 0.6px;
+}
+
+.news-date {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+
+.news-content {
+    font-size: 13px;          /* smaller than category */
+    line-height: 1.35;
+    color: #444;
+    padding-left: 12px;
+}
+.news-item:hover {
+    background-color: #f8f9fa;
+    padding-left: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.item-red .news-category { color: #d11a2a; }
+.item-blue .news-category { color: #0056b3; }
+.item-green .news-category { color: #006B20;}
+
+/*-HERO CARD--*/
+.hero-card {
+  border-radius: 18px;
+  padding: 30px;
+  background: #ffffff 
+}
+
+.dashboard-header {
+  margin: 0; 
+}
+
+.hero-card .page-title {
+  font-size: 34px; 
+  font-weight: 900;
+  letter-spacing: -0.4px;
+}
+
+.hero-card .search-group .form-control,
+.hero-card .search-group .form-select {
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: #fff;
+}
+
+/*--SIDEBAR--*/
+.sidebar {
+  background-color: var(--green) !important;
+  --bs-offcanvas-width: 280px;
+}
+
+.nav-link.active-green {
+  background-color: #ffffff !important;
+  color: var(--green) !important;
+  font-weight: 700;
+}
+
+.hover-opacity:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff !important;
+}
+
+.sidebar-top {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.news-updates {
+    padding: 14px 18px;
+}
