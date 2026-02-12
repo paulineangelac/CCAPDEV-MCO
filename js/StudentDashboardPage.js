@@ -1,37 +1,20 @@
-const menuBtn = document.getElementById("menuBtn");
-const userMenu = document.getElementById("userMenu");
-const logoutBtn = document.getElementById("logoutBtn");
+document.addEventListener("DOMContentLoaded", () => {
+    const sidebarEl = document.getElementById("profileSidebar");
+    const logoutBtn = document.getElementById("logoutBtn");
 
-function closeMenu() {
-    userMenu.classList.remove("is-open");
-    menuBtn.setAttribute("aria-expanded", "false");
-}
+    if (sidebarEl && window.bootstrap) {
+        const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(sidebarEl);
 
-function toggleMenu() {
-    const isOpen = userMenu.classList.toggle("is-open");
-    menuBtn.setAttribute("aria-expanded", String(isOpen));
-}
+        sidebarEl.addEventListener("click", (e) => {
+            const link = e.target.closest("a.sidebar-link");
+            if (link) offcanvas.hide();
+        });
+    }
 
-menuBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    toggleMenu();
-});
-
-// close when clicking outside
-document.addEventListener("click", () => {
-    closeMenu();
-});
-
-// prevent click inside menu from closing immediately
-userMenu.addEventListener("click", (e) => {
-    e.stopPropagation();
-});
-
-// close when pressing esc
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeMenu();
-});
-
-logoutBtn.addEventListener("click", () => {
-    window.location.href = "../src/LoginPage.html";
+    // Logout 
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            window.location.href = "../src/IndexPage.html";
+        });
+    }
 });
