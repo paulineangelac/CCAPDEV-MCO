@@ -1,8 +1,16 @@
 const menuBtn = document.getElementById("menuBtn");
 const userMenu = document.getElementById("userMenu");
 const logoutBtn = document.getElementById("logoutBtn");
+const userSearch = document.getElementById("userSearch");
 
-
+userSearch.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        searchUser();
+    }
+});
+function searchUser(){
+    window.location.href = "../src/ViewProfilePage.html";
+}
 function closeMenu() {
     userMenu.classList.remove("is-open");
     menuBtn.setAttribute("aria-expanded", "false");
