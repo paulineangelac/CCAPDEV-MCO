@@ -10,12 +10,16 @@ function editBio(){
         const saveBtn = document.createElement('button');
         textField.value = currentBio;
         textField.id = 'bio-box';
-        editBtn.innerText = 'Save';
+        editBtn.innerText = 'Save Changes';
         mainBioDiv.replaceChild(textField, BioDiv);
         editBtn.onclick = function() {
-            console.log("test");
+            mainBioDiv.replaceChild(BioDiv, textField);
+            BioDiv.id = 'bio-box';
+            const newBio = textField.value;
+            document.getElementById('profile-bio').innerText = newBio;
+            editBtn.innerText = 'Edit Bio';
+            editBtn.onclick = editBio;
         }
-        
     } 
 }
         
