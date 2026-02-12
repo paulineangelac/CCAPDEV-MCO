@@ -4,67 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/StudentDashboardPage.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/StudentProfile.css">
     <link rel="stylesheet" href="../css/StudentDashboardPage.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="navbar__inner navbar__inner--wide">
+    <header class="app-navbar">
+        <div class="nav-inner">
 
             <a class="brand" href="../src/IndexPage.html">
-                <span class="brand__logo" aria-hidden="true"></span>
-                <span class="brand__text">Lab Reservation</span>
+                <span class="brand-logo" aria-hidden="true"></span>
+                <span>Lab Reservation</span>
             </a>
 
-            <div class="navbar-search" role="search">
+            <!--navbar search-->
+            <div class="flex-grow-1" role="search" style="max-width: 420px;">
                 <div class="nav-search">
                     <input id="userSearch" class="navbar-search-input" type="search" placeholder="Search Users..."
                         autocomplete="off" aria-expanded="false" aria-controls="userSearchResults" />
                     <button class="nav-search-btn" type="button" aria-label="Search">
-                        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none" />
-                            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" />
-                        </svg>
+                        <i class="bi bi-search"></i>
                     </button>
                 </div>
-
             </div>
-            <div class="navbar__right">
+            <!-- right side of navbar: profile/menu-->
+            <div class="d-flex align-items-center gap-2 flex-shrink-0">
                 <div id="topRightProfile">
-                    <a class="profile-chip" href="StudentProfilePage.html" title="View profile">
+                    <button class="profile-chip profile-trigger" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#profileSidebar" aria-controls="profileSidebar" title="Open menu">
                         <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
-                        <span class="profile-chip__meta">
-                            <span class="profile-chip__name">Juan Dela Cruz</span>
-                            <span class="profile-chip__role">Student</span>
+                        <span class="d-flex flex-column lh-2">
+                            <span class="fw-bold" style="font-size:13px; color: var(--navy);">Juan Dela Cruz</span>
+                            <span class="muted" style="font-size:11px;">Student | BS-CSE</span>
                         </span>
-                    </a>
-                </div>
-
-                <div class="menu-wrap">
-                    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"
-                        aria-controls="userMenu">
-                        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                            <line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" />
-                            <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" />
-                            <line x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" />
-                        </svg>
                     </button>
-
-                    <div class="menu-panel" id="userMenu" role="menu" aria-label="User menu">
-                        <a class="menu-item" href="StudentDashboardPage.html" role="menuitem">Reserve a Seat</a>
-                        <a class="menu-item" href="../src/FAQsPage.html" role="menuitem">FAQs</a>
-                        <a class="menu-item" href="support.html" role="menuitem">Support</a>
-                        <div class="menu-divider"></div>
-                    </div>
                 </div>
-
-
             </div>
-
         </div>
     </header>
 
@@ -180,6 +160,43 @@
             </form>
         </footer>
     </div>
+
+    <div class="offcanvas offcanvas-end sidebar border-0 shadow" tabindex="-1" id="profileSidebar">
+
+        <div class="sidebar-top d-flex justify-content-between align-items-start p-4">
+            <div class="text-white">
+                <div class="fw-bold fs-5 lh-sm">Juan Dela Cruz</div>
+                <div class="small opacity-75">Student | BS-CSE</div>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+
+        <div class="offcanvas-body d-flex flex-column p-3">
+            <nav class="nav nav-pills flex-column gap-2 mb-auto">
+                <a class="nav-link text-white active-green shadow-sm" href="StudentDashboardPage.html">
+                    Dashboard
+                </a>
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="ReservationPage.html">
+                    Reserve A Seat
+                </a>
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="StudentProfilePage.html">
+                    View Profile
+                </a>
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="my-reservations.html">
+                    My Reservations
+                </a>
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="../src/FAQsPage.html">
+                    FAQs
+                </a>
+            </nav>
+
+            <button class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4" id="logoutBtn">
+                Logout
+            </button>
+        </div>
+    </div>
+
+    
     <script src="../js/StudentProfile.js"></script>
     <script src="../js/Logout.js"></script>
     <script src="../js/StudentDashboardPage.js"></script>

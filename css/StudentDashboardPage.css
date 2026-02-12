@@ -219,6 +219,7 @@ a:hover {
     border-radius: 10px;
     padding: 16px;
     transition: all 0.2s ease;
+    margin:9px;
 }
 
 .booking-card:hover {
@@ -382,4 +383,13 @@ a:hover {
 
 .sidebar-top {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#scroll-card{
+  height:300px;
+  overflow:scroll;
+  border:none;
+}
+#booking-list{
+  border-style:none;
 }

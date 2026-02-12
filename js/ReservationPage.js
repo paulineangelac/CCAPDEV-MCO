@@ -29,3 +29,8 @@ seats.forEach(seat => {
         confirmBtn.disabled = false;
     });
 });
+
+confirmBtn.addEventListener("click", function(){
+    alert(`You have reserved seat ${selectedSeat.textContent}.`);
+    window.location.href = "StudentDashboardPage.html";
+});
