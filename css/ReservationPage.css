@@ -1,0 +1,160 @@
+.ui-card.seatmap-card,
+.ui-card.reservation-sidebar{
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.seatmap-card{
+  min-height: 560px;
+}
+
+/* sidebar card */
+.reservation-sidebar{
+  top: 92px;
+}
+
+/* seat map top row */
+.seatmap-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+.seat-legend{
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.legend-item{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.legend-swatch{
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.legend-reserved{ 
+  background: #e5e7eb; border-color: #e5e7eb; 
+}
+
+.legend-selected { 
+  background: var(--green); border-color: rgba(0,107,32,0.35); 
+}
+
+/*4 seats layout*/
+.seat-grid{
+  display: grid;
+  grid-template-columns: repeat(4, auto) 60px repeat(4, auto);
+  gap: 14px;
+  justify-content: center;
+}
+
+.seat-aisle{
+  width: 56px;
+}
+
+.lab-seat{
+  width: 56px;
+  height: 54px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #f6f7fb;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.lab-seat:hover{
+  border-color: rgba(0,107,32,0.35);
+}
+
+.lab-seat.is-reserved{
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.lab-seat.is-selected{
+  background: var(--green);
+  color: #fff;
+  border-color: rgba(0,107,32,0.35);
+}
+
+/* reservation details*/
+.detail-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.06);
+  font-size: 14px;
+}
+
+.detail-label{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(17, 24, 39, 0.55);
+  font-weight: 600;
+}
+
+.detail-icon{
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: rgba(45, 47, 78, 0.06);
+}
+
+.detail-value{
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.seat-value{
+  color: rgba(17, 24, 39, 0.35);
+}
+
+.seat-value.is-picked{
+  color: var(--green);
+}
+
+/* custom button design */
+.btn-primary {
+  background: var(--green);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.ui-btn{
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+#confirmBtn:disabled{
+  opacity: 0.6;
+}
+
