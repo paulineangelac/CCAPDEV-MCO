@@ -3,6 +3,8 @@ const displaySeat = document.getElementById("displaySeat");
 const confirmBtn = document.getElementById("confirmBtn");
 const usernameInput = document.getElementById("first-name");
 const studentSelect = document.getElementById("choose-student");
+const cancelBtn = document.getElementById("cancelBtn");
+
 let selectedSeat = null;
 
 seats.forEach(seat => {
@@ -47,5 +49,9 @@ confirmBtn.addEventListener("click", function(){
     }
     
     alert(message);
+    window.location.href = "LabTechDashboardPage.html";
+});
+
+cancelBtn.addEventListener("click", function(){
     window.location.href = "LabTechDashboardPage.html";
 });
