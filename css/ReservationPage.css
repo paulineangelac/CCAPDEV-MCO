@@ -93,6 +93,19 @@
   border-color: rgba(0,107,32,0.35);
 }
 
+/* for edit reservations: previously selected seat */
+.lab-seat.is-current {
+  border: 2px solid var(--green);
+  background: #f6f7fb; 
+  color: var(--navy);
+}
+
+/*legend for previously selected seat*/
+.legend-current {
+  background: transparent;
+  border: 2px solid var(--green);
+}
+
 /* reservation details*/
 .detail-row{
   display: flex;
