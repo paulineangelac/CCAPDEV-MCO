@@ -1,4 +1,20 @@
-/* for consistency */
+/* 
+  STUDENTDASHBOARDPAGE.CSS
+   
+   Purpose:
+   - Defines the visual style for the Student Dashboard page
+   - Uses CSS variables for consistent colors and sizing
+   - Styles custom components (navbar, cards, announcements, sidebar)
+   - Works together with Bootstrap classes (grid, spacing, offcanvas)
+*/
+
+   /* THEME VARIABLES: 
+   CSS variables for consistent styling.
+   Any component can reuse these values for:
+   - colors, text colors, border colors
+   - shadows, radius, font family
+   Added to make it easier to restyle entire UI in one section
+   */
 :root {
   --green: #006B20;
   --navy: #2D2F4E;
@@ -14,6 +30,7 @@
           "Segoe UI", Roboto, Arial, sans-serif;
 }
 
+/* BASE STYLES */
 * { 
   box-sizing: border-box; 
 }
@@ -25,6 +42,7 @@ body{
   color: var(--text);
 }
 
+/* HELPER STYLES*/
 .muted { 
   color: var(--muted); 
 }  
@@ -38,7 +56,11 @@ a:hover {
 }
 
 
-/* --NAVBAR/HEADER-- */
+/* NAVBAR / HEADER: 
+   Sticky top navbar:
+   - position: sticky keeps navbar visible when scrolling
+   - semi-transparent background + bottom border separates it from content
+ */
 .app-navbar{
   position: sticky;
   top: 0;
@@ -46,7 +68,11 @@ a:hover {
   border-bottom: 2px solid var(--border);
 }
 
- /* centered content in navbar and added max width */
+/* Navbar inner layout:
+   - flex layout aligns brand, search, and profile horizontally
+   - max-width centers content and prevents stretching on large screens
+   - padding controls navbar height and spacing
+*/
 .nav-inner{
   display: flex;
   align-items: center;
@@ -60,7 +86,7 @@ a:hover {
   box-sizing: border-box;
 }
 
-/* brand/logo */
+/* Brand area */
 .brand { 
   display: inline-flex;
   align-items: center;
@@ -80,7 +106,7 @@ a:hover {
   background: rgba(0, 107, 32, 0.14); 
 }
 
-/* profile area */
+/* Profile chip */
 .profile-chip{
   display: inline-flex;
   align-items: center;
@@ -102,7 +128,6 @@ a:hover {
   border: 1px solid var(--border);
   object-fit: cover;
 }
-
  .profile-trigger{
   border: none;
   background: transparent;
@@ -112,8 +137,8 @@ a:hover {
   outline: none;
 }
 
-/* --USER SEARCH BAR--*/
-.nav-search {
+/* USER SEARCH BAR */
+ .nav-search {
   display:flex;
   align-items: center;
   gap: 8px;
@@ -133,6 +158,7 @@ a:hover {
   box-shadow: none;
 }
 
+/* SEARCH INPUT*/
 .navbar-search-input {
   flex: 1;
   border: none;
@@ -162,8 +188,11 @@ a:hover {
   transition: background 0.2s ease;
 }
 
-/*--DASHBOARD--*/
-.page-title {
+/*  DASHBOARD UI
+   - .page-title styles main heading text
+   - .ui-card is a reusable "card" container used across the dashboard
+ */
+ .page-title {
   margin: 0;
   font-size: 35px;
   color: var(--navy);
@@ -360,8 +389,12 @@ a:hover {
   background: #fff;
 }
 
-/*--SIDEBAR--*/
-.sidebar {
+/*  SIDEBAR (BOOTSTRAP OFFCANVAS):
+   This class modifies Bootstrap Offcanvas:
+   - background color set to system green
+   - --bs-offcanvas-width overrides default sidebar width
+ */
+ .sidebar {
   background-color: var(--green) !important;
   --bs-offcanvas-width: 280px;
 }
@@ -381,6 +414,10 @@ a:hover {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Scrollable reservation list:
+   - fixed height + overflow: scroll keeps the page layout stable
+   - only reservation list scrolls (not the whole page)
+*/
 #scroll-card{
   height:300px;
   overflow:scroll;
