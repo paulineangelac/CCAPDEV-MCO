@@ -1,60 +1,72 @@
-/* for consistency */
-:root{
-  --green: #006B20;
-  --navy: #2D2F4E;
-  
+ /* =====================================================
+    VARIABLES / ROOT
+    ----------------
+    Define CSS variables for colors, fonts, shadows, and border-radius.
+    These variables ensure consistency across the site and make theme
+    changes easier.
+   ===================================================== */
+:root {
+  --green: #006B20;           /* Primary accent color */
+  --navy: #2D2F4E;            /* Secondary dark color, used for text and headings */
 
-  --bg: #F6F7FB;
-  --card: #FFFFFF;
-  --text: #111827;
-  --muted: #6B7280;
-  --border: #E5E7EB;
+  --bg: #F6F7FB;              /* Default background color */
+  --card: #FFFFFF;             /* Card background color */
+  --text: #111827;             /* Main text color */
+  --muted: #6B7280;            /* Muted/secondary text */
+  --border: #E5E7EB;           /* Borders for inputs, cards, etc. */
 
-  --radius: 14px;
-  --shadow: 0 10px 25px rgba(17, 24, 39, 0.06);
+  --radius: 14px;              /* Standard border-radius */
+  --shadow: 0 10px 25px rgba(17, 24, 39, 0.06); /* Card shadow */
 
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-          "Segoe UI", Roboto, Arial, sans-serif;
+          "Segoe UI", Roboto, Arial, sans-serif; /* Base font stack */
 }
 
-/* GLOBAL */
+/* =====================================================
+   GLOBAL STYLES
+   ----------------
+   Base styling for the body and global text elements.
+   ===================================================== */
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  background-color: #f7f9fb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #f7f9fb; /* Page background */
 }
 
-/* HERO */
+/* =====================================================
+   HERO SECTION
+   ----------------
+   Styles for the main hero/banner section on the index page.
+   ===================================================== */
 .hero-section {
   position: relative;
   overflow: hidden;
-  padding: clamp(5rem, 10vw, 8rem) 0;
+  padding: clamp(5rem, 10vw, 8rem) 0; /* Responsive vertical spacing */
 }
 
 /* Background image layer */
 .hero-bg {
   position: absolute;
-  inset: 0;
+  inset: 0; /* top:0, right:0, bottom:0, left:0 */
   background: url("../pictures/indexbg.jpg") center bottom / cover no-repeat;
-  z-index: 0;
-  opacity: 0.25; /* adjust for readability */
+  z-index: 0; /* behind text */
+  opacity: 0.25; /* semi-transparent for readability */
 }
 
-/* Text layer */
+/* Hero text/content layer */
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 2; /* above background */
 }
 
 .hero-title {
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 4vw, 3.2rem); /* Responsive text size */
   font-weight: 800;
   line-height: 1.2;
   color: var(--navy);
 }
 
 .hero-title span {
-  color: var(--green);
+  color: var(--green); /* Highlighted text */
 }
 
 .hero-subtitle {
@@ -63,26 +75,35 @@ body {
   font-size: 1.1rem;
 }
 
+/* Hero call-to-action buttons */
 .hero-buttons {
   margin-top: 2rem;
   display: flex;
   justify-content: center;
   gap: 1rem;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Wrap buttons on small screens */
 }
 
-/* NAV BAR */
+/* =====================================================
+   NAVBAR
+   ----------------
+   Navbar background, transitions, and scroll effects.
+   ===================================================== */
 .navbar-custom {
-    transition: background-color 0.3s, box-shadow 0.3s;
-    background-color: transparent;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth scroll effect */
+    background-color: transparent; /* Default transparent */
 }
 
 .navbar-custom.scrolled {
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background-color: #ffffff; /* White background after scrolling */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Subtle shadow */
 }
 
-/* TRUST BAR */
+/* =====================================================
+   TRUST SECTION
+   ----------------
+   Section highlighting endorsements or trust logos.
+   ===================================================== */
 .trust-section {
   background-color: #1f1f1f;
   padding: 2.5rem 0;
@@ -97,10 +118,14 @@ body {
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
-  opacity: 0.85;
+  opacity: 0.85; /* slightly faded */
 }
 
-/* INFO */
+/* =====================================================
+   INFO SECTION
+   ----------------
+   Additional information sections below hero.
+   ===================================================== */
 .info-section {
   padding: clamp(4rem, 7vw, 6rem) 0;
 }
@@ -111,10 +136,14 @@ body {
 }
 
 .info-section h2 span {
-  color: #006B20;
+  color: #006B20; /* Highlight text in green */
 }
 
-/* BUTTONS */
+/* =====================================================
+   BUTTONS
+   ----------------
+   Override Bootstrap danger button colors for site theme.
+   ===================================================== */
 .btn-danger {
   background-color: var(--green) !important;
   border-color: var(--green) !important;
@@ -126,9 +155,13 @@ body {
   border-color: #006B20 !important;
 }
 
-/* FOOTER */
+/* =====================================================
+   FOOTER
+   ----------------
+   Styling for footer sections, including forms and buttons.
+   ===================================================== */
 .footer-section {
-  background-color: #006B20; /* bright orange */
+  background-color: #006B20;
   font-family: var(--font);
 }
 
@@ -149,6 +182,7 @@ body {
   margin-bottom: 1rem;
 }
 
+/* Footer forms and text */
 .footer-section p,
 .footer-section input,
 .footer-section textarea {
@@ -173,6 +207,7 @@ body {
   color: #fff;
 }
 
+/* Footer button */
 .footer-section .btn-light {
   color: #006B20;
   background-color: #fff;
@@ -186,12 +221,17 @@ body {
   background-color: #e6e6e6;
 }
 
+/* =====================================================
+   RESPONSIVE
+   ----------------
+   Footer adjustments for smaller screens.
+   ===================================================== */
 @media (max-width: 767px) {
   .footer-section {
     text-align: center;
   }
 
   .footer-section .col-md-6 {
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; /* add spacing between columns */
   }
 }

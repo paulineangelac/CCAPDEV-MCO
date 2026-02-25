@@ -1,3 +1,26 @@
+/**
+ * FAQsPage.js
+ * -----------------------------
+ * This script dynamically loads FAQ questions into the Bootstrap accordion
+ * based on which category the user selects on the left sidebar.
+ *
+ * Features:
+ * - Stores FAQ content in a structured JavaScript object (faqData)
+ * - Updates the accordion content dynamically when a category is clicked
+ * - Updates the section title automatically
+ * - Highlights the active category in the sidebar
+ * - Loads a default category on page load
+ */
+
+/**
+ * FAQ DATA STORAGE
+ * ----------------
+ * faqData acts as a mini database for the FAQs.
+ * Each key represents a category.
+ * Each category contains:
+ *    - title - displayed above the accordion
+ *    - items - array of question/answer objects
+ */
 const faqData = {
   about: {
     title: "About the System",
@@ -84,14 +107,33 @@ const faqData = {
   }
 };
 
+/**
+ * ELEMENT SELECTION
+ * -----------------
+ * - links - all category buttons in the sidebar
+ * - accordion - container where FAQs will be inserted
+ * - title - heading showing the current category name
+ */
 const links = document.querySelectorAll(".faq-links li");
 const accordion = document.getElementById("faqAccordion");
 const title = document.getElementById("faqCategoryTitle");
 
+/**
+ * FUNCTION: loadFAQs(category)
+ * -----------------------------
+ * Dynamically loads FAQs for the selected category.
+ *
+ * Steps:
+ * 1. Get category data from faqData object
+ * 2. Update the section title
+ * 3. Clear existing accordion content
+ * 4. Loop through questions and generate Bootstrap accordion items
+ * 5. Insert generated HTML into the page
+ */
 function loadFAQs(category) {
   const data = faqData[category];
-  title.textContent = data.title;
-  accordion.innerHTML = "";
+  title.textContent = data.title; // Update category title text
+  accordion.innerHTML = ""; // Remove previous FAQ content
 
   data.items.forEach((item, index) => {
     accordion.innerHTML += `
@@ -114,13 +156,26 @@ function loadFAQs(category) {
   });
 }
 
+/**
+ * CATEGORY CLICK HANDLER
+ * ----------------------
+ * When a sidebar link is clicked:
+ * 1. Remove active class from all links
+ * 2. Add active class to the clicked link
+ * 3. Load FAQs for the clicked category
+ */
 links.forEach(link => {
   link.addEventListener("click", () => {
-    links.forEach(l => l.classList.remove("active"));
-    link.classList.add("active");
-    loadFAQs(link.dataset.category);
+    links.forEach(l => l.classList.remove("active")); // Remove highlight from all categories
+    link.classList.add("active"); // Highlight selected category
+    loadFAQs(link.dataset.category); // Load FAQs
   });
 });
 
-// Load default
+/**
+ * DEFAULT LOAD
+ * ------------
+ * Automatically loads the "About the System" category
+ * when the page first opens.
+ */
 loadFAQs("about");

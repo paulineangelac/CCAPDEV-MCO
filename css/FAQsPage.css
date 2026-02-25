@@ -1,65 +1,95 @@
-/* FAQ PAGE */
+/* =====================================================
+   FAQ PAGE STYLES
+   ----------------
+   Styling for the FAQ page hero section, content area,
+   links, and accordion components.
+   ===================================================== */
+
+/* =====================================================
+   HERO SECTION
+   ----------------
+   Top section of FAQ page with title, subtitle, and illustration.
+   ===================================================== */
 .faq-hero {
-padding: clamp(6rem, 10vw, 8rem) 0 4rem;
-background-color: var(--bg);
+  padding: clamp(6rem, 10vw, 8rem) 0 4rem; /* top, horizontal responsive, bottom */
+  background-color: var(--bg); /* light background for contrast */
 }
 
+/* FAQ page main title */
 .faq-title {
-font-size: 3rem;
-font-weight: 800;
-color: var(--navy);
+  font-size: 3rem; /* large heading */
+  font-weight: 800; /* bold for emphasis */
+  color: var(--navy); /* consistent with theme */
 }
 
+/* Subtitle under the title */
 .faq-subtitle {
-margin-top: 1rem;
-color: var(--muted);
-max-width: 520px;
+  margin-top: 1rem; /* spacing below title */
+  color: var(--muted); /* secondary text color */
+  max-width: 520px; /* limit width for readability */
 }
 
+/* Illustration image in hero section */
 .faq-illustration {
-max-width: 100%;
-height: auto;
+  max-width: 100%; /* responsive image */
+  height: auto; /* maintain aspect ratio */
 }
 
-/* FAQ CONTENT */
+/* =====================================================
+   FAQ CONTENT SECTION
+   ----------------
+   The main FAQ content including categories and accordions.
+   ===================================================== */
 .faq-content {
-padding: 4rem 0;
-background-color: #fff;
+  padding: 4rem 0; /* vertical spacing */
+  background-color: #fff; /* white background for contrast */
 }
 
+/* FAQ categories list (left sidebar) */
 .faq-links {
-list-style: none;
-padding: 0;
+  list-style: none; /* remove default bullets */
+  padding: 0; /* remove default padding */
 }
 
+/* Individual FAQ category link */
 .faq-links li {
-padding: 0.6rem 0;
-color: var(--muted);
-cursor: pointer;
+  padding: 0.6rem 0; /* spacing between items */
+  color: var(--muted); /* default muted color */
+  cursor: pointer; /* indicate clickable */
 }
 
+/* Active FAQ category */
 .faq-links li.active {
-color: var(--green);
-font-weight: 600;
+  color: var(--green); /* highlight active category */
+  font-weight: 600; /* make active link stand out */
 }
 
-/* ACCORDION CUSTOM */
+/* =====================================================
+   ACCORDION CUSTOMIZATION
+   ----------------
+   Overrides Bootstrap default accordion styles to match theme.
+   ===================================================== */
+
+/* Each accordion item border */
 .accordion-item {
-border: none;
-border-bottom: 1px solid var(--border);
+  border: none; /* remove default border */
+  border-bottom: 1px solid var(--border); /* subtle bottom divider */
 }
 
+/* Accordion button text style */
 .accordion-button {
-font-weight: 600;
-color: var(--navy);
+  font-weight: 600; /* semi-bold for readability */
+  color: var(--navy); /* match theme color */
 }
 
+/* When accordion is expanded (active) */
 .accordion-button:not(.collapsed) {
-background-color: transparent;
-color: var(--green);
-box-shadow: none;
+  background-color: transparent; /* no background color */
+  color: var(--green); /* highlight active question */
+  box-shadow: none; /* remove Bootstrap shadow */
 }
 
+/* Remove focus shadow for accessibility styling */
 .accordion-button:focus {
-box-shadow: none;
+  box-shadow: none;
 }

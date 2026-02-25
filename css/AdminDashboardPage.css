@@ -1,56 +1,87 @@
-/* navbar */
+/* =====================================================
+   ADMIN DASHBOARD PAGE STYLES
+   ---------------------------
+   Styling for navigation tabs, buttons, and admin cards.
+   ===================================================== */
+
+/* =====================================================
+   NAVBAR LINKS
+   ----------------
+   Remove underlines from navbar links.
+   ===================================================== */
 .navbar a {
-  text-decoration: none;
+  text-decoration: none; /* remove default link underline */
 }
 
 .navbar a:hover {
-  text-decoration: none;
+  text-decoration: none; /* keep links clean on hover */
 }
 
+/* =====================================================
+   ADMIN TABS (Manage/Create Lab Techs)
+   ----------------
+   Custom styling for nav-pills used in tab navigation.
+   ===================================================== */
 .admin-tabs.nav-pills .nav-link {
-  color: #006b20;
-  border-radius: 12px;
-  padding: 0.6rem 1.2rem;
+  color: #006b20; /* green text color */
+  border-radius: 12px; /* rounded corners */
+  padding: 0.6rem 1.2rem; /* spacing inside tabs */
 }
 
+/* Active tab styling */
 .admin-tabs.nav-pills .nav-link.active,
 .admin-tabs.nav-pills .show > .nav-link {
-  background-color: #006b20 !important;
-  color: #fff !important;
+  background-color: #006b20 !important; /* solid green background for active tab */
+  color: #fff !important; /* white text for contrast */
 }
 
-/* Button */
+/* =====================================================
+   BUTTONS
+   ----------------
+   Custom styling for lab technician action buttons.
+   ===================================================== */
 .btn-labtech {
-  background-color: #006b20 !important;
-  border-color: #006b20 !important;
+  background-color: #006b20 !important; /* green background */
+  border-color: #006b20 !important; /* match border color */
 }
 
+/* Hover state for lab tech buttons */
 .btn-labtech:hover {
-  background-color: #005a1b !important;
-  border-color: #005a1b !important;
+  background-color: #005a1b !important; /* slightly darker green on hover */
+  border-color: #005a1b !important; /* match hover border color */
 }
 
-/* Profile Card */
+/* =====================================================
+   PROFILE / ADMIN CARDS
+   ----------------
+   Styles for lab tech cards displayed in the dashboard.
+   ===================================================== */
+
+/* Card container */
 .admin-card {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  background: #fff; /* white card background */
+  padding: 1rem; /* spacing inside card */
+  border-radius: 14px; /* rounded corners */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* subtle shadow */
+  transition: transform 0.2s, box-shadow 0.2s; /* smooth hover transition */
 }
 
+/* Profile avatar image */
 .admin-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 12px;
-  object-fit: cover;
+  width: 60px; /* fixed width */
+  height: 60px; /* fixed height */
+  border-radius: 12px; /* rounded corners for avatar */
+  object-fit: cover; /* maintain aspect ratio, cover container */
 }
 
+/* Lab tech card hover effect */
 .labtech-card {
-    cursor: pointer;
-    transition: transform 0.2s;
+  cursor: pointer; /* indicate clickable card */
+  transition: transform 0.2s; /* smooth hover scaling */
 }
 
+/* Hover effect for admin card */
 .admin-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transform: scale(1.02); /* slightly enlarge card */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* stronger shadow for depth */
 }
