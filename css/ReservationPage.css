@@ -1,3 +1,13 @@
+/* 
+  RESERVATIONPAGE.CSS
+  SEAT MAP & SIDEBAR STYLES
+  
+   - Styles seat grid layout
+   - Controls seat states (available, reserved, selected, current)
+   - Styles reservation details sidebar
+   - Custom button styling */
+
+/* CARD LAYOUT*/
 .ui-card.seatmap-card,
 .ui-card.reservation-sidebar{
   border-radius: 18px;
@@ -5,14 +15,15 @@
 }
 
 .seatmap-card{
-  min-height: 560px;
+  min-height: 560px;/* to ensure consistent height beside sidebar */
 }
 
-/* sidebar card */
+/* sidebar sticky positioning */
 .reservation-sidebar{
   top: 92px;
 }
 
+/* SEAT MAP HEADER AND LEGEND*/
 /* seat map top row */
 .seatmap-top{
   display: flex;
@@ -38,6 +49,7 @@
   font-weight: 600;
 }
 
+/* Small colored square indicators */
 .legend-swatch{
   width: 14px;
   height: 14px;
@@ -46,6 +58,7 @@
   background: #fff;
 }
 
+/* Seat state legend colors */
 .legend-reserved{ 
   background: #e5e7eb; border-color: #e5e7eb; 
 }
@@ -54,11 +67,13 @@
   background-color:#E3F2FD; border-color: #e5e7eb;
 }
 
+/* Previously reserved seat (for edit mode) */
 .legend-selected { 
   background: var(--green); border-color: rgba(0,107,32,0.35); 
 }
 
-/*4 seats layout*/
+/*SEAT GRID LAYOUT*/
+/*4 seats, AISLE, 4 seats*/
 .seat-grid{
   display: grid;
   grid-template-columns: repeat(4, auto) 60px repeat(4, auto);
@@ -70,6 +85,7 @@
   width: 56px;
 }
 
+/*SEAT BUTTON STATES*/
 .lab-seat{
   width: 56px;
   height: 54px;
@@ -81,16 +97,19 @@
   cursor: pointer;
 }
 
+/* Hover effect for available seats */
 .lab-seat:hover{
   border-color: rgba(0,107,32,0.35);
 }
 
+/* Reserved seats (disabled) */
 .lab-seat.is-reserved{
   background: #e5e7eb;
   color: #9ca3af;
   cursor: not-allowed;
 }
 
+/* Selected seat */
 .lab-seat.is-selected{
   background: var(--green);
   color: #fff;
@@ -110,7 +129,7 @@
   border: 2px solid var(--green);
 }
 
-/* reservation details*/
+/*RESERVATION DETAILS SIDEBAR*/
 .detail-row{
   display: flex;
   justify-content: space-between;
@@ -150,7 +169,7 @@
   color: var(--green);
 }
 
-/* custom button design */
+/* CUSTOM BUTTON STYLE */
 .btn-primary {
   background: var(--green);
   color: white;
@@ -186,6 +205,8 @@
   font-family: inherit;
   cursor: pointer;
 }
+
+/* Disabled confirm button visual state */
 #confirmBtn:disabled{
   opacity: 0.6;
 }

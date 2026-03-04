@@ -1,47 +1,24 @@
-const menuBtn = document.getElementById("menuBtn");
-const userMenu = document.getElementById("userMenu");
-const logoutBtn = document.getElementById("logoutBtn");
+/*
+   STUDENTDASHBOARDPAGE.JS
+   Search bar behavior (Enter key + button click)
+
+    Note:
+   - Sidebar uses Bootstrap Offcanvas already
+   - Logout currently uses anchor redirect
+*/
+
 const userSearch = document.getElementById("userSearch");
 
+// SEARCH BEHAVIOUR 
+// pressing enter in the search input triggers the same action as clicking the search button.
 userSearch.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
         searchUser();
     }
 });
-function searchUser(){
+// Phase 1 placeholder: redirects to ViewProfilePage
+// Phase 2 TO DO: replace with actual user search + results dropdown/list
+function searchUser() {
     window.location.href = "../src/ViewProfilePage.html";
 }
-function closeMenu() {
-    userMenu.classList.remove("is-open");
-    menuBtn.setAttribute("aria-expanded", "false");
-}
-
-function toggleMenu() {
-    const isOpen = userMenu.classList.toggle("is-open");
-    menuBtn.setAttribute("aria-expanded", String(isOpen));
-}
-
-menuBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    toggleMenu();
-});
-
-// close when clicking outside
-document.addEventListener("click", () => {
-    closeMenu();
-});
-
-// prevent click inside menu from closing immediately
-userMenu.addEventListener("click", (e) => {
-    e.stopPropagation();
-});
-
-// close when pressing esc
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeMenu();
-});
-
-logoutBtn.addEventListener("click", () => {
-    window.location.href = "../src/LoginPage.html";
-});
 

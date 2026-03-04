@@ -1,7 +1,26 @@
+
+/* RESERVATIONPAGE.JS
+   - Handles seat selection logic in the seat map
+   - Updates "Selected Seat" display in the reservation sidebar
+   - Enables/disables Confirm button
+   - Redirects user after confirming reservation (Phase 1 placeholder)
+
+   Phase 1:
+   - Seat layout is hardcoded in HTML
+   - Selection is handled purely on the frontend
+   - No backend/database validation yet
+
+*/
+
+// Select all seats that are NOT reserved
+// ".lab-seat:not(.is-reserved)" excludes disabled seats
 const seats = document.querySelectorAll(".lab-seat:not(.is-reserved)");
+
+// sidebar display elements
 const displaySeat = document.getElementById("displaySeat");
 const confirmBtn = document.getElementById("confirmBtn");
 
+// Stores currently selected seat element
 let selectedSeat = null;
 
 seats.forEach(seat => {
@@ -21,16 +40,22 @@ seats.forEach(seat => {
             selectedSeat.classList.remove("is-selected");
         }
 
-        // select new seat
+        // apply selection styling to clicked seat
         seat.classList.add("is-selected");
         selectedSeat = seat;
 
+        // update sidebar display
         displaySeat.textContent = seat.textContent;
+
+        // enable confirm button once a seat is selected
         confirmBtn.disabled = false;
     });
 });
 
-confirmBtn.addEventListener("click", function(){
+// Phase 1 placeholder to confirm reservation:
+// - Shows alert confirmation
+// - Redirects back to Student Dashboard
+confirmBtn.addEventListener("click", function () {
     alert(`You have reserved seat ${selectedSeat.textContent}.`);
     window.location.href = "StudentDashboardPage.html";
 });
