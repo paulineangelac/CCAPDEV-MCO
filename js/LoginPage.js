@@ -1,5 +1,5 @@
 /* Login Form Functionality */
-const loginForm = document.querySelector('form');
+/* const loginForm = document.querySelector('form');
 const usernameForm = document.getElementById('username');
 loginForm.addEventListener('submit', function(event){
     event.preventDefault();
@@ -13,7 +13,7 @@ loginForm.addEventListener('submit', function(event){
     }else{
         window.location.href='StudentDashboardPage.html';
     }
-})
+})*/
 
 /* End of Login Form Functionality */
 

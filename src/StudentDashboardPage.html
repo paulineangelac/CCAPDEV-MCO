@@ -64,8 +64,8 @@
                         data-bs-target="#profileSidebar" aria-controls="profileSidebar" title="Open menu">
                         <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
                         <span class="d-flex flex-column lh-2">
-                            <span class="fw-bold" style="font-size:13px; color: var(--navy);">Juan Dela Cruz</span>
-                            <span class="muted" style="font-size:11px;">Student | BS-CSE</span>
+                            <span id="fullname" class="fw-bold" style="font-size:13px; color: var(--navy);"></span>
+                            <span id="type" class="muted" style="font-size:11px;"></span>
                         </span>
                     </button>
                 </div>
@@ -169,6 +169,7 @@
 
                         <div class="card" id="scroll-card">
                             <div id="booking-list">
+                                <!-- Example of a confirmed reservation card -->
                                 <div class="booking-card">
                                     <div class="booking-header">
                                         <span class="booking-lab">Gokongwei 304A - Seat 12</span>
@@ -184,6 +185,7 @@
                                         <button class="btn-details" style="color:Red;">Cancel Reservation</button>
                                     </div>
                                 </div>
+
                                 <div class="booking-card">
                                     <div class="booking-header">
                                         <span class="booking-lab">Gokongwei 306A - Seat 05</span>
@@ -220,39 +222,12 @@
             </section>
 
             <!--Reccomended labs for the student -->
-            <aside class="col-12 col-lg-4 labs-column">
+            <aside  class="col-12 col-lg-4 labs-column">
                 <h3 class="fs-5 fw-bold text-navy mb-3">Recommended Laboratories</h3>
-
-                <a href="ReservationPage.html" class="lab-card ui-card">
-                    <div class="lab-card__info">
-                        <span class="lab-name">Goks 304B</span>
-                        <span class="lab-status small">12 Seats Available</span>
-                    </div>
-                    <span class="chevron">→</span>
-                </a>
-
-                <a href="ReservationPage.html" class="lab-card ui-card">
-                    <div class="lab-card__info">
-                        <span class="lab-name">Goks 306A</span>
-                        <span class="lab-status small">28 Seats Available</span>
-                    </div>
-                    <span class="chevron">→</span>
-                </a>
-
-                <a href="ReservationPage.html" class="lab-card ui-card">
-                    <div class="lab-card__info">
-                        <span class="lab-name">Andrew 1904</span>
-                        <span class="lab-status small">5 Seats Available</span>
-                    </div>
-                    <span class="chevron">→</span>
-                </a>
-                <a href="ReservationPage.html" class="lab-card ui-card">
-                    <div class="lab-card__info">
-                        <span class="lab-name">Andrew 1702</span>
-                        <span class="lab-status small">14 Seats Available</span>
-                    </div>
-                    <span class="chevron">→</span>
-                </a>
+                <div id="recommended-rooms">
+        
+                </div>
+                
             </aside>
         </div>
     </main>
@@ -264,8 +239,8 @@
 
         <div class="sidebar-top d-flex justify-content-between align-items-start p-4">
             <div class="text-white">
-                <div class="fw-bold fs-5 lh-sm">Juan Dela Cruz</div>
-                <div class="small opacity-75">Student | BS-CSE</div>
+                <div id="sidebar-fullname" class="fw-bold fs-5 lh-sm"></div>
+                <div id="sidebar-usertype" class="small opacity-75"></div>
             </div>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>

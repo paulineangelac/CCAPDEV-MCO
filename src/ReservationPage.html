@@ -72,39 +72,7 @@
             - row + col-* for responsive form layout
             - g-3 for consistent spacing between fields
             - form-select / form-control for consistent styling -->
-        <section class="hero-card ui-card mt-1">
-            <form class="row g-3 align-items-end mt-1">
-                <div class="col-12 col-md">
-                    <label for="lab-select" class="form-label fw-bold text-navy">Laboratory</label>
-                    <select id="lab-select" name="lab" class="form-select">
-                        <option value="">Select Laboratory</option>
-                        <option value="goks-304B">G304B</option>
-                        <option value="goks-306A">G306A</option>
-                        <option value="andrew-1904">A1904</option>
-                    </select>
-                </div>
 
-                <div class="col-12 col-md">
-                    <label for="date-select" class="form-label fw-bold text-navy">Date</label>
-                    <input type="date" id="date-select" name="date" class="form-control">
-                </div>
-
-                <div class="col-12 col-md">
-                    <label for="time-select" class="form-label fw-bold text-navy">Time</label>
-                    <select id="time-select" name="time" class="form-select">
-                        <option value="">Select Time</option>
-                        <option value="08:00 AM">08:00 AM</option>
-                        <option value="09:00 AM">09:00 AM</option>
-                    </select>
-                </div>
-
-                <div class="col-12 col-md-auto">
-                    <button type="submit" class="btn btn-success px-4 py-2 fw-semibold">
-                        Find Seats
-                    </button>
-                </div>
-            </form>
-        </section>
 
         <!-- PAGE LAYOUT: 
             Bootstrap grid layout:
@@ -144,60 +112,7 @@
                     <!-- Seat grid container:
                     - JS attaches click listeners to .lab-seat buttons -->
                     <div id="seatGrid" class="seat-grid" aria-label="Seat map">
-                        <!--1st row-->
-                        <button type="button" class="lab-seat is-reserved" data-seat="A1" disabled>A1</button>
-                        <button type="button" class="lab-seat" data-seat="A2">A2</button>
-                        <button type="button" class="lab-seat" data-seat="A3">A3</button>
-                        <button type="button" class="lab-seat" data-seat="A4">A4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat is-reserved" data-seat="A5" disabled>A5</button>
-                        <button type="button" class="lab-seat" data-seat="A6">A6</button>
-                        <button type="button" class="lab-seat" data-seat="A7">A7</button>
-                        <button type="button" class="lab-seat" data-seat="A8">A8</button>
-
-                        <!--2nd row-->
-                        <button type="button" class="lab-seat is-reserved" data-seat="B1" disabled>B1</button>
-                        <button type="button" class="lab-seat" data-seat="B2">B2</button>
-                        <button type="button" class="lab-seat" data-seat="B3">B3</button>
-                        <button type="button" class="lab-seat" data-seat="B4">B4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="B5">B5</button>
-                        <button type="button" class="lab-seat" data-seat="B6">B6</button>
-                        <button type="button" class="lab-seat" data-seat="B7">B7</button>
-                        <button type="button" class="lab-seat" data-seat="B8">B8</button>
-
-                        <!--3rd row-->
-                        <button type="button" class="lab-seat" data-seat="C1">C1</button>
-                        <button type="button" class="lab-seat" data-seat="C2">C2</button>
-                        <button type="button" class="lab-seat" data-seat="C3">C3</button>
-                        <button type="button" class="lab-seat" data-seat="C4">C4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="C5">C5</button>
-                        <button type="button" class="lab-seat" data-seat="C6">C6</button>
-                        <button type="button" class="lab-seat" data-seat="C7">C7</button>
-                        <button type="button" class="lab-seat is-reserved" data-seat="C8" disabled>C8</button>
-
-                        <!--4th row-->
-                        <button type="button" class="lab-seat" data-seat="D1">D1</button>
-                        <button type="button" class="lab-seat" data-seat="D2">D2</button>
-                        <button type="button" class="lab-seat" data-seat="D3">D3</button>
-                        <button type="button" class="lab-seat is-reserved" data-seat="D4" disabled>D4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="D5">D5</button>
-                        <button type="button" class="lab-seat" data-seat="D6">D6</button>
-                        <button type="button" class="lab-seat" data-seat="D7">D7</button>
-                        <button type="button" class="lab-seat" data-seat="D8">D8</button>
-
-                        <!--5th row-->
-                        <button type="button" class="lab-seat" data-seat="E1">E1</button>
-                        <button type="button" class="lab-seat is-reserved" data-seat="E2" disabled>E2</button>
-                        <button type="button" class="lab-seat" data-seat="E3">E3</button>
-                        <button type="button" class="lab-seat" data-seat="E4">E4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="E5">E5</button>
-                        <button type="button" class="lab-seat" data-seat="E6">E6</button>
-                        <button type="button" class="lab-seat" data-seat="E7">E7</button>
-                        <button type="button" class="lab-seat" data-seat="E8">E8</button>
+                        <!--CREATE SEAT BUTTONS HERE-->
                     </div>
                 </div>
             </section>
@@ -213,47 +128,59 @@
             <aside class="col-12 col-lg-4">
                 <div class="ui-card sticky-top reservation-sidebar">
                     <h3 class="fs-3 fw-bold text-navy mb-3">Reservation Details</h3>
-
-                    <div class="detail-row">
+                    <form action="/reserve" method="POST">
+                        <div class="detail-row">
                         <span class="detail-label">
                             <span class="detail-icon" aria-hidden="true"><i class="bi bi-pc-display"></i></span> Lab
                         </span>
-                        <span class="detail-value" id="displayLab">G306A</span>
-                    </div>
+                        <select id="lab-select" name="lab" class="form-select">
+                            <option value="">Select Laboratory</option>
+                            <option value="Gokongwei 304A">G304A</option>
+                            <option value="Gokongwei 306A">G306A</option>
+                            <option value="Andrew 1904">A1904</option>
+                        </select>
+                        
+                        </div>
 
-                    <div class="detail-row">
-                        <span class="detail-label">
-                            <span class="detail-icon" aria-hidden="true"><i class="bi bi-calendar"></i></span> Date
-                        </span>
-                        <span class="detail-value" id="displayDate">Feb 14, 2026</span>
-                    </div>
+                        <div class="detail-row">
+                            <span class="detail-label">
+                                <span class="detail-icon" aria-hidden="true"><i class="bi bi-calendar"></i></span> Date
+                            </span>
+                            <input type="date" id="date-select" name="date" class="form-control">
+                        </div>
 
-                    <div class="detail-row">
-                        <span class="detail-label">
-                            <span class="detail-icon" aria-hidden="true"><i class="bi bi-clock"></i></span> Time
-                        </span>
-                        <span class="detail-value" id="displayTime">09:00 AM</span>
-                    </div>
+                        <div class="detail-row">
+                            <span class="detail-label">
+                                <span class="detail-icon" aria-hidden="true"><i class="bi bi-clock"></i></span> Time
+                            </span>
+                            <select id="time-select" name="time" class="form-select">
+                                <option value="">Select Time</option>
+                                <option value="08:00 AM">08:00 AM</option>
+                                <option value="09:00 AM">09:00 AM</option>
+                            </select>
+                        </div>
 
-                    <div class="detail-row">
-                        <span class="detail-label">
-                            <span class="detail-icon" aria-hidden="true"><i class="bi bi-info-circle"></i></span>
-                            Selected Seat
-                        </span>
-                        <span class="detail-value seat-value" id="displaySeat">—</span>
-                    </div>
+                        <div class="detail-row">
+                            <span class="detail-label">
+                                <span class="detail-icon" aria-hidden="true"><i class="bi bi-info-circle"></i></span>
+                                Selected Seat
+                            </span>
+                            <span class="detail-value seat-value" id="displaySeat">—</span>
+                        </div>
 
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="" id="anonCheck">
-                        <label class="form-check-label" for="anonCheck">
-                            Reserve anonymously
-                        </label>
-                    </div>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" value="" id="anonCheck">
+                            <label class="form-check-label" for="anonCheck">
+                                Reserve anonymously
+                            </label>
+                        </div>
 
-                    <button class="ui-btn btn-primary w-100 mt-3" id="confirmBtn" disabled>
-                        Confirm Reservation
-                    </button>
+                        <button class="ui-btn btn-primary w-100 mt-3" id="confirmBtn" disabled>
+                            Confirm Reservation
+                        </button>
 
+                    </form>
+                    
                     <p class="muted mt-3 small mb-0 text-center">
                         Availability is updated periodically. Reserved seats show reservee names unless anonymously
                         booked.

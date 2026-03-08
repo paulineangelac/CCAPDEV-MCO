@@ -210,3 +210,27 @@
 #confirmBtn:disabled{
   opacity: 0.6;
 }
+
+
+#lab-select{
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #f6f7fb;
+  padding: 6px 12px;
+  width: 155px;
+}
+#time-select{
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #f6f7fb;
+  padding: 6px 12px;
+  width: 155px;
+}
+
+#date-select{
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #f6f7fb;
+  padding: 6px 12px;
+  width: 155px;
+}

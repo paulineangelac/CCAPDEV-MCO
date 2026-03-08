@@ -1,0 +1,28 @@
+{
+  "name": "ccapdev-mco",
+  "version": "1.0.0",
+  "description": "Major Course Output for CCAPDEV",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulineangelac/CCAPDEV-MCO.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/paulineangelac/CCAPDEV-MCO/issues"
+  },
+  "homepage": "https://github.com/paulineangelac/CCAPDEV-MCO#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.2.4"
+  }
+}

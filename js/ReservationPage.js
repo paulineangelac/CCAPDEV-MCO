@@ -59,3 +59,29 @@ confirmBtn.addEventListener("click", function () {
     alert(`You have reserved seat ${selectedSeat.textContent}.`);
     window.location.href = "StudentDashboardPage.html";
 });
+
+const roomDropDown = document.getElementById("lab-select");
+roomDropDown.addEventListener('change', async function() {
+    const selectedRoom = roomDropDown.value;
+    
+    try{
+        const response = await fetch(`/rooms/${selectedRoom}`);
+        const roomData = await response.json();
+        if(roomData){
+            //update the seat map based on the selected room's data
+            const seatGrid = document.getElementById("seat-grid");
+            seatGrid.innerHTML = ""; //clear existing seats
+            
+            roomData.seatNumbers.forEach(seat => {
+                // Create and append seat buttons
+                seatGrid.innerHTML += `<button type="button" class="lab-seat is-reserved" value="${seat}" disabled="">${seat}</button>`;
+            });
+        }else{
+            console.log("No data found for the selected room.");
+        }
+    }catch(error){
+        console.log("MongoDB Error:", error.message);
+    }
+});
+
+//<button type="button" class="lab-seat is-reserved" data-seat="A1" disabled="">A1</button>

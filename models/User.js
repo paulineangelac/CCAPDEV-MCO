@@ -1,0 +1,29 @@
+import mongoose from 'mongoose';
+const userSchema = new mongoose.Schema({
+    fname:{
+        type: String, trim: true, required: true
+    },
+    lname:{
+        type: String, trim: true, required: true
+    },
+    email:{
+        type: String, trim: true, required: true
+    },
+    username:{
+        type: Number, trim: true,unique: true, required: true
+    },
+    password:{
+        type: String, trim: true, required: true
+    },
+    reservations: {
+        type: Array, default:[]
+    },
+    status:{
+        type: String, default: "Student"
+    },
+    bio:{
+        type: String, default: "This user has no Bio yet."
+    }
+    
+});
+export default mongoose.model('User', userSchema);
