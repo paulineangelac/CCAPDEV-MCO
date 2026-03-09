@@ -60,22 +60,27 @@ confirmBtn.addEventListener("click", function () {
     window.location.href = "StudentDashboardPage.html";
 });
 
+//updates seatmap after choosing room
 const roomDropDown = document.getElementById("lab-select");
 roomDropDown.addEventListener('change', async function() {
     const selectedRoom = roomDropDown.value;
     
     try{
         const response = await fetch(`/rooms/${selectedRoom}`);
+        //console.log(selectedRoom);
         const roomData = await response.json();
+        //console.log(roomData.seatNumbers);
         if(roomData){
+
             //update the seat map based on the selected room's data
-            const seatGrid = document.getElementById("seat-grid");
-            seatGrid.innerHTML = ""; //clear existing seats
-            
+            const seatGrid = document.getElementById("seatGrid");
+
+            let innerList = '';
             roomData.seatNumbers.forEach(seat => {
                 // Create and append seat buttons
-                seatGrid.innerHTML += `<button type="button" class="lab-seat is-reserved" value="${seat}" disabled="">${seat}</button>`;
+                innerList += `<button type="button" class="lab-seat" value="${seat}" >${seat}</button>`;
             });
+            seatGrid.innerHTML = innerList;
         }else{
             console.log("No data found for the selected room.");
         }

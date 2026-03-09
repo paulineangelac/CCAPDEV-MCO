@@ -58,6 +58,16 @@ app.get('/rooms', async (req,res)=>{
     }
 });
 
+app.get('/rooms/:roomNumber', async (req,res)=>{
+    try{
+        const room = await Room.findOne({roomNumber: req.params.roomNumber});
+        
+        res.json(room);
+    }catch(error){
+        console.error("Error fetching room ", error);
+    }
+});
+
 app.use(express.urlencoded({extended: true}));
 
 app.post('/signUp', SignUpController.signUp);

@@ -36,7 +36,7 @@ async function loadDashboardInformation(){
             document.getElementById("sidebar-usertype").textContent = `${userData.status}`;
 
             //generates the list of current reservations for the user
-
+            loadRecommendedRoom();
         }
 
     }catch(error){
@@ -71,4 +71,4 @@ async function loadRecommendedRoom(){
 
 
 window.onload = loadDashboardInformation;
-window.onload = loadRecommendedRoom;
+
