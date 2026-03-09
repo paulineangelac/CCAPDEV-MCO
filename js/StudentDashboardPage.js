@@ -1,12 +1,3 @@
-/*
-   STUDENTDASHBOARDPAGE.JS
-   Search bar behavior (Enter key + button click)
-
-    Note:
-   - Sidebar uses Bootstrap Offcanvas already
-   - Logout currently uses anchor redirect
-*/
-
 const userSearch = document.getElementById("userSearch");
 
 // SEARCH BEHAVIOUR 
@@ -16,18 +7,28 @@ userSearch.addEventListener("keypress", (e) => {
         searchUser();
     }
 });
-// Phase 1 placeholder: redirects to ViewProfilePage
-// Phase 2 TO DO: replace with actual user search + results dropdown/list
-function searchUser() {
-    window.location.href = "../src/ViewProfilePage.html";
+
+async function searchUser() {
+    const query = userSearch.value.trim(); // get whatever user types in the search bar
+
+    if (!query) return;
+
+    try {
+        const response = await fetch(`/search-users?q=${encodeURIComponent(query)}`);
+        const users = await response.json();
+
+        console.log(users);
+    } catch (error) {
+        console.log("Search error:", error.message);
+    }
 }
 
-async function loadDashboardInformation(){
-    try{
+async function loadDashboardInformation() {
+    try {
         const response = await fetch('/get-user');
         const userData = await response.json();
 
-        if(userData.loggedIn){
+        if (userData.loggedIn) {
             //updates top right profile name and type based on the current session's information
             document.getElementById("fullname").textContent = `${userData.lname}, ${userData.fname}`;
             document.getElementById("type").textContent = `${userData.status}`;
@@ -39,16 +40,16 @@ async function loadDashboardInformation(){
             loadRecommendedRoom();
         }
 
-    }catch(error){
+    } catch (error) {
         console.log("MongoDB Error:", error.message);
     }
 }
-async function loadRecommendedRoom(){
-    try{
+async function loadRecommendedRoom() {
+    try {
         const response = await fetch('/rooms');
         const roomData = await response.json();
 
-        if(roomData){
+        if (roomData) {
             const recoDiv = document.getElementById('recommended-rooms');
             let roomListHTML = '';
             roomData.forEach(room => {
@@ -64,7 +65,7 @@ async function loadRecommendedRoom(){
             });
             recoDiv.innerHTML = roomListHTML;
         }
-    }catch(error){
+    } catch (error) {
         console.log("MongoDB Error:", error.message);
     }
 }
