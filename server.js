@@ -92,6 +92,30 @@ app.get('/search-users', async (req, res) => {
     }
 });
 
+// GET route to get a user profile given a username
+app.get('/get-user-profile', async (req, res) => {
+    try {
+        const username = req.query.username;
+
+        if (!username || username.trim() == '') {
+            return res.status(400).json({ error: "Username is required" });
+        }
+
+        const user = await User.findOne({ username: username })
+            .select('fname lname username email status bio');
+
+        if (!user) {
+            return res.status(400).json({ error: "User not found" });
+        }
+
+        res.json(user);
+    } catch (error) {
+        console.error("Error getting user profile:", error);
+        res.status(500).json({ error: "server error" });
+    }
+});
+
+
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/signUp', SignUpController.signUp);
