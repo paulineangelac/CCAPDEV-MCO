@@ -426,3 +426,23 @@ a:hover {
 #booking-list{
   border-style:none;
 }
+
+/* Search users */
+.search-results{
+  position: absolute;
+  background:white;
+  width: 28%;
+  border: 1px solid #ddd;
+  margin-top:5px;
+  max-height: 200px;
+}
+
+.resultItem{
+  padding:10px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.resultItem:hover{
+  background:#f5f5f5
+}
