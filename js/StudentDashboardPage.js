@@ -1,27 +1,50 @@
 const userSearch = document.getElementById("userSearch");
+const resultsContainer = document.getElementById("userSearchResults");
 
-// SEARCH BEHAVIOUR 
-// pressing enter in the search input triggers the same action as clicking the search button.
-userSearch.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-        searchUser();
-    }
-});
+// USER SEARCH behavior
+userSearch.addEventListener("input", searchUser);
 
 async function searchUser() {
     const query = userSearch.value.trim(); // get whatever user types in the search bar
 
-    if (!query) return;
+    if (!query) {
+        resultsContainer.innerHTML = "";
+        return;
+    }
 
     try {
         const response = await fetch(`/search-users?q=${encodeURIComponent(query)}`);
         const users = await response.json();
 
-        console.log(users);
+        displayResults(users);
     } catch (error) {
         console.log("Search error:", error.message);
     }
 }
+
+// user search dropdown
+function displayResults(users) {
+    resultsContainer.innerHTML = "";
+
+    if (users.length == 0) {
+        resultsContainer.innerHTML = "<div>No users found</div>";
+        return;
+    }
+
+    users.forEach(user => {
+        resultsContainer.innerHTML += `
+        <div class="resultItem" onclick="viewProfile('${user.username}')">
+            ${user.fname} ${user.lname}
+        </div>
+        `;
+    });
+}
+
+// redirect to user profile
+function viewProfile(username) {
+    window.location.href = `/ViewProfilePage.html?username=${username}`;
+}
+
 
 async function loadDashboardInformation() {
     try {
@@ -44,6 +67,7 @@ async function loadDashboardInformation() {
         console.log("MongoDB Error:", error.message);
     }
 }
+
 async function loadRecommendedRoom() {
     try {
         const response = await fetch('/rooms');
@@ -69,7 +93,6 @@ async function loadRecommendedRoom() {
         console.log("MongoDB Error:", error.message);
     }
 }
-
 
 window.onload = loadDashboardInformation;
 

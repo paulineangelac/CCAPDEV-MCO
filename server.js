@@ -72,16 +72,16 @@ app.get('/rooms/:roomNumber', async (req, res) => {
 // GET route for searching users
 app.get('/search-users', async (req, res) => {
     try {
-        const query = req.query.q; // gets the q from the URL
+        const query = req.query.q; // gets the name from the URL
 
         if (!query || query.trim() === '') {
-            return res.json([]); // if user searched nothing return empty array
+            return res.json([]); // return empty array
         }
-        // tells mongodb to find users where the fname or lname contains typed query
+
         const users = await User.find({
             $or: [
-                { fname: { $regex: query, $options: 'i' } },
-                { lname: { $regex: query, $options: 'i' } }
+                { fname: { $regex: `^${query}`, $options: 'i' } },
+                { lname: { $regex: `^${query}`, $options: 'i' } }
             ]
         }).select('fname lname username email status bio');
 
