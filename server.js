@@ -12,14 +12,13 @@ import LoginController from '../CCAPDEV-MCO/controllers/LoginController.js';
 
 const app = express();
 
-//makes sures when you view on localhost:3000, it will show the index page
-app.use(express.static('.'));
-app.use(express.static('src'));
-const indexPath = path.dirname(fileURLToPath(import.meta.url));
-app.get('/', (req, res) => {
-    res.sendFile(path.join(indexPath, '../CCAPDEV-MCO/src/IndexPage.html'));
-});
+app.set("view engine", "hbs");
 
+//makes sures when you view on localhost:3000, it will show the index page
+app.use(express.static('public'));
+app.get('/', (req, res) => {
+    res.render('index');
+});
 
 const PORT = process.env.SERVER_PORT;
 const dbURL = process.env.MONGODB_URI;
