@@ -4,7 +4,8 @@
   "description": "Major Course Output for CCAPDEV",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
-    "mongoose": "^9.2.4"
+    "hbs": "^4.2.0",
+    "mongoose": "^9.3.0"
   }
 }
