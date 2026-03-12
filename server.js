@@ -11,6 +11,7 @@ import BookedRooms from './models/BookedRooms.js';
 
 import SignUpController from '../CCAPDEV-MCO/controllers/SignUpController.js';
 import LoginController from '../CCAPDEV-MCO/controllers/LoginController.js';
+import ReserveController from '../CCAPDEV-MCO/controllers/ReserveController.js';
 
 const app = express();
 
@@ -163,7 +164,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.post('/signUp', SignUpController.signUp);
 app.post('/login', LoginController.login);
-
+app.post('/reserve', ReserveController.reserve);
 
 
 

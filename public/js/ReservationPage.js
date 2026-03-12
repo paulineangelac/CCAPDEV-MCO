@@ -106,6 +106,10 @@ labSelect.addEventListener('change', async (event)=>{
 
                 timeSelect.innerHTML = innerListTime;
             });
+
+            timeSelect.addEventListener('change' ,(event) =>{
+                confirmBtn.disabled = false;
+            });
         });
 
     }catch(error){

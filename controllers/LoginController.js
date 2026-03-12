@@ -10,12 +10,8 @@ const LoginController ={
                 username: username,
             });
 
-            if(!user){
-                return res.send(`
-                    <script>
-                        alert('Username not found! Please try again.');
-                    </script>
-                `);
+            if (!user) {
+                return res.redirect('/login');
             }
             if(user.password !== password){
                 return res.send(`

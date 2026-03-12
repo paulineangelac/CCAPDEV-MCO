@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 
 const bookedRoomSchema = new mongoose.Schema({
-    roomCode: String,
+    roomNumber: String,
     seat: String,
     time: String,
-    date: String
+    date: String,
+    name: String
 });
 
 export default mongoose.model('BookedRooms', bookedRoomSchema);

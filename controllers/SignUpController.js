@@ -32,7 +32,6 @@ const SignUpController = {
         
         } catch (error) {
             console.log("MongoDB Error:", error.message);
-            res.status(500).json({ message: error.message });
         }
     }
 };
