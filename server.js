@@ -13,12 +13,18 @@ import LoginController from '../CCAPDEV-MCO/controllers/LoginController.js';
 
 const app = express();
 
+
 app.set("view engine", "hbs");
 
 //makes sures when you view on localhost:3000, it will show the index page
 app.use(express.static('public'));
+
 app.get('/', (req, res) => {
     res.render('index');
+});
+
+app.get('/login', (req, res) => {
+    res.render('LoginPage');  // will render LoginPage.hbs
 });
 
 const PORT = process.env.SERVER_PORT;
