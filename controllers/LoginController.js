@@ -1,4 +1,4 @@
-import { type } from 'os';
+
 import User from '../models/User.js';
 
 const LoginController ={
@@ -27,7 +27,7 @@ const LoginController ={
                 if(username === "admin"){
                     return res.redirect('/AdminDashboardPage');
                 }else if(username === "labtech"){
-                    return res.render('/LabTechDashboardPage');
+                    return res.redirect('/LabTechDashboardPage');
                 }else{
                     req.session.user={
                         fname: user.fname,
@@ -37,7 +37,7 @@ const LoginController ={
                         reservations: user.reservations,
                         status: user.status
                     }
-                    return res.redirect('/StudentdashboardPage');
+                    return res.redirect('studentdashboard-page');
                 }
             }
 

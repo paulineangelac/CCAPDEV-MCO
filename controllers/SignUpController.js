@@ -14,8 +14,6 @@ const SignUpController = {
                 </script>
             `);
         }
-
-        // 2. Create and Save
         const newUser = new User({
             fname,
             lname,
@@ -25,13 +23,10 @@ const SignUpController = {
         });
 
         const result = await newUser.save();
-        console.log("User saved to MongoDB with ID:", result._id);
 
-        // 3. Tell the browser what to do next
         res.send(`
             <script>
-                alert('Account created successfully for ${username}!');
-                window.location.href = '../src/LoginPage.html'; 
+                alert('Account created successfully for ${username}!'); 
             </script>
         `);
         

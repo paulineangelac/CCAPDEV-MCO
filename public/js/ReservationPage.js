@@ -64,28 +64,35 @@ confirmBtn.addEventListener("click", function () {
 const labSelect = document.getElementById('lab-select');
 const seatSelect = document.getElementById('seat-select');
 const timeSelect = document.getElementById('time-select');
+const seatGrid = document.getElementById('seatGrid');
 labSelect.addEventListener('change', async (event)=>{
     const selectedRoom = event.target.value;
-    console.log(selectedRoom);
     try{
         //fetch selected room data
         const response = await fetch(`/rooms/${selectedRoom}`);
         const roomData = await response.json();
-        let innerListSeat = '';
+        let innerListSeat = '<option value="">--Select a Seat--</option>';
         roomData.seatNumbers.forEach(seat =>{
             innerListSeat += `<option value="${seat.number}">${seat.number}</option>`;
         });
         seatSelect.innerHTML = innerListSeat;
 
+        let innerListGridSeat ='';
+        
+        
+        roomData.seatNumbers.forEach((seat,num)=>{
+            innerListGridSeat += `<button type="button" class="lab-seat">${seat.number}</button>`;
+        });
+        seatGrid.innerHTML = innerListGridSeat;
 
         //updates seatmap
-        
+
 
         //adds seat options
         seatSelect.addEventListener('change' ,(event)=>{
             const selectedSeat = event.target.value;
 
-            let innerListTime = '';
+            let innerListTime = '<option value="">--Select a Time--</option>';
             roomData.seatNumbers.forEach(seat =>{
                 
                 if(seat.number === selectedSeat){
@@ -106,6 +113,25 @@ labSelect.addEventListener('change', async (event)=>{
     }
 });
 
+async function loadDashboardInformation() {
+    try {
+        const response = await fetch('/get-user');
+        const userData = await response.json();
 
+        if (userData.loggedIn) {
+            //updates top right profile name and type based on the current session's information
+            document.getElementById("fullname").textContent = `${userData.lname}, ${userData.fname}`;
+            document.getElementById("type").textContent = `${userData.status}`;
+            //updates the sidebar popup
+            document.getElementById("sidebar-fullname").textContent = `${userData.lname}, ${userData.fname}`;
+            document.getElementById("sidebar-usertype").textContent = `${userData.status}`;
 
+            //generates the list of current reservations for the user
+            loadRecommendedRoom();
+        }
+
+    } catch (error) {
+        console.log("MongoDB Error:", error.message);
+    }
+}
 //<button type="button" class="lab-seat is-reserved" data-seat="A1" disabled="">A1</button>

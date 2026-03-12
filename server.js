@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import session from 'express-session';
 import Room from './models/Rooms.js';
 import User from './models/User.js';
+import BookedRooms from './models/BookedRooms.js';
 
 import SignUpController from '../CCAPDEV-MCO/controllers/SignUpController.js';
 import LoginController from '../CCAPDEV-MCO/controllers/LoginController.js';
@@ -23,9 +24,6 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/login', (req, res) => {
-    res.render('LoginPage');  // will render LoginPage.hbs
-});
 
 const PORT = process.env.SERVER_PORT;
 const dbURL = process.env.MONGODB_URI;
@@ -161,28 +159,13 @@ app.get('/ReservationPage', async (req,res)=>{
 //gets room
 
 
-//helper function
-hbs.registerHelper('eq', function (a, b) {
-    return a === b;
-});
-app.get('/reservation-page', async (req, res) => {
-    
-    const selectedLab = req.query.lab; 
-
-    // 2. Fetch your rooms list from the Database
-    // Replace 'RoomModel.find()' with your actual DB call
-    const roomsFromDB = await RoomModel.find({}); 
-
-    // 3. Render the page, passing BOTH the rooms and the user's choice
-    res.render('reservation', { 
-        allRooms: roomsFromDB, 
-        currentLab: selectedLab 
-    });
-});
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/signUp', SignUpController.signUp);
 app.post('/login', LoginController.login);
+
+
+
 
 //connect to mongoose and start the server
 mongoose.connect(dbURL)

@@ -100,9 +100,6 @@
                                 <span class="legend-swatch"></span> Available
                             </span>
                             <span class="legend-item">
-                                <span class="legend-swatch legend-reserved"></span> Reserved
-                            </span>
-                            <span class="legend-item">
                                 <span class="legend-swatch legend-selected"></span> Selected
                             </span>
                         </div>
@@ -133,7 +130,8 @@
                         <span class="detail-label">
                             <span class="detail-icon" aria-hidden="true"><i class="bi bi-pc-display"></i></span> Lab
                         </span>
-                        <select id="lab-select" name="lab" class="form-select">
+                        <select id="lab-select" name="room" class="form-select">
+                            <option value="">--Select a Room--</option>
                             {{#each rooms}}
                                 {{!-- Optional: Only show rooms that are marked as available --}}
                                 {{#if this.isAvailable}}
@@ -149,7 +147,7 @@
                                 <span class="detail-icon" aria-hidden="true"><i class="bi bi-info-circle"></i></span>
                                 Selected Seat
                             </span>
-                            <select id="seat-select" name="lab" class="form-select">
+                            <select id="seat-select" name="seat" class="form-select">
                                 
                             </select>
                         </div>
@@ -169,11 +167,8 @@
                                 
                             </select>
                         </div>
-
-                        
-
                         <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" value="" id="anonCheck">
+                            <input class="form-check-input" type="checkbox" value="Anonnymous" id="anonCheck" name="anon">
                             <label class="form-check-label" for="anonCheck">
                                 Reserve anonymously
                             </label>

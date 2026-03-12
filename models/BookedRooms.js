@@ -6,3 +6,5 @@ const bookedRoomSchema = new mongoose.Schema({
     time: String,
     date: String
 });
+
+export default mongoose.model('BookedRooms', bookedRoomSchema);
