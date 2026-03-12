@@ -60,33 +60,52 @@ confirmBtn.addEventListener("click", function () {
     window.location.href = "StudentDashboardPage.html";
 });
 
-//updates seatmap after choosing room
-const roomDropDown = document.getElementById("lab-select");
-roomDropDown.addEventListener('change', async function() {
-    const selectedRoom = roomDropDown.value;
-    
+//updates time slots after choosing room
+const labSelect = document.getElementById('lab-select');
+const seatSelect = document.getElementById('seat-select');
+const timeSelect = document.getElementById('time-select');
+labSelect.addEventListener('change', async (event)=>{
+    const selectedRoom = event.target.value;
+    console.log(selectedRoom);
     try{
+        //fetch selected room data
         const response = await fetch(`/rooms/${selectedRoom}`);
-        //console.log(selectedRoom);
         const roomData = await response.json();
-        //console.log(roomData.seatNumbers);
-        if(roomData){
+        let innerListSeat = '';
+        roomData.seatNumbers.forEach(seat =>{
+            innerListSeat += `<option value="${seat.number}">${seat.number}</option>`;
+        });
+        seatSelect.innerHTML = innerListSeat;
 
-            //update the seat map based on the selected room's data
-            const seatGrid = document.getElementById("seatGrid");
 
-            let innerList = '';
-            roomData.seatNumbers.forEach(seat => {
-                // Create and append seat buttons
-                innerList += `<button type="button" class="lab-seat" value="${seat}" >${seat}</button>`;
+        //updates seatmap
+        
+
+        //adds seat options
+        seatSelect.addEventListener('change' ,(event)=>{
+            const selectedSeat = event.target.value;
+
+            let innerListTime = '';
+            roomData.seatNumbers.forEach(seat =>{
+                
+                if(seat.number === selectedSeat){
+                    seat.slots.forEach(time =>{
+                        if(time.reservedBy === null){
+                            innerListTime += `<option value="${time.time}">${time.time}</option>`
+                        }
+                        
+                    })
+                }
+
+                timeSelect.innerHTML = innerListTime;
             });
-            seatGrid.innerHTML = innerList;
-        }else{
-            console.log("No data found for the selected room.");
-        }
+        });
+
     }catch(error){
-        console.log("MongoDB Error:", error.message);
+        console.log(error);
     }
 });
+
+
 
 //<button type="button" class="lab-seat is-reserved" data-seat="A1" disabled="">A1</button>

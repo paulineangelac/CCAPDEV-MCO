@@ -18,7 +18,7 @@
     <header class="app-navbar">
         <div class="nav-inner">
 
-            <a class="brand" href="../src/IndexPage.html">
+            <a class="brand" href="../src/IndexPage.hbs">
                 <span class="brand-logo" aria-hidden="true"></span>
                 <span>Lab Reservation</span>
             </a>
@@ -96,37 +96,12 @@
                 <p class="muted mb-0">Select a laboratory, date and time to secure a slot</p>
             </header>
 
-            <form action="ReservationPage.html" method="get" class="row g-3 align-items-end mt-1">
-                <div class="col-12 col-md">
-                    <label for="lab-select" class="form-label fw-bold text-navy">Laboratory</label>
-                    <select id="lab-select" name="lab" class="form-select">
-                        <option value="">Select Laboratory</option>
-                        <option value="goks-304B">G304B</option>
-                        <option value="goks-306A">G306A</option>
-                        <option value="andrew-1904">A1904</option>
-                    </select>
-                </div>
 
-                <div class="col-12 col-md">
-                    <label for="date-select" class="form-label fw-bold text-navy">Date</label>
-                    <input type="date" id="date-select" name="date" class="form-control">
-                </div>
-
-                <div class="col-12 col-md">
-                    <label for="time-select" class="form-label fw-bold text-navy">Time</label>
-                    <select id="time-select" name="time" class="form-select">
-                        <option value="">Select Time</option>
-                        <option value="08:00 AM">08:00 AM</option>
-                        <option value="09:00 AM">09:00 AM</option>
-                    </select>
-                </div>
-
-                <div class="col-12 col-md-auto">
-                    <button type="submit" class="btn btn-success px-4 py-2 fw-semibold">
-                        Find Seats
-                    </button>
-                </div>
-            </form>
+            <div class="col-12 col-md-auto">
+                <a href="/reservation-page" class="btn btn-success px-4 py-2 fw-semibold">
+                    Find Seats
+                </a>
+            </div>
         </section>
 
         <div class="row g-4 mt-4">
@@ -144,6 +119,9 @@
                         <div class="card" id="scroll-card">
                             <div id="booking-list">
                                 <!-- Example of a confirmed reservation card -->
+                                
+
+
                                 <div class="booking-card">
                                     <div class="booking-header">
                                         <span class="booking-lab">Gokongwei 304A - Seat 12</span>

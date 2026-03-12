@@ -78,7 +78,7 @@ async function loadRecommendedRoom() {
             let roomListHTML = '';
             roomData.forEach(room => {
                 roomListHTML += `
-                    <a href="ReservationPage.html" class="lab-card ui-card">
+                    <a href="ReservationPage.hbs" class="lab-card ui-card">
                         <div class="lab-card__info">
                             <span class="lab-name">${room.roomNumber}</span>
                             <span class="lab-status small">${room.seatNumbers.length} Seats Available</span>
@@ -93,6 +93,8 @@ async function loadRecommendedRoom() {
         console.log("MongoDB Error:", error.message);
     }
 }
+
+
 
 window.onload = loadDashboardInformation;
 

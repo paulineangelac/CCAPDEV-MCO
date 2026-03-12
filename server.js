@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express, { urlencoded } from 'express';
 import mongoose from 'mongoose';
+import hbs from 'hbs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import session from 'express-session';
@@ -113,8 +114,65 @@ app.get('/get-user-profile', async (req, res) => {
         res.status(500).json({ error: "server error" });
     }
 });
+//render login page
+app.get('/login-page', (req,res)=>{
+    res.render('LoginPage');
+});
+//render studentdashboard page
+app.get('/studentdashboard-page', (req,res)=>{
+    res.render('StudentDashboardPage');
+});
+//render reservation page
+app.get('/reservation-page', async (req,res)=>{
+    const selectedRoom = req.query.lab;
+    const selectedDate = req.query.date;
+    const selectedTime = req.query.time;
+
+    const allRooms = await Room.find({}).lean();
+    
+    res.render('ReservationPage',{
+        rooms: allRooms,
+        lab: selectedRoom,
+        date: selectedDate,
+        time: selectedTime
+    });
+});
+app.get('/signup-page', (req,res)=>{
+    res.render('SignUpPage');
+});
+
+app.get('/ReservationPage', async (req,res)=>{
+    try{
+        const roomsData = await Room.find({}).lean();
+        
+        res.render('RservationPage', {
+            rooms: roomsData
+        });
+    }catch(error){
+        console.log(error);
+    }
+});
+//gets room
 
 
+//helper function
+hbs.registerHelper('eq', function (a, b) {
+    return a === b;
+});
+app.get('/reservation-page', async (req, res) => {
+    
+    const selectedLab = req.query.lab; 
+
+    // 2. Fetch your rooms list from the Database
+    // Replace 'RoomModel.find()' with your actual DB call
+    const roomsFromDB = await RoomModel.find({}); 
+
+    // 3. Render the page, passing BOTH the rooms and the user's choice
+    res.render('reservation', { 
+        allRooms: roomsFromDB, 
+        currentLab: selectedLab 
+    });
+});
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/signUp', SignUpController.signUp);

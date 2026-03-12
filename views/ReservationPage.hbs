@@ -134,12 +134,24 @@
                             <span class="detail-icon" aria-hidden="true"><i class="bi bi-pc-display"></i></span> Lab
                         </span>
                         <select id="lab-select" name="lab" class="form-select">
-                            <option value="">Select Laboratory</option>
-                            <option value="Gokongwei-304A">G304A</option>
-                            <option value="Gokongwei-306A">G306A</option>
-                            <option value="Andrew-1904">A1904</option>
+                            {{#each rooms}}
+                                {{!-- Optional: Only show rooms that are marked as available --}}
+                                {{#if this.isAvailable}}
+                                    <option value="{{this.roomNumber}}">{{this.roomCode}}</option>
+                                {{/if}}
+                            {{/each}}
                         </select>
                         
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">
+                                <span class="detail-icon" aria-hidden="true"><i class="bi bi-info-circle"></i></span>
+                                Selected Seat
+                            </span>
+                            <select id="seat-select" name="lab" class="form-select">
+                                
+                            </select>
                         </div>
 
                         <div class="detail-row">
@@ -154,19 +166,11 @@
                                 <span class="detail-icon" aria-hidden="true"><i class="bi bi-clock"></i></span> Time
                             </span>
                             <select id="time-select" name="time" class="form-select">
-                                <option value="">Select Time</option>
-                                <option value="08:00 AM">08:00 AM</option>
-                                <option value="09:00 AM">09:00 AM</option>
+                                
                             </select>
                         </div>
 
-                        <div class="detail-row">
-                            <span class="detail-label">
-                                <span class="detail-icon" aria-hidden="true"><i class="bi bi-info-circle"></i></span>
-                                Selected Seat
-                            </span>
-                            <span class="detail-value seat-value" id="displaySeat">—</span>
-                        </div>
+                        
 
                         <div class="form-check mt-3">
                             <input class="form-check-input" type="checkbox" value="" id="anonCheck">

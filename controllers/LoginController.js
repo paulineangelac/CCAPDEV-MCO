@@ -25,17 +25,9 @@ const LoginController ={
                 `);
             }else{
                 if(username === "admin"){
-                    return res.send(`
-                        <script>
-                            window.location.href = '../src/AdminDashboardPage.html'; 
-                        </script>
-                    `);
+                    return res.redirect('/AdminDashboardPage');
                 }else if(username === "labtech"){
-                    return res.send(`
-                        <script>
-                            window.location.href = '../src/LabTechDashboardPage.html'; 
-                        </script>
-                    `);
+                    return res.render('/LabTechDashboardPage');
                 }else{
                     req.session.user={
                         fname: user.fname,
@@ -45,12 +37,7 @@ const LoginController ={
                         reservations: user.reservations,
                         status: user.status
                     }
-                    return res.send(`
-                        <script>
-                            alert('Welcome, ${user.fname}!');
-                            window.location.href = '/StudentDashboardPage.html'; 
-                        </script>
-                    `);
+                    return res.redirect('/StudentdashboardPage');
                 }
             }
 
