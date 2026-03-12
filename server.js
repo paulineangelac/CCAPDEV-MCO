@@ -11,6 +11,7 @@ import BookedRooms from './models/BookedRooms.js';
 
 import SignUpController from '../CCAPDEV-MCO/controllers/SignUpController.js';
 import LoginController from '../CCAPDEV-MCO/controllers/LoginController.js';
+import SearchController from './controllers/SearchController.js';
 
 const app = express();
 
@@ -73,98 +74,63 @@ app.get('/rooms/:roomNumber', async (req, res) => {
     }
 });
 
-// GET route for searching users
-app.get('/search-users', async (req, res) => {
-    try {
-        const query = req.query.q; // gets the name from the URL
 
-        if (!query || query.trim() === '') {
-            return res.json([]); // return empty array
-        }
+// for searching users
+app.get('/search-users', SearchController.searchUsers);
+app.get('/get-user-profile', SearchController.getUserProfile);
 
-        const users = await User.find({
-            $or: [
-                { fname: { $regex: `^${query}`, $options: 'i' } },
-                { lname: { $regex: `^${query}`, $options: 'i' } }
-            ]
-        }).select('fname lname username email status bio');
+// render view profile page and use renderProfilePage function
+app.get('/viewprofile', SearchController.renderProfilePage);
 
-        res.json(users);
-    } catch (error) {
-        console.error("Error searching user:", error);
-        res.status(500).json({ error: "server error" });
-    }
-});
-
-// GET route to get a user profile given a username
-app.get('/get-user-profile', async (req, res) => {
-    try {
-        const username = req.query.username;
-
-        if (!username || username.trim() == '') {
-            return res.status(400).json({ error: "Username is required" });
-        }
-
-        const user = await User.findOne({ username: username })
-            .select('fname lname username email status bio');
-
-        if (!user) {
-            return res.status(400).json({ error: "User not found" });
-        }
-
-        res.json(user);
-    } catch (error) {
-        console.error("Error getting user profile:", error);
-        res.status(500).json({ error: "server error" });
-    }
-});
 //render login page
-app.get('/login', (req,res)=>{
+app.get('/login', (req, res) => {
     res.render('LoginPage');
 });
+
 //render studentdashboard page
-app.get('/studentdashboard-page', (req,res)=>{
+app.get('/studentdashboard-page', (req, res) => {
     res.render('StudentDashboardPage');
 });
+
 //render reservation page
-app.get('/reservation-page', async (req,res)=>{
+app.get('/reservation-page', async (req, res) => {
     const selectedRoom = req.query.lab;
     const selectedDate = req.query.date;
     const selectedTime = req.query.time;
 
     const allRooms = await Room.find({}).lean();
-    
-    res.render('ReservationPage',{
+
+    res.render('ReservationPage', {
         rooms: allRooms,
         lab: selectedRoom,
         date: selectedDate,
         time: selectedTime
     });
 });
-app.get('/signup', (req,res)=>{
+
+app.get('/signup', (req, res) => {
     res.render('SignUpPage');
 });
 
-app.get('/ReservationPage', async (req,res)=>{
-    try{
+app.get('/ReservationPage', async (req, res) => {
+    try {
         const roomsData = await Room.find({}).lean();
-        
-        res.render('RservationPage', {
+
+        res.render('ReservationPage', {
             rooms: roomsData
         });
-    }catch(error){
+    } catch (error) {
         console.log(error);
     }
 });
 //gets room
 
 
+
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/signUp', SignUpController.signUp);
 app.post('/login', LoginController.login);
-
-
 
 
 //connect to mongoose and start the server

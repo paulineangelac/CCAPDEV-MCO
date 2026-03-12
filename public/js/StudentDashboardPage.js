@@ -42,7 +42,7 @@ function displayResults(users) {
 
 // redirect to user profile
 function viewProfile(username) {
-    window.location.href = `/ViewProfilePage.html?username=${username}`;
+    window.location.href = `/viewProfile?username=${username}`;
 }
 
 
