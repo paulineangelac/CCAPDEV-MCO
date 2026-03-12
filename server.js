@@ -119,7 +119,7 @@ app.get('/get-user-profile', async (req, res) => {
     }
 });
 //render login page
-app.get('/login-page', (req,res)=>{
+app.get('/login', (req,res)=>{
     res.render('LoginPage');
 });
 //render studentdashboard page
@@ -141,7 +141,7 @@ app.get('/reservation-page', async (req,res)=>{
         time: selectedTime
     });
 });
-app.get('/signup-page', (req,res)=>{
+app.get('/signup', (req,res)=>{
     res.render('SignUpPage');
 });
 
