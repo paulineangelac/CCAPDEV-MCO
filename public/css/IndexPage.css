@@ -84,6 +84,11 @@ body {
   flex-wrap: wrap; /* Wrap buttons on small screens */
 }
 
+a {
+  color: inherit;        /* use parent text color */
+  text-decoration: none; /* remove underline */
+}
+
 /* =====================================================
    NAVBAR
    ----------------
@@ -97,6 +102,25 @@ body {
 .navbar-custom.scrolled {
     background-color: #ffffff; /* White background after scrolling */
     box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+/* Remove default blue & underline for navbar links */
+.navbar-custom .nav-link,
+.navbar-custom .navbar-brand {
+    color: var(--navy) !important;       /* Your desired link color */
+    text-decoration: none !important;    /* Remove underline */
+}
+
+/* Optional: hover effect */
+.navbar-custom .nav-link:hover,
+.navbar-custom .navbar-brand:hover {
+    color: var(--green) !important;      /* Highlight on hover */
+    text-decoration: underline;          /* Optional */
+}
+
+/* Buttons: remove underline just in case */
+.navbar-custom .btn {
+    text-decoration: none !important;
 }
 
 /* =====================================================

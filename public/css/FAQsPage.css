@@ -93,3 +93,8 @@
 .accordion-button:focus {
   box-shadow: none;
 }
+
+a {
+  color: inherit;        /* use parent text color */
+  text-decoration: none; /* remove underline */
+}

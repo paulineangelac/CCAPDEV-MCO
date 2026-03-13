@@ -5,17 +5,19 @@ import hbs from 'hbs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import session from 'express-session';
+
 import Room from './models/Rooms.js';
 import User from './models/User.js';
 import BookedRooms from './models/BookedRooms.js';
-
+import ContactMessage from './models/ContactMessage.js';
 import SignUpController from '../CCAPDEV-MCO/controllers/SignUpController.js';
 import LoginController from '../CCAPDEV-MCO/controllers/LoginController.js';
 import ReserveController from '../CCAPDEV-MCO/controllers/ReserveController.js';
 import SearchController from './controllers/SearchController.js';
+import LabTech from './models/LabTech.js';
+import bcrypt from 'bcryptjs'; // safely hashes passwords
 
 const app = express();
-
 
 app.set("view engine", "hbs");
 
@@ -56,6 +58,7 @@ app.get('/get-user', (req, res) => {
         res.json({ loggedIn: false });
     }
 });
+
 app.get('/rooms', async (req, res) => {
     try {
         const rooms = await Room.find({});
@@ -90,6 +93,10 @@ app.get('/login', (req, res) => {
 
 //render studentdashboard page
 app.get('/studentdashboard-page', (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+
     res.render('StudentDashboardPage',{
         reservations: req.session.user.reservations,
         fname: req.session.user.fname,
@@ -100,6 +107,9 @@ app.get('/studentdashboard-page', (req, res) => {
 
 //render reservation page
 app.get('/reservation-page', async (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
 
     const allRooms = await Room.find({}).lean();
 
@@ -114,7 +124,12 @@ app.get('/reservation-page', async (req, res) => {
 app.get('/signup', (req, res) => {
     res.render('SignUpPage');
 });
-app.get('/studentprofile-page', (req,res)=>{
+
+app.get('/studentprofile-page', (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+
     res.render('StudentProfilePage',{
         bio: req.session.user.bio,
         reservations: req.session.user.reservations,
@@ -125,9 +140,113 @@ app.get('/studentprofile-page', (req,res)=>{
         username: req.session.user.username,
     });
 });
+
 app.get('/faqs-page', (req,res)=>{
     res.render('FAQsPage');
 });
+
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.json()); 
+
+app.post('/contact', async (req, res) => {
+  try {
+    console.log("Contact form data:", req.body); // print submitted data
+
+    const { name, email, phone, message } = req.body;
+
+    if (!name || !email || !message) {
+      console.log("Missing required fields");
+      return res.status(400).send("Please fill in all required fields.");
+    }
+    await ContactMessage.create({ name, email, phone, message, date: new Date() });
+
+    res.send(`<script>alert("Thank you, ${name}! Your message has been submitted."); window.location.href = "/";</script>`);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error. Please try again.");
+  }
+});
+
+// GET all lab technicians
+app.get('/labtechs', async (req, res) => {
+    try {
+        const labTechs = await LabTech.find().lean(); // lean() returns plain JS objects
+        res.json(labTechs);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch lab technicians" });
+    }
+});
+
+// POST create new lab technician
+app.post('/labtechs/create', async (req, res) => {
+    try {
+        const { firstName, lastName, email, contactNumber, password, confirmPassword, assignedLab } = req.body;
+
+        // Check all required fields
+        if (!firstName || !lastName || !email || !password || !confirmPassword || !assignedLab) {
+            return res.status(400).json({ error: "Please fill in all required fields." });
+        }
+
+        // Confirm passwords match
+        if (password !== confirmPassword) {
+            return res.status(400).json({ error: "Passwords do not match." });
+        }
+
+        // Check if email is already in use
+        const existing = await LabTech.findOne({ email });
+        if (existing) {
+            return res.status(400).json({ error: "Email already exists." });
+        }
+
+        // Hash the password before storing
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newLabTech = new LabTech({
+            firstName,
+            lastName,
+            email,
+            contactNumber,
+            password: hashedPassword,
+            assignedLab
+        });
+
+        await newLabTech.save();
+        res.status(201).json({ message: "Lab technician created successfully." });
+
+    } catch (err) {
+        console.error("Error creating lab technician:", err);
+        res.status(500).json({ error: "Server error. Please try again." });
+    }
+});
+
+app.post('/labtech-login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const labTech = await LabTech.findOne({ email });
+        if (!labTech) return res.status(400).json({ error: "Invalid email or password" });
+
+        // 🔒 compare entered password with stored hash
+        const isMatch = await bcrypt.compare(password, labTech.password);
+        if (!isMatch) return res.status(400).json({ error: "Invalid email or password" });
+
+        // Optional: save session
+        req.session.user = {
+            id: labTech._id,
+            firstName: labTech.firstName,
+            lastName: labTech.lastName,
+            email: labTech.email,
+            assignedLab: labTech.assignedLab,
+            role: "LabTech"
+        };
+
+        res.json({ message: "Login successful" });
+    } catch (err) {
+        res.status(500).json({ error: "Server error during login" });
+    }
+});
+
 app.get('/logout-page', (req,res)=>{
     res.render('LoginPage');
 })
@@ -145,7 +264,6 @@ app.get('/ReservationPage', async (req, res) => {
     }
 });
 //gets room
-
 
 app.use(express.urlencoded({ extended: true }));
 
