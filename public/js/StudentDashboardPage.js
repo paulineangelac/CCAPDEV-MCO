@@ -11,7 +11,7 @@ async function searchUser() {
         resultsContainer.innerHTML = "";
         return;
     }
-    
+
     try {
         const response = await fetch(`/search-users?q=${encodeURIComponent(query)}`);
         const users = await response.json();
@@ -42,7 +42,7 @@ function displayResults(users) {
 
 // redirect to user profile
 function viewProfile(username) {
-    window.location.href = `/ViewProfilePage.html?username=${username}`;
+    window.location.href = `/viewprofile?username=${username}`;
 }
 
 
