@@ -56,8 +56,8 @@
                         data-bs-target="#profileSidebar" aria-controls="profileSidebar" title="Open menu">
                         <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
                         <span class="d-flex flex-column lh-2">
-                            <span class="fw-bold" style="font-size:13px; color: var(--navy);">Juan Dela Cruz</span>
-                            <span class="text-muted" style="font-size:11px;">Student | BS-CSE</span>
+                            <span id="fullname" class="fw-bold" style="font-size:13px; color: var(--navy);">{{lname}}, {{fname}}</span>
+                            <span id="type" class="muted" style="font-size:11px;">{{status}}</span>
                         </span>
                     </button>
                 </div>
@@ -190,40 +190,41 @@
     </main>
 
     <!--sidebar-->
+     <!--PROFILE SIDEBAR: 
+        Bootstrap Offcanvas component used as the student menu sidebar, 
+        contains navigation links and logout button. -->
     <div class="offcanvas offcanvas-end sidebar border-0 shadow" tabindex="-1" id="profileSidebar">
 
         <div class="sidebar-top d-flex justify-content-between align-items-start p-4">
             <div class="text-white">
-                <div class="fw-bold fs-5 lh-sm">Juan Dela Cruz</div>
-                <div class="small opacity-75">Student | BS-CSE</div>
+                <div id="sidebar-fullname" class="fw-bold fs-5 lh-sm">{{lname}}, {{fname}}</div>
+                <div id="sidebar-usertype" class="small opacity-75">{{status}}</div>
             </div>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
 
         <div class="offcanvas-body d-flex flex-column p-3">
-            <nav class="nav nav-pills flex-column gap-2">
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="StudentDashboardPage.html">
+            <nav class="nav nav-pills flex-column gap-2 mb-auto">
+                <a class="nav-link text-white active-green shadow-sm" href="/studentdashboard-page">
                     Dashboard
                 </a>
-                <a class="nav-link text-white active-green shadow-sm" href="ReservationPage.html">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/reservation-page">
                     Reserve A Seat
                 </a>
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="StudentProfilePage.html">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/studentprofile-page">
                     View Profile
                 </a>
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="StudentProfilePage.html">
-                    My Reservations
-                </a>
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="../src/FAQsPage.html">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/faqs-page">
                     FAQs
                 </a>
             </nav>
-
-            <button class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4" id="logoutBtn">
-                Logout
-            </button>
+            <a href="/logout-page">
+                <button class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4">
+                    Logout
+                </button></a>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/ReservationPage.js"></script>
     <script src="../js/StudentDashboardPage.js"></script>

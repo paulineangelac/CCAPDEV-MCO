@@ -11,11 +11,8 @@ import BookedRooms from './models/BookedRooms.js';
 
 import SignUpController from '../CCAPDEV-MCO/controllers/SignUpController.js';
 import LoginController from '../CCAPDEV-MCO/controllers/LoginController.js';
-<<<<<<< HEAD
 import ReserveController from '../CCAPDEV-MCO/controllers/ReserveController.js';
-=======
 import SearchController from './controllers/SearchController.js';
->>>>>>> origin
 
 const app = express();
 
@@ -93,34 +90,46 @@ app.get('/login', (req, res) => {
 
 //render studentdashboard page
 app.get('/studentdashboard-page', (req, res) => {
-    res.render('StudentDashboardPage');
+    res.render('StudentDashboardPage',{
+        reservations: req.session.user.reservations,
+        fname: req.session.user.fname,
+        lname: req.session.user.lname,
+        status: req.session.user.status
+    });
 });
 
 //render reservation page
 app.get('/reservation-page', async (req, res) => {
-    const selectedRoom = req.query.lab;
-    const selectedDate = req.query.date;
-    const selectedTime = req.query.time;
-
+    
     const allRooms = await Room.find({}).lean();
 
     res.render('ReservationPage', {
+        fname: req.session.user.fname,
+        lname: req.session.user.lname,
+        status: req.session.user.status,
         rooms: allRooms,
-        lab: selectedRoom,
-        date: selectedDate,
-        time: selectedTime
     });
 });
 
 app.get('/signup', (req, res) => {
     res.render('SignUpPage');
 });
+app.get('/studentprofile-page', (req,res)=>{
+    res.render('StudentProfilePage');
+});
+app.get('/faqs-page', (req,res)=>{
+    res.render('FAQsPage');
+});
+app.get('/logout-page', (req,res)=>{
+    res.render('LoginPage');
+})
 
 app.get('/ReservationPage', async (req, res) => {
     try {
         const roomsData = await Room.find({}).lean();
 
         res.render('ReservationPage', {
+
             rooms: roomsData
         });
     } catch (error) {
@@ -128,7 +137,6 @@ app.get('/ReservationPage', async (req, res) => {
     }
 });
 //gets room
-
 
 
 app.use(express.urlencoded({ extended: true }));

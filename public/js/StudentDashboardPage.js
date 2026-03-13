@@ -11,7 +11,7 @@ async function searchUser() {
         resultsContainer.innerHTML = "";
         return;
     }
-
+    
     try {
         const response = await fetch(`/search-users?q=${encodeURIComponent(query)}`);
         const users = await response.json();
@@ -42,32 +42,13 @@ function displayResults(users) {
 
 // redirect to user profile
 function viewProfile(username) {
-    window.location.href = `/viewProfile?username=${username}`;
+    window.location.href = `/ViewProfilePage.html?username=${username}`;
 }
 
 
-async function loadDashboardInformation() {
-    try {
-        const response = await fetch('/get-user');
-        const userData = await response.json();
-
-        if (userData.loggedIn) {
-            //updates top right profile name and type based on the current session's information
-            document.getElementById("fullname").textContent = `${userData.lname}, ${userData.fname}`;
-            document.getElementById("type").textContent = `${userData.status}`;
-            //updates the sidebar popup
-            document.getElementById("sidebar-fullname").textContent = `${userData.lname}, ${userData.fname}`;
-            document.getElementById("sidebar-usertype").textContent = `${userData.status}`;
-
-            //generates the list of current reservations for the user
-            loadRecommendedRoom();
-        }
-
-    } catch (error) {
-        console.log("MongoDB Error:", error.message);
-    }
+function loadDashboardInformation() {
+    loadRecommendedRoom();
 }
-
 async function loadRecommendedRoom() {
     try {
         const response = await fetch('/rooms');

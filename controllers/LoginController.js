@@ -26,6 +26,7 @@ const LoginController ={
                     return res.redirect('/LabTechDashboardPage');
                 }else{
                     req.session.user={
+                        
                         fname: user.fname,
                         lname: user.lname,
                         email: user.email,

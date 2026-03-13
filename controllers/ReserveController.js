@@ -40,12 +40,16 @@ const ReserveController = {
                     }
                 
                 )
-                res.send(`
-                    <script>
-                        alert('Room successfully reserved!');
-                        window.location.href = '/studentdashboard-page';
-                    </script>
-                `);
+                req.session.save((err) => {
+                    if (err) console.error("Session save error:", err);
+                    
+                    res.send(`
+                        <script>
+                            alert('Room successfully reserved!');
+                            window.location.href = '/studentdashboard-page';
+                        </script>
+                    `);
+                });
             }
         }catch(error){
             console.log(error);

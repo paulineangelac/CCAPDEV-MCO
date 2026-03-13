@@ -138,4 +138,5 @@ async function loadDashboardInformation() {
         console.log("MongoDB Error:", error.message);
     }
 }
+window.onload = loadDashboardInformation;
 //<button type="button" class="lab-seat is-reserved" data-seat="A1" disabled="">A1</button>
