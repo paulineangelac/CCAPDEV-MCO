@@ -39,6 +39,10 @@ document.getElementById('findSeatsBtn').addEventListener('click', async () => {
         });
         seatGrid.innerHTML = innerListGridSeat;
 
+        document.getElementById('displayLab').textContent = roomNumber;
+        document.getElementById('displayDate').textContent = date;
+        document.getElementById('displayTime').textContent = time;
+
         // update seat dropdown
         let innerListSeat = '<option value="">--Select a Seat--</option>';
         roomData.seatNumbers.forEach(seat => {

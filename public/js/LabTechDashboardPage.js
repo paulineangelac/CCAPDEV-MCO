@@ -59,7 +59,7 @@ async function loadRecommendedRoom() {
                         </div>
                         <br>
                         <div class="booking-footer">
-                            <a href="/LabTechEditReservation" class="btn-details">Edit Reservations</a>
+                            <a href="/LabTechEditReservation?roomNumber=${room.roomNumber}" class="btn-details">Edit Reservations</a>
                             <button class="btn-disabled" disabled>Remove Reservation</button>
                             <a href="/LabTechReservationPage" class="btn-details">Make Reservation</a>
                             <button class="btn-details" onclick="showDetails('${room.roomNumber}')">Details</button>

@@ -5,7 +5,8 @@ const bookedRoomSchema = new mongoose.Schema({
     seat: String,
     time: String,
     date: String,
-    name: String
+    name: String,
+    username: Number
 });
 
 export default mongoose.model('BookedRooms', bookedRoomSchema);

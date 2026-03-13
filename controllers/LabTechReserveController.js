@@ -17,7 +17,7 @@ const LabTechReserveController = {
                 `);
             }
 
-            const newRoomBooking = new BookedRooms({ roomNumber, seat, time, date });
+            const newRoomBooking = new BookedRooms({ roomNumber, seat, time, date, username: Number(username) });
             await newRoomBooking.save();
 
             await User.findOneAndUpdate(

@@ -54,18 +54,40 @@
     <main class="container-xl py-3">
 
         
-        <section class="hero-card ui-card mt-1">
-            <div class="row g-3">
-                <div class="col-3">
-                    <label for="choose-student" class="form-label fw-bold text-navy">Choose Student</label>
-                    <select id="choose-student" name="choose-student" class="form-select">
-                        <option>Anthony Cruz</option>
-                        <option>Juan Antonio Cruz</option>
-                        <option>Juanito Anton Cruz</option>
-                    </select>
-                </div>
-            </div>            
-        </section>
+    <section class="hero-card ui-card mt-1">
+        <div class="row g-3 align-items-end">
+            <div class="col-3">
+                <label for="username-select" class="form-label fw-bold text-navy">Choose Student</label>
+                <select id="username-select" class="form-select">
+                    <option value="">-- Select a Student --</option>
+                </select>
+            </div>
+            <div class="col-3">
+                <label for="lab-select" class="form-label fw-bold text-navy">Laboratory</label>
+                <select id="lab-select" class="form-select">
+                    <option value="">Select Laboratory</option>
+                    {{#each rooms}}
+                        <option value="{{this.roomNumber}}">{{this.roomNumber}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-3">
+                <label for="date-select" class="form-label fw-bold text-navy">Date</label>
+                <input type="date" id="date-select" class="form-control">
+            </div>
+            <div class="col-2">
+                <label for="time-select" class="form-label fw-bold text-navy">Time</label>
+                <select id="time-select" class="form-select">
+                    <option value="">Select Time</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="button" id="findSeatsBtn" class="btn btn-success px-4 py-2 fw-semibold">
+                    Find Seats
+                </button>
+            </div>
+        </div>
+    </section>
 
         
 
@@ -165,21 +187,21 @@
                         <span class="detail-label">
                             <span class="detail-icon" aria-hidden="true"><i class="bi bi-pc-display"></i></span> Lab
                         </span>
-                        <span class="detail-value" id="displayLab">G306A</span>
+                        <span class="detail-value" id="displayLab">—</span>
                     </div>
 
                     <div class="detail-row">
                         <span class="detail-label">
                             <span class="detail-icon" aria-hidden="true"><i class="bi bi-calendar"></i></span> Date
                         </span>
-                        <span class="detail-value" id="displayDate">Feb 14, 2026</span>
+                        <span class="detail-value" id="displayDate">—</span>
                     </div>
 
                     <div class="detail-row">
                         <span class="detail-label">
                             <span class="detail-icon" aria-hidden="true"><i class="bi bi-clock"></i></span> Time
                         </span>
-                        <span class="detail-value" id="displayTime">09:00 AM</span>
+                        <span class="detail-value" id="displayTime">—</span>
                     </div>
 
                     <div class="detail-row">
