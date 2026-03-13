@@ -97,11 +97,9 @@ labSelect.addEventListener('change', async (event)=>{
                 
                 if(seat.number === selectedSeat){
                     seat.slots.forEach(time =>{
-                        if(time.reservedBy === null){
-                            innerListTime += `<option value="${time.time}">${time.time}</option>`
-                        }
                         
-                    })
+                        innerListTime += `<option value="${time.time}">${time.time}</option>`    
+                    });
                 }
 
                 timeSelect.innerHTML = innerListTime;
