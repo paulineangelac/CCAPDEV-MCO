@@ -7,7 +7,7 @@ const LabTechSchema = new mongoose.Schema({
     contactNumber: { type: String },
     password: { type: String, required: true },
     assignedLab: { type: String, required: true },
-    status: { type: String, default: "Offline" } // Online / Offline
+    status: { type: String, default: "labtech" } // Online / Offline
 }, { timestamps: true });
 
 export default mongoose.model("LabTech", LabTechSchema);

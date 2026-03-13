@@ -22,7 +22,7 @@ const LoginController ={
             }else{
                 if(user.status === "admin"){
                     return res.redirect('AdminDashboardPage');
-                }else if(username === "labtech"){
+                }else if(user.status === "labtech"){
                     return res.redirect('LabTechDashboardPage');
                 }else{
                     req.session.user={
@@ -37,11 +37,9 @@ const LoginController ={
                     return res.redirect('studentdashboard-page');
                 }
             }
-
         }catch (error) {
             console.log("MongoDB Error:", error.message);
         }
     } 
 }
-
 export default LoginController;

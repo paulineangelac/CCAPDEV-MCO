@@ -57,10 +57,10 @@ async function loadRecommendedRoom() {
             let roomListHTML = '';
             roomData.forEach(room => {
                 roomListHTML += `
-                    <a href="ReservationPage.hbs" class="lab-card ui-card">
+                    <a href="/reservation-page" class="lab-card ui-card">
                         <div class="lab-card__info">
                             <span class="lab-name">${room.roomNumber}</span>
-                            <span class="lab-status small">${room.seatNumbers.length} Seats Available</span>
+                            <span class="lab-status small">${room.seatNumbers.length} Seats</span>
                         </div>
                         <span class="chevron">→</span>
                     </a>
