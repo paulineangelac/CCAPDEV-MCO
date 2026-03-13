@@ -128,6 +128,10 @@ app.get('/studentdashboard-page', (req, res) => {
 app.get('/AdminDashboardPage', async (req,res)=>{
     res.render('AdminDashboardPage');
 });
+//render labteech page
+app.get('/LabtechDashboardPage', async (req,res)=>{
+    res.render('LabTechDashboardPage');
+});
 //render reservation page
 app.get('/reservation-page', async (req, res) => {
     if (!req.session.user) {
