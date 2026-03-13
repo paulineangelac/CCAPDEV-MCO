@@ -130,7 +130,7 @@
                         <span class="detail-label">
                             <span class="detail-icon" aria-hidden="true"><i class="bi bi-pc-display"></i></span> Lab
                         </span>
-                        <select id="lab-select" name="roomNumber" class="form-select">
+                        <select required id="lab-select" name="roomNumber" class="form-select">
                             <option value="">--Select a Room--</option>
                             {{#each rooms}}
                                 {{!-- Optional: Only show rooms that are marked as available --}}
@@ -147,7 +147,7 @@
                                 <span class="detail-icon" aria-hidden="true"><i class="bi bi-info-circle"></i></span>
                                 Selected Seat
                             </span>
-                            <select id="seat-select" name="seat" class="form-select">
+                            <select required id="seat-select" name="seat" class="form-select">
                                 
                             </select>
                         </div>
@@ -156,14 +156,14 @@
                             <span class="detail-label">
                                 <span class="detail-icon" aria-hidden="true"><i class="bi bi-calendar"></i></span> Date
                             </span>
-                            <input type="date" id="date-select" name="date" class="form-control">
+                            <input required type="date" id="date-select" name="date" class="form-control">
                         </div>
 
                         <div class="detail-row">
                             <span class="detail-label">
                                 <span class="detail-icon" aria-hidden="true"><i class="bi bi-clock"></i></span> Time
                             </span>
-                            <select id="time-select" name="time" class="form-select">
+                            <select required id="time-select" name="time" class="form-select">
                                 
                             </select>
                         </div>

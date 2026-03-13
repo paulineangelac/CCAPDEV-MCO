@@ -32,17 +32,15 @@ function displayResults(users) {
     }
 
     users.forEach(user => {
+        // Pass the username as a query parameter in the href
         resultsContainer.innerHTML += `
-        <div class="resultItem" onclick="viewProfile('${user.username}')">
-            ${user.fname} ${user.lname}
-        </div>
+        <a href="/searchUser?username=${user.username}" class="text-decoration-none">
+            <div class="resultItem">
+                ${user.fname} ${user.lname}
+            </div>
+        </a>
         `;
     });
-}
-
-// redirect to user profile
-function viewProfile(username) {
-    window.location.href = `/viewprofile?username=${username}`;
 }
 
 
