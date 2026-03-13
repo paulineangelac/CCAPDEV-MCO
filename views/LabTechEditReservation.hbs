@@ -95,88 +95,28 @@
 
         <div class="row g-4 mt-0">
             <!--seat map -->
-            <section class="col-12 col-lg-8">
-                <div class="ui-card seatmap-card">
-                    <div class="seatmap-top">
-                        <h3 class="fs-3 fw-bold text-navy mb-3">Seat Map</h3>
-
-                        <!--legend for the map -->
-                        <div class="seat-legend">
-                            <span class="legend-item">
-                                <span class="legend-swatch legend-current"></span> Previous Seat
-                            </span>
-                            <span class="legend-item">
-                                <span class="legend-swatch"></span> Available
-                            </span>
-                            <span class="legend-item">
-                                <span class="legend-swatch legend-reserved"></span> Reserved
-                            </span>
-                            <span class="legend-item">
-                                <span class="legend-swatch legend-selected"></span> Selected
-                            </span>
+                <section class="col-12 col-lg-8">
+                    <div class="ui-card seatmap-card">
+                        <div class="seatmap-top">
+                            <h3 class="fs-3 fw-bold text-navy mb-3">Seat Map</h3>
+                            <div class="seat-legend">
+                                <span class="legend-item">
+                                    <span class="legend-swatch legend-current"></span> Previous Seat
+                                </span>
+                                <span class="legend-item">
+                                    <span class="legend-swatch"></span> Available
+                                </span>
+                                <span class="legend-item">
+                                    <span class="legend-swatch legend-reserved"></span> Reserved
+                                </span>
+                                <span class="legend-item">
+                                    <span class="legend-swatch legend-selected"></span> Selected
+                                </span>
+                            </div>
                         </div>
+                        <div id="seatGrid" class="seat-grid" aria-label="Seat map"></div>
                     </div>
-
-                    <!--seat selection (hardcoded for now)-->
-                    <div id="seatGrid" class="seat-grid" aria-label="Seat map">
-                        <!--1st row-->
-                        <button type="button" class="lab-seat is-reserved" data-seat="A1" disabled>A1</button>
-                        <button type="button" class="lab-seat" data-seat="A2" disabled style="background-color:#E3F2FD">A2</button>
-                        <button type="button" class="lab-seat is-current" data-seat="A3">A3</button>
-                        <!--hardcoded for now, previously selected seat-->
-                        <button type="button" class="lab-seat" data-seat="A4">A4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat is-reserved" data-seat="A5" disabled>A5</button>
-                        <button type="button" class="lab-seat" data-seat="A6">A6</button>
-                        <button type="button" class="lab-seat" data-seat="A7">A7</button>
-                        <button type="button" class="lab-seat" data-seat="A8">A8</button>
-
-                        <!--2nd row-->
-                        <button type="button" class="lab-seat is-reserved" data-seat="B1" disabled>B1</button>
-                        <button type="button" class="lab-seat" data-seat="B2">B2</button>
-                        <button type="button" class="lab-seat" data-seat="B3">B3</button>
-                        <button type="button" class="lab-seat" data-seat="B4">B4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="B5">B5</button>
-                        <button type="button" class="lab-seat" data-seat="B6">B6</button>
-                        <button type="button" class="lab-seat" data-seat="B7">B7</button>
-                        <button type="button" class="lab-seat" data-seat="B8">B8</button>
-
-                        <!--3rd row-->
-                        <button type="button" class="lab-seat" data-seat="C1">C1</button>
-                        <button type="button" class="lab-seat" data-seat="C2">C2</button>
-                        <button type="button" class="lab-seat" data-seat="C3">C3</button>
-                        <button type="button" class="lab-seat" data-seat="C4">C4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="C5">C5</button>
-                        <button type="button" class="lab-seat" data-seat="C6">C6</button>
-                        <button type="button" class="lab-seat" data-seat="C7">C7</button>
-                        <button type="button" class="lab-seat is-reserved" data-seat="C8" disabled>C8</button>
-
-                        <!--4th row-->
-                        <button type="button" class="lab-seat" data-seat="D1">D1</button>
-                        <button type="button" class="lab-seat" data-seat="D2">D2</button>
-                        <button type="button" class="lab-seat" data-seat="D3">D3</button>
-                        <button type="button" class="lab-seat is-reserved" data-seat="D4" disabled>D4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="D5">D5</button>
-                        <button type="button" class="lab-seat" data-seat="D6">D6</button>
-                        <button type="button" class="lab-seat" data-seat="D7">D7</button>
-                        <button type="button" class="lab-seat" data-seat="D8">D8</button>
-
-                        <!--5th row-->
-                        <button type="button" class="lab-seat" data-seat="E1">E1</button>
-                        <button type="button" class="lab-seat is-reserved" data-seat="E2" disabled>E2</button>
-                        <button type="button" class="lab-seat" data-seat="E3">E3</button>
-                        <button type="button" class="lab-seat" data-seat="E4">E4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="E5">E5</button>
-                        <button type="button" class="lab-seat" data-seat="E6">E6</button>
-                        <button type="button" class="lab-seat" data-seat="E7">E7</button>
-                        <button type="button" class="lab-seat" data-seat="E8">E8</button>
-                    </div>
-                </div>
-            </section>
+                </section>
 
             <!-- reservation details -->
             <aside class="col-12 col-lg-4">
