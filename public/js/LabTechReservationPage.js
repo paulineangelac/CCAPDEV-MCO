@@ -39,9 +39,26 @@ document.getElementById('findSeatsBtn').addEventListener('click', async () => {
         });
         seatGrid.innerHTML = innerListGridSeat;
 
-        document.getElementById('displayLab').textContent = roomNumber;
-        document.getElementById('displayDate').textContent = date;
-        document.getElementById('displayTime').textContent = time;
+        const seatSelectEdit = document.getElementById('seat-select');
+    
+        roomData.seatNumbers.forEach(seat => {
+            innerListSeat += `<option value="${seat.number}">${seat.number}</option>`;
+        });
+        seatSelectEdit.innerHTML = innerListSeat;
+
+        seatSelectEdit.addEventListener('change', (event) => {
+            const val = event.target.value;
+            document.querySelectorAll(".lab-seat").forEach(s => {
+                s.classList.remove("is-selected");
+                if (s.textContent === val) s.classList.add("is-selected");
+            });
+            selectedSeat = document.querySelector(".lab-seat.is-selected");
+            confirmBtn.disabled = !selectedSeat;
+        });
+
+        document.getElementById('displayLab').textContent = selectedRoom;
+        document.getElementById('displayDate').textContent = document.getElementById('date-select').value;
+        document.getElementById('displayTime').textContent = timeSelect.value;
 
         // update seat dropdown
         let innerListSeat = '<option value="">--Select a Seat--</option>';
