@@ -16,6 +16,7 @@ import ReserveController from '../CCAPDEV-MCO/controllers/ReserveController.js';
 import SearchController from './controllers/SearchController.js';
 import LabTech from './models/LabTech.js';
 import bcrypt from 'bcryptjs'; // safely hashes passwords
+import LabTechReserveController from './controllers/LabTechReserveController.js';
 
 const app = express();
 
@@ -277,6 +278,64 @@ app.post('/labtech-login', async (req, res) => {
 app.get('/logout-page', (req,res)=>{
     res.render('LoginPage');
 })
+app.get('/LabTechDashboardPage', (req, res) => {
+    res.render('LabTechDashboardPage');
+});
+
+app.get('/LabTechProfilePage', (req, res) => {
+    res.render('LabTechProfilePage');
+});
+
+app.get('/LabTechEditReservation', async (req, res) => {
+    try {
+        const { roomNumber } = req.query;
+        const roomsData = await Room.find({}).lean();
+        res.render('LabTechEditReservation', {
+            rooms: roomsData,
+            selectedRoom: roomNumber || ''
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get('/get-booking', async (req, res) => {
+    const { username, roomNumber, date, time } = req.query;
+    try {
+        const booking = await BookedRooms.findOne({
+            username: Number(username),
+            roomNumber,
+            date,
+            time
+        }).lean();
+        res.json(booking || null);
+    } catch (error) {
+        res.status(500).json({ error: 'server error' });
+    }
+});
+
+app.get('/get-student-bookings', async (req, res) => {
+    const { username } = req.query;
+    try {
+        const bookings = await BookedRooms.find({ username: Number(username) }).lean();
+        res.json(bookings);
+    } catch (error) {
+        res.status(500).json({ error: 'server error' });
+    }
+});
+
+app.get('/LabTechReservationPage', async (req, res) => {
+    try {
+        const roomsData = await Room.find({}).lean();
+
+        res.render('LabTechReservationPage', {
+
+            rooms: roomsData
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 app.get('/ReservationPage', async (req, res) => {
     try {
@@ -290,13 +349,31 @@ app.get('/ReservationPage', async (req, res) => {
         console.log(error);
     }
 });
+
 //gets room
+
 
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/signUp', SignUpController.signUp);
 app.post('/login', LoginController.login);
 app.post('/reserve', ReserveController.reserve);
+app.post('/labtech-reserve', LabTechReserveController.reserve);
+app.post('/labtech-edit-reserve', async (req, res) => {
+    try {
+        const { bookingId, seat } = req.body;
+        await BookedRooms.findByIdAndUpdate(bookingId, { seat });
+        res.send(`
+            <script>
+                alert('Reservation updated successfully!');
+                window.location.href = '/LabTechDashboardPage';
+            </script>
+        `);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Server error');
+    }
+});
 
 //connect to mongoose and start the server
 mongoose.connect(dbURL)
