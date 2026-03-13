@@ -1,57 +1,118 @@
-const seats = document.querySelectorAll(".lab-seat:not(.is-reserved)");
-const displaySeat = document.getElementById("displaySeat");
 const confirmBtn = document.getElementById("confirmBtn");
-const usernameInput = document.getElementById("first-name");
-const studentSelect = document.getElementById("choose-student");
 const cancelBtn = document.getElementById("cancelBtn");
+const labSelect = document.getElementById('lab-select');
+const seatSelect = document.getElementById('seat-select');
+const timeSelect = document.getElementById('time-select');
+const seatGrid = document.getElementById('seatGrid');
 
 let selectedSeat = null;
 
-seats.forEach(seat => {
-    seat.addEventListener("click", function () {
-        // if clicking the same seat deselect it
-        if (selectedSeat === seat) {
-            seat.classList.remove("is-selected");
-            selectedSeat = null;
-            displaySeat.textContent = "—";
-            confirmBtn.disabled = true;
-            return;
-        }
-        // remove selection from previous seat
-        if (selectedSeat) {
-            selectedSeat.classList.remove("is-selected");
-        }
-        // select new seat
-        seat.classList.add("is-selected");
-        selectedSeat = seat;
-        displaySeat.textContent = seat.textContent;
-        confirmBtn.disabled = false;
-    });
+labSelect.addEventListener('change', async (event) => {
+    const selectedRoom = event.target.value;
+    if (!selectedRoom) return;
+    try {
+        const response = await fetch(`/rooms/${selectedRoom}`);
+        const roomData = await response.json();
+
+        let innerListTime = '<option value="">Select Time</option>';
+        roomData.seatNumbers[0].slots.forEach(slot => {
+            innerListTime += `<option value="${slot.time}">${slot.time}</option>`;
+        });
+        timeSelect.innerHTML = innerListTime;
+    } catch (error) {
+        console.log(error);
+    }
 });
 
-confirmBtn.addEventListener("click", function(){
-    let studentName = "";
-    let message = "";
-    
-    // Check which page we're on by checking which element exists
-    if (usernameInput) {
-        // Reservation page
-        studentName = usernameInput.value.trim();
-        if (!studentName) {
-            alert("Please enter a username.");
-            return;
-        }
-        message = `You have reserved seat ${selectedSeat.textContent} for user ${studentName}.`;
-    } else if (studentSelect) {
-        // Edit reservation page
-        studentName = studentSelect.value;
-        message = `Changed seat for ${studentName} to ${selectedSeat.textContent}.`;
+document.getElementById('findSeatsBtn').addEventListener('click', async () => {
+    const selectedRoom = document.getElementById('lab-select').value;
+    if (!selectedRoom) { alert("Please select a laboratory."); return; }
+
+    try {
+        const response = await fetch(`/rooms/${selectedRoom}`);
+        const roomData = await response.json();
+
+        // update seat grid (display only)
+        let innerListGridSeat = '';
+        roomData.seatNumbers.forEach(seat => {
+            innerListGridSeat += `<button type="button" class="lab-seat" disabled>${seat.number}</button>`;
+        });
+        seatGrid.innerHTML = innerListGridSeat;
+
+        // update seat dropdown
+        let innerListSeat = '<option value="">--Select a Seat--</option>';
+        roomData.seatNumbers.forEach(seat => {
+            innerListSeat += `<option value="${seat.number}">${seat.number}</option>`;
+        });
+        seatSelect.innerHTML = innerListSeat;
+
+        // sync seat dropdown -> grid highlight
+        seatSelect.addEventListener('change', (event) => {
+            const val = event.target.value;
+            document.querySelectorAll(".lab-seat").forEach(s => {
+                s.classList.remove("is-selected");
+                if (s.textContent === val) s.classList.add("is-selected");
+            });
+            selectedSeat = document.querySelector(".lab-seat.is-selected");
+            confirmBtn.disabled = !selectedSeat;
+        });
+
+    } catch (error) {
+        console.log(error);
     }
-    
-    alert(message);
-    window.location.href = "/LabTechDashboardPage";
+});
+
+
+confirmBtn.addEventListener("click", async function () {
+    const studentUsername = document.getElementById('username-select').value;
+    const roomNumber = document.getElementById('lab-select').value;
+    const date = document.getElementById('date-select').value;
+    const time = document.getElementById('time-select').value;
+
+    if (!studentUsername) { alert("Please select a student."); return; }
+    if (!selectedSeat) { alert("Please select a seat."); return; }
+    if (!date) { alert("Please select a date."); return; }
+    if (!time) { alert("Please select a time."); return; }
+
+    const formData = new URLSearchParams();
+    formData.append('username', studentUsername);
+    formData.append('roomNumber', roomNumber);
+    formData.append('seat', selectedSeat.textContent);
+    formData.append('date', date);
+    formData.append('time', time);
+
+    const response = await fetch('/labtech-reserve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString()
+    });
+
+    const html = await response.text();
+    document.open();
+    document.write(html);
+    document.close();
 });
 
 cancelBtn.addEventListener("click", function(){
     window.location.href = "/LabTechDashboardPage";
 });
+
+async function loadUsernames() {
+    try {
+        const response = await fetch('/get-all-users');
+        const users = await response.json();
+
+        const select = document.getElementById('username-select');
+        users.forEach(user => {
+            select.innerHTML += `
+                <option value="${user.username}">${user.fname} ${user.lname}</option>
+            `;
+        });
+    } catch (error) {
+        console.log("Error loading users:", error.message);
+    }
+}
+
+window.onload = function() {
+    loadUsernames();
+}

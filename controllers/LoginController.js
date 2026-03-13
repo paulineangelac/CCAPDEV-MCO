@@ -19,12 +19,7 @@ const LoginController ={
                         alert('Incorrect password! Please try again.');
                     </script>
                 `);
-            }else{
-                if(username === "admin"){
-                    return res.redirect('/AdminDashboardPage');
-                }else if(username === "labtech"){
-                    return res.redirect('/LabTechDashboardPage');
-                }else{
+            }
                     req.session.user={
                         
                         fname: user.fname,
@@ -34,10 +29,28 @@ const LoginController ={
                         reservations: user.reservations,
                         status: user.status
                     }
-                    return res.redirect('studentdashboard-page');
-                }
-            }
 
+            if (user.status === 'Admin') {
+                return res.send(`
+                    <script>
+                        window.location.href = '/AdminDashboardPage';
+                    </script>
+                `);
+            } else if (user.status === 'LabTech') {
+                return res.send(`
+                    <script>
+                        alert('Welcome, ${user.fname}!');
+                        window.location.href = '/LabTechDashboardPage';
+                    </script>
+                `);
+            } else {
+                return res.send(`
+                    <script>
+                        alert('Welcome, ${user.fname}!');
+                        window.location.href = '/studentdashboard-page';
+                    </script>
+                `);
+            }
         }catch (error) {
             console.log("MongoDB Error:", error.message);
         }

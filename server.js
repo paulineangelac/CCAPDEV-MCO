@@ -13,6 +13,7 @@ import SignUpController from '../CCAPDEV-MCO/controllers/SignUpController.js';
 import LoginController from '../CCAPDEV-MCO/controllers/LoginController.js';
 import ReserveController from '../CCAPDEV-MCO/controllers/ReserveController.js';
 import SearchController from './controllers/SearchController.js';
+import LabTechReserveController from './controllers/LabTechReserveController.js';
 
 const app = express();
 
@@ -163,8 +164,17 @@ app.get('/LabTechEditReservation', (req, res) => {
     res.render('LabTechEditReservation');
 });
 
-app.get('/LabTechReservationPage', (req, res) => {
-    res.render('LabTechReservationPage');
+app.get('/LabTechReservationPage', async (req, res) => {
+    try {
+        const roomsData = await Room.find({}).lean();
+
+        res.render('LabTechReservationPage', {
+
+            rooms: roomsData
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 app.get('/ReservationPage', async (req, res) => {
@@ -179,7 +189,70 @@ app.get('/ReservationPage', async (req, res) => {
         console.log(error);
     }
 });
+
 //gets room
+app.get('/rooms-with-stats', async (req, res) => {
+    try {
+        const rooms = await Room.find({});
+        const booked = await BookedRooms.find({});
+
+        const roomStats = rooms.map(room => {
+            const bookedCount = booked.filter(b => b.roomNumber === room.roomNumber).length;
+            return {
+                roomNumber: room.roomNumber,
+                totalSeats: room.seatNumbers.length,
+                bookedSeats: bookedCount,
+                availableSeats: room.seatNumbers.length - bookedCount
+            };
+        });
+
+        res.json(roomStats);
+    } catch (error) {
+        console.error("Error fetching room stats:", error);
+        res.status(500).json({ error: "server error" });
+    }
+});
+
+app.get('/room-details/:roomNumber', async (req, res) => {
+    try {
+        const room = await Room.findOne({ roomNumber: req.params.roomNumber });
+        const booked = await BookedRooms.find({ roomNumber: req.params.roomNumber });
+
+        // get all unique time slots from first seat
+        const timeSlots = room.seatNumbers[0].slots.map(slot => slot.time);
+
+        const slotDetails = timeSlots.map(time => {
+            const bookedSeats = booked
+                .filter(b => b.time === time)
+                .map(b => b.seat);
+            return {
+                time,
+                bookedSeats,
+                totalSeats: room.seatNumbers.length
+            };
+        });
+
+        res.json({
+            roomNumber: room.roomNumber,
+            totalSeats: room.seatNumbers.length,
+            slotDetails
+        });
+    } catch (error) {
+        res.status(500).json({ error: "server error" });
+    }
+});
+
+app.get('/get-all-users', async (req, res) => {
+    try {
+        const users = await User.find({ status: 'Student' }).select('username fname lname');
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ error: "server error" });
+    }
+});
+
+
+
 
 
 app.use(express.urlencoded({ extended: true }));
@@ -187,6 +260,7 @@ app.use(express.urlencoded({ extended: true }));
 app.post('/signUp', SignUpController.signUp);
 app.post('/login', LoginController.login);
 app.post('/reserve', ReserveController.reserve);
+app.post('/labtech-reserve', LabTechReserveController.reserve);
 
 //connect to mongoose and start the server
 mongoose.connect(dbURL)

@@ -59,57 +59,7 @@
                 <h3 class="fw-bold text-navy">Campus Laboratories</h3>
 
                 <div class="ui-card">
-
-                    <!-- LAB 1 -->
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <span class="booking-lab">Gokongwei 304A</span>
-                            <span class="status-tag">3/15</span>
-                        </div>
-
-                        <p><strong>Reserved Seats:</strong> A2, C4, E2</p>
-
-                        <div class="booking-footer">
-                            <a href="/LabTechEditReservation" class="btn-details">Edit Reservations</a>
-                            <button class="btn-disabled" data-bs-toggle="modal" data-bs-target="#timeModal" disabled>Remove Reservation</button>
-                            <a href="/LabTechReservationPage" class="btn-details">Make Reservation</a>
-                            <button class="btn-details" data-bs-toggle="modal" data-bs-target="#timeModal">Details</button>
-                        </div>
-
-                    </div>
-
-                    <!-- LAB 2 EMPTY -->
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <span class="booking-lab">Gokongwei 305B</span>
-                            <span class="status-tag">0/20</span>
-                        </div>
-
-                        <p>No Reservations Yet</p>
-
-                        <div class="booking-footer">
-                            <a href="/LabTechEditReservation" class="btn-details">Edit Reservations</a>
-                            <a href="/LabTechReservationPage" class="btn-details">Make Reservation</a>
-                            <button class="btn-details" data-bs-toggle="modal" data-bs-target="#timeModal">Details</button>
-                        </div>
-                    </div>
-
-                    <!-- LAB 3 EMPTY -->
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <span class="booking-lab">Andrew 1904</span>
-                            <span class="status-tag">0/20</span>
-                        </div>
-
-                        <p>No Reservations Yet</p>
-
-                        <div class="booking-footer">
-                            <a href="LabTechEditReservation.html" class="btn-details">Edit Reservations</a>
-                            <a href="LabTechReservationPage.html" class="btn-details">Make Reservation</a>
-                            <button class="btn-details" data-bs-toggle="modal" data-bs-target="#timeModal">Details</button>
-                        </div>
-                    </div>
-
+                    <div id="lab-list"></div>
                 </div>
 
             </section>
@@ -180,28 +130,13 @@
     <div class="modal fade" id="timeModal">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 <div class="modal-header">
-                    <h5>Select Time Frame</h5>
+                    <h5 id="modalRoomTitle">Room Details</h5>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-
                 <div class="modal-body">
-
-                    <button class="btn btn-outline-dark w-100 mb-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#seatMapModal">8:00 - 9:00</button>
-
-                    <button class="btn btn-outline-dark w-100 mb-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#seatMapModal">9:00 - 10:00</button>
-
-                    <button class="btn btn-outline-dark w-100"
-                    data-bs-toggle="modal"
-                    data-bs-target="#seatMapModal">10:00 - 11:00</button>
-
+                    <div id="modalSlotList"></div>
                 </div>
-
             </div>
         </div>
     </div>
