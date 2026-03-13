@@ -40,6 +40,15 @@ const ReserveController = {
                     }
                 
                 )
+                if (req.session.user) {
+                    // We add the new reservation to the array stored in the session
+                    req.session.user.reservations.push({
+                        roomNumber,
+                        seat,
+                        time,
+                        date,
+                    });
+                }
                 req.session.save((err) => {
                     if (err) console.error("Session save error:", err);
                     
