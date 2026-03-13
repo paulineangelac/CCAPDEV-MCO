@@ -151,6 +151,21 @@ app.get('/faqs-page', (req,res)=>{
 app.get('/logout-page', (req,res)=>{
     res.render('LoginPage');
 })
+app.get('/LabTechDashboardPage', (req, res) => {
+    res.render('LabTechDashboardPage');
+});
+
+app.get('/LabTechProfilePage', (req, res) => {
+    res.render('LabTechProfilePage');
+});
+
+app.get('/LabTechEditReservation', (req, res) => {
+    res.render('LabTechEditReservation');
+});
+
+app.get('/LabTechReservationPage', (req, res) => {
+    res.render('LabTechReservationPage');
+});
 
 app.get('/ReservationPage', async (req, res) => {
     try {
