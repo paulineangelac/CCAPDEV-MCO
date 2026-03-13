@@ -19,11 +19,12 @@ const userSchema = new mongoose.Schema({
         type: Array, default:[]
     },
     status:{
-        type: String, default: "Student"
+        type: String, enum: ['Student', 'Labtech', 'Admin'], default: "Student"
     },
     bio:{
         type: String, default: "This user has no Bio yet."
     }
+    
     
 });
 export default mongoose.model('User', userSchema);
