@@ -11,11 +11,8 @@ import BookedRooms from './models/BookedRooms.js';
 
 import SignUpController from '../CCAPDEV-MCO/controllers/SignUpController.js';
 import LoginController from '../CCAPDEV-MCO/controllers/LoginController.js';
-<<<<<<< HEAD
 import ReserveController from '../CCAPDEV-MCO/controllers/ReserveController.js';
-=======
 import SearchController from './controllers/SearchController.js';
->>>>>>> origin
 
 const app = express();
 
