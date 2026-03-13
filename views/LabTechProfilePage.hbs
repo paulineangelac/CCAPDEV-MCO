@@ -94,22 +94,23 @@
         </footer>
     </div>
 
+    <!--sidebar-->
     <div class="offcanvas offcanvas-end sidebar border-0 shadow" tabindex="-1" id="profileSidebar">
 
         <div class="sidebar-top d-flex justify-content-between align-items-start p-4">
             <div class="text-white">
-                <div class="fw-bold fs-5 lh-sm">Juan Dela Cruz</div>
-                <div class="small opacity-75">Lab Technician</div>
+                <div id="sidebar-fullname" class="fw-bold fs-5 lh-sm"></div>
+                <div id="sidebar-usertype" class="small opacity-75"></div>
             </div>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
 
         <div class="offcanvas-body d-flex flex-column p-3">
             <nav class="nav nav-pills flex-column gap-2 mb-auto">
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="LabTechDashboardPage.html">
+                <a class="nav-link text-white active-green shadow-sm" href="/LabTechDashboardPage">
                     Dashboard
                 </a>
-                <a class="nav-link text-white active-green shadow-sm" href="LabTechProfilePage.html">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/LabTechProfilePage">
                     View Profile
                 </a>
                 <a class="nav-link text-white text-decoration-none hover-opacity" href="../src/FAQsPage.html">
@@ -117,7 +118,7 @@
                 </a>
             </nav>
             <a href="IndexPage.html">
-                <button class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4" id="logoutBtn">
+                <button class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4">
                     Logout
                 </button></a>
         </div>

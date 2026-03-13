@@ -49,9 +49,9 @@ confirmBtn.addEventListener("click", function(){
     }
     
     alert(message);
-    window.location.href = "LabTechDashboardPage.html";
+    window.location.href = "/LabTechDashboardPage";
 });
 
 cancelBtn.addEventListener("click", function(){
-    window.location.href = "LabTechDashboardPage.html";
+    window.location.href = "/LabTechDashboardPage";
 });
