@@ -41,8 +41,8 @@
                         data-bs-target="#profileSidebar" aria-controls="profileSidebar" title="Open menu">
                         <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
                         <span class="d-flex flex-column lh-2">
-                            <span class="fw-bold" style="font-size:13px; color: var(--navy);">Juan Dela Cruz</span>
-                            <span class="muted" style="font-size:11px;">Student | BS-CSE</span>
+                            <span id="fullname" class="fw-bold" style="font-size:13px; color: var(--navy);">{{lname}}, {{fname}}</span>
+                            <span id="type" class="muted" style="font-size:11px;">{{status}}</span>
                         </span>
                     </button>
                 </div>
@@ -64,23 +64,16 @@
             </div>
             <!-- Student Information Column -->
             <div id="student-information-div">
-                <h1>Dela Cruz, Juan</h1>
-                <p><strong>Username:</strong> juandelacruz</p>
-                <p><strong>Email:</strong> juandelacruz@example.com</p>
+                <h1>{{lname}}, {{fname}}</h1>
+                <p><strong>Username:</strong> {{username}}</p>
+                <p><strong>Email:</strong> {{email}}</p>
 
             </div>
             <!-- Bio Column -->
             <div id="main-bio-box">
                 <strong>Bio:</strong>
                 <div id="bio-box">
-                    <p id="profile-bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit quod placeat omnis
-                        consequuntur et minima quia quidem tempore assumenda obcaecati, rerum, quas amet blanditiis
-                        natus! Odio quibusdam, dolores laboriosam labore harum animi recusandae quam sunt nisi quae qui
-                        libero culpa eos officiis sint vel voluptate exercitationem consectetur dolore! Harum quia nemo
-                        sequi deleniti ullam aspernatur saepe. Incidunt consequatur aliquam obcaecati vitae quos magni
-                        quas, cum, tenetur quidem repellendus corrupti id harum ratione animi consectetur reiciendis,
-                        neque numquam impedit minima modi aliquid cumque eligendi! Nobis nemo rem repellendus tempora
-                        quos iure veritatis, nulla, cum eveniet repellat, saepe dolores tempore ducimus. Obcaecati!</p>
+                    <p id="profile-bio">{{bio}}</p>
                 </div>
                 <footer id="edit-profile-bio">
                     <button id="bio-btn" onclick="editBio()">Edit Bio</button>
@@ -93,82 +86,37 @@
             <h2>My Reservations</h2>
             <div class="card" id="scroll-card">
                 <div id="booking-list">
-                    <div class="booking-card">
+                    {{#each reservations}}
+                        <div class="booking-card">
                         <div class="booking-header">
-                            <span class="booking-lab">Gokongwei 304A - Seat 12</span>
+                            <span class="booking-lab">{{this.roomNumber}} - {{this.seat}}</span>
                             <span class="status-tag">Confirmed</span>
                         </div>
                         <div class="booking-summary">
-                            <p>Today, 9:00 AM - 10:30 AM</p>
+                            <p>{{this.date}}, {{this.time}}</p>
                         </div>
                         <div class="booking-footer">
-                            <button class="btn-details">Edit Reservation</button>
+                            <a href="/edit/{{this._id}}" class="btn-details text-decoration-none">
+                            Edit Reservation
+                            </a>
                             <button class="btn-details" style="color:Red;">Cancel Reservation</button>
                         </div>
-                    </div>
-
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <span class="booking-lab">Gokongwei 306A - Seat 05</span>
-                            <span class="status-tag">Confirmed</span>
                         </div>
-                        <div class="booking-summary">
-                            <p>Feb 04, 2026 | 1:00 PM - 2:30 PM</p>
+                    {{else}}
+                        <div>
+                            <p>No upcoming reservations found.</p>
                         </div>
-                        <div class="booking-footer">
-                            <button class="btn-details">Edit Reservation</button>
-                            <button class="btn-details" style="color:Red;">Cancel Reservation</button>
-                        </div>
-                    </div>
-
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <span class="booking-lab">Andrew 1904 - Seat 22</span>
-                            <span class="status-tag pending">Pending</span>
-                        </div>
-                        <div class="booking-summary">
-                            <p>Feb 05, 2026 | 10:00 AM - 11:30 AM</p>
-                        </div>
-                        <div class="booking-footer">
-                            <button class="btn-details">Edit Reservation</button>
-                            <button class="btn-details" style="color:Red;">Cancel Reservation</button>
-                        </div>
-                    </div>
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <span class="booking-lab">Andrew 1904 - Seat 22</span>
-                            <span class="status-tag pending">Pending</span>
-                        </div>
-                        <div class="booking-summary">
-                            <p>Feb 05, 2026 | 10:00 AM - 11:30 AM</p>
-                        </div>
-                        <div class="booking-footer">
-                            <button class="btn-details">Edit Reservation</button>
-                            <button class="btn-details" style="color:Red;">Cancel Reservation</button>
-                        </div>
-                    </div>
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <span class="booking-lab">Andrew 1904 - Seat 22</span>
-                            <span class="status-tag pending">Pending</span>
-                        </div>
-                        <div class="booking-summary">
-                            <p>Feb 05, 2026 | 10:00 AM - 11:30 AM</p>
-                        </div>
-                        <div class="booking-footer">
-                            <button class="btn-details">Edit Reservation</button>
-                            <button class="btn-details" style="color:Red;">Cancel Reservation</button>
-                        </div>
-                    </div>
+                            
+                    {{/each}}   
                 </div>
             </div>
 
         </section>
         <!-- Footer for logout button -->
         <footer>
-            <form>
-                <input id="logout-btn" type="submit" value="Logout">
-            </form>
+            <a href="/login">
+                <button id="logout-btn">Logout</button>
+            </a>
         </footer>
     </div>
 
@@ -177,28 +125,28 @@
 
         <div class="sidebar-top d-flex justify-content-between align-items-start p-4">
             <div class="text-white">
-                <div class="fw-bold fs-5 lh-sm">Juan Dela Cruz</div>
-                <div class="small opacity-75">Student | BS-CSE</div>
+                <div id="sidebar-fullname" class="fw-bold fs-5 lh-sm">{{lname}}, {{fname}}</div>
+                <div id="sidebar-usertype" class="small opacity-75">{{status}}</div>
             </div>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
 
         <div class="offcanvas-body d-flex flex-column p-3">
             <nav class="nav nav-pills flex-column gap-2 mb-auto">
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="StudentDashboardPage.html">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/studentdashboard-page">
                     Dashboard
                 </a>
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="ReservationPage.html">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/reservation-page">
                     Reserve A Seat
                 </a>
-                <a class="nav-link text-white active-green shadow-sm" href="StudentProfilePage.html">
+                <a class="nav-link text-white active-green shadow-sm" href="/studentprofile-page">
                     View Profile
                 </a>
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="../src/FAQsPage.html">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/faqs-page">
                     FAQs
                 </a>
             </nav>
-            <a href="IndexPage.html">
+            <a href="/login">
                 <button class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4" id="logoutBtn">
                     Logout
                 </button></a>

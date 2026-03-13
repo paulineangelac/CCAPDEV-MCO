@@ -22,25 +22,6 @@ function editBio(){
         }
     } 
 }
-async function loadDashboardInformation(){
-    try{
-        const response = await fetch('/get-user');
-        const userData = await response.json();
-
-        if(userData.loggedIn){
-            //updates top right profile name and type based on the current session's information
-            document.getElementById("fullname").textContent = `${userData.lname}, ${userData.fname}`;
-            document.getElementById("type").textContent = `${userData.status}`;
-            //updates the sidebar popup
-            document.getElementById("sidebar-fullname").textContent = `${userData.lname}, ${userData.fname}`;
-            document.getElementById("sidebar-usertype").textContent = `${userData.status}`;
-
-        }
-
-    }catch(error){
-        console.log("MongoDB Error:", error.message);
-    }
-}
 
 window.onload = loadDashboardInformation;
         

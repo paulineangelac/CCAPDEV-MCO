@@ -100,7 +100,7 @@ app.get('/studentdashboard-page', (req, res) => {
 
 //render reservation page
 app.get('/reservation-page', async (req, res) => {
-    
+
     const allRooms = await Room.find({}).lean();
 
     res.render('ReservationPage', {
@@ -115,7 +115,15 @@ app.get('/signup', (req, res) => {
     res.render('SignUpPage');
 });
 app.get('/studentprofile-page', (req,res)=>{
-    res.render('StudentProfilePage');
+    res.render('StudentProfilePage',{
+        bio: req.session.user.bio,
+        reservations: req.session.user.reservations,
+        fname: req.session.user.fname,
+        lname: req.session.user.lname,
+        status: req.session.user.status,
+        email: req.session.user.email,
+        username: req.session.user.username,
+    });
 });
 app.get('/faqs-page', (req,res)=>{
     res.render('FAQsPage');
