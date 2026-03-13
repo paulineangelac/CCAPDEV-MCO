@@ -11,7 +11,7 @@ async function searchUser() {
         resultsContainer.innerHTML = "";
         return;
     }
-    
+
     try {
         const response = await fetch(`/search-users?q=${encodeURIComponent(query)}`);
         const users = await response.json();
