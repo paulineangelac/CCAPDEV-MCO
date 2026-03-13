@@ -20,10 +20,10 @@ const LoginController ={
                     </script>
                 `);
             }else{
-                if(username === "admin"){
-                    return res.redirect('/AdminDashboardPage');
+                if(user.status === "admin"){
+                    return res.redirect('AdminDashboardPage');
                 }else if(username === "labtech"){
-                    return res.redirect('/LabTechDashboardPage');
+                    return res.redirect('LabTechDashboardPage');
                 }else{
                     req.session.user={
                         

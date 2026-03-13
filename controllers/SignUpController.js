@@ -24,11 +24,7 @@ const SignUpController = {
 
         const result = await newUser.save();
 
-        res.send(`
-            <script>
-                alert('Account created successfully for ${username}!'); 
-            </script>
-        `);
+        return res.redirect('/login');
         
         } catch (error) {
             console.log("MongoDB Error:", error.message);

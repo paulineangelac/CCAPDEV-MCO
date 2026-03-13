@@ -124,6 +124,11 @@ app.get('/studentdashboard-page', (req, res) => {
         status: req.session.user.status
     });
 });
+//render admin page
+app.get('/AdminDashboardPage', async (req,res)=>{
+    res.render('AdminDashboardPage');
+});
+
 
 //render reservation page
 app.get('/reservation-page', async (req, res) => {
@@ -141,7 +146,7 @@ app.get('/reservation-page', async (req, res) => {
     });
 });
 
-app.get('/signup', (req, res) => {
+app.get('/signup-page', (req, res) => {
     res.render('SignUpPage');
 });
 
