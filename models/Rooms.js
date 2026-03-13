@@ -6,8 +6,7 @@ const roomSchema = new mongoose.Schema({
     seatNumbers:[{
         number: String,
         slots:[{
-            time: String,
-            reservedBy: {type: String, default: null}
+            time: String
         }]
     }]
 });

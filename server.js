@@ -75,6 +75,26 @@ app.get('/rooms/:roomNumber', async (req, res) => {
     }
 });
 
+app.get('/searchUser', async(req,res)=>{
+    try {
+        const searchedUsername = req.query.username;
+        console.log(searchedUsername);
+        const userData = await User.findOne({ username: searchedUsername }).lean();
+        console.log(userData);
+        
+        res.render('ViewProfilePage', {
+            profileUser: userData,
+            reservations: userData.reservations,
+            fname: req.session.user.fname,
+            lname: req.session.user.lname,
+            status: req.session.user.status
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 // for searching users
 app.get('/search-users', SearchController.searchUsers);
