@@ -119,19 +119,19 @@
                             <div id="booking-list">
                             {{#each reservations}}
                                 <div class="booking-card">
-                                <div class="booking-header">
-                                    <span class="booking-lab">{{this.roomNumber}} - {{this.seat}}</span>
-                                    <span class="status-tag">Confirmed</span>
-                                </div>
-                                <div class="booking-summary">
-                                    <p>{{this.date}}, {{this.time}}</p>
-                                </div>
-                                <div class="booking-footer">
-                                    <a href="/edit/{{this._id}}" class="btn-details text-decoration-none">
-                                    Edit Reservation
-                                    </a>
-                                    <button class="btn-details" style="color:Red;">Cancel Reservation</button>
-                                </div>
+                                    <div class="booking-header">
+                                        <span class="booking-lab">{{this.roomNumber}} - {{this.seat}}</span>
+                                        <span class="status-tag">Confirmed</span>
+                                    </div>
+                                    <div class="booking-summary">
+                                        <p>{{this.date}}, {{this.time}}</p>
+                                    </div>
+                                    <div class="booking-footer">
+                                        <a href="/edit/{{this._id}}" class="btn-details text-decoration-none">
+                                        Edit Reservation
+                                        </a>
+                                        <button class="btn-details" style="color:Red;">Cancel Reservation</button>
+                                    </div>
                                 </div>
                             {{else}}
                                 <div>

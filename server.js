@@ -13,6 +13,7 @@ import ContactMessage from './models/ContactMessage.js';
 import SignUpController from '../CCAPDEV-MCO/controllers/SignUpController.js';
 import LoginController from '../CCAPDEV-MCO/controllers/LoginController.js';
 import ReserveController from '../CCAPDEV-MCO/controllers/ReserveController.js';
+import ReserveForStudentController from '../CCAPDEV-MCO/controllers/ReserveForStudentController.js';
 import SearchController from './controllers/SearchController.js';
 import LabTech from './models/LabTech.js';
 import bcrypt from 'bcryptjs'; // safely hashes passwords
@@ -130,8 +131,24 @@ app.get('/AdminDashboardPage', async (req,res)=>{
     res.render('AdminDashboardPage');
 });
 //render labteech page
-app.get('/LabtechDashboardPage', async (req,res)=>{
-    res.render('LabTechDashboardPage');
+app.get('/labtechdashboard-page', async (req,res)=>{
+    const allRooms = await Room.find({}).lean();
+    res.render('LabTechDashboardPage',{
+        rooms:allRooms,
+        fname: req.session.user.fname,
+        lname: req.session.user.lname,
+        status: req.session.user.status
+    });
+});
+//render labtech make reservation for student
+app.get('/makereservation-page', async (req,res)=>{
+    const allRooms = await Room.find({}).lean();
+    res.render('LabTechMakeReservation',{
+        rooms:allRooms,
+        fname: req.session.user.fname,
+        lname: req.session.user.lname,
+        status: req.session.user.status
+    });
 });
 //render reservation page
 app.get('/reservation-page', async (req, res) => {
@@ -248,32 +265,7 @@ app.post('/labtechs/create', async (req, res) => {
     }
 });
 
-app.post('/labtech-login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
 
-        const labTech = await LabTech.findOne({ email });
-        if (!labTech) return res.status(400).json({ error: "Invalid email or password" });
-
-        // 🔒 compare entered password with stored hash
-        const isMatch = await bcrypt.compare(password, labTech.password);
-        if (!isMatch) return res.status(400).json({ error: "Invalid email or password" });
-
-        // Optional: save session
-        req.session.user = {
-            id: labTech._id,
-            firstName: labTech.firstName,
-            lastName: labTech.lastName,
-            email: labTech.email,
-            assignedLab: labTech.assignedLab,
-            role: "LabTech"
-        };
-
-        res.json({ message: "Login successful" });
-    } catch (err) {
-        res.status(500).json({ error: "Server error during login" });
-    }
-});
 
 app.get('/logout-page', (req,res)=>{
     res.render('LoginPage');
@@ -358,6 +350,7 @@ app.use(express.urlencoded({ extended: true }));
 app.post('/signUp', SignUpController.signUp);
 app.post('/login', LoginController.login);
 app.post('/reserve', ReserveController.reserve);
+app.post('/reserveforstudent', ReserveForStudentController.reserveforstudent);
 app.post('/labtech-reserve', LabTechReserveController.reserve);
 app.post('/labtech-edit-reserve', async (req, res) => {
     try {

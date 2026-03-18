@@ -17,13 +17,19 @@ const LoginController ={
                 return res.send(`
                     <script>
                         alert('Incorrect password! Please try again.');
+                        window.history.back();
                     </script>
                 `);
             }else{
                 if(user.status === "admin"){
                     return res.redirect('AdminDashboardPage');
                 }else if(user.status === "labtech"){
-                    return res.redirect('LabTechDashboardPage');
+                    req.session.user={
+                        fname: user.fname,
+                        lname: user.lname,
+                        status: user.status
+                    }
+                    return res.redirect('labtechdashboard-page');
                 }else{
                     req.session.user={
                         

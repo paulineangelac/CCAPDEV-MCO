@@ -261,12 +261,11 @@ display:none;
 .booking-footer {
     margin-top: 12px;
     display: flex;
-    justify-content: flex-end; 
     gap: 5px;
 }
 
 .btn-details {
-    background: #f3f4f6;
+
     border: none;
     padding: 6px 14px;
     border-radius: 6px;
@@ -420,4 +419,16 @@ display:none;
 
 .news-updates {
     padding: 14px 18px;
+}
+
+#makereservationbtn{
+  height: 50px;
+  width:300px;
+  border-radius:10px;
+  background-color:#006B20;
+  color:#F6F7FB;
+  border-style:none;
+}
+#makereservationbtn:hover{
+  background-color:#2e6d41;
 }
