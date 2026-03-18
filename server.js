@@ -140,6 +140,7 @@ app.get('/labtechdashboard-page', async (req,res)=>{
         status: req.session.user.status
     });
 });
+
 //render labtech make reservation for student
 app.get('/makereservation-page', async (req,res)=>{
     const allRooms = await Room.find({}).lean();
