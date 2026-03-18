@@ -12,7 +12,7 @@ export const getAllLabTechs = async (req, res) => {
 
 export const createLabTech = async (req, res) => {
     try {
-        const { firstName, lastName, email, contactNumber, password, assignedLab } = req.body;
+        const { firstName, lastName, email, contactNumber, password} = req.body;
 
         if (!firstName || !lastName || !email || !password || !assignedLab) {
             return res.status(400).json({ error: "Please fill in all required fields." });

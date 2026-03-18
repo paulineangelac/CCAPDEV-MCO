@@ -64,8 +64,8 @@
                             
                             <!-- Username and role -->
                             <span class="d-flex flex-column lh-2">
-                                <span class="fw-bold" style="font-size:13px; color: var(--navy);">Rico Blanco</span>
-                                <span class="muted" style="font-size:11px;">Administrator</span>
+                                <span id="fullname" class="fw-bold" style="font-size:13px; color: var(--navy);">{{lname}}, {{fname}}</span>
+                                <span id="type" class="muted" style="font-size:11px;">{{status}}</span>
                             </span>
                         </button>
                     </div>
@@ -114,19 +114,7 @@
                         <h5 class="fw-bold mb-0">All Laboratory Technicians</h5>
 
                         <!-- Search, sort, and filter controls -->
-                        <div class="d-flex gap-3">
-
-                            <!-- Text search input (by JavaScript) -->
-                            <input type="text" id="searchLabTech" class="form-control" placeholder="Search"
-                                style="max-width: 220px;">
-
-                            <!-- Filter based on online/offline status -->
-                            <select class="form-select" style="max-width: 120px;">
-                                <option>All</option>
-                                <option>Online</option>
-                                <option>Offline</option>
-                            </select>
-                        </div>
+                        
                     </div>
 
                     <!-- Technician profile card grid -->
@@ -134,93 +122,21 @@
 
                         <!-- Each card represents a technician profile -->
                         <!-- Cards may be dynamically populated later via JS -->
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
+                        {{#each labtech}}
+                            <div class="col-xl-4 col-md-6 labtech-card">
+                                <div class="admin-card d-flex align-items-center">
+                                    <!-- Lab tech profile image-->
+                                    <img src="../pictures/temp.jpeg" class="admin-avatar">
 
-                                <!-- Lab tech profile image-->
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
-
-                                <!-- Lab tech info -->
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Lucy MacLean</h6>
-                                    <p class="mb-0 text-muted small">lucymaclean@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
+                                    <!-- Lab tech info -->
+                                    <div class="ms-3 labtech-info">
+                                        <h6 class="mb-1 fw-bold">{{this.fname}}, {{this.lname}}</h6>
+                                        <p class="mb-0 text-muted small">{{this.email}}</p>
+                                        <p class="mb-0 text-muted small">+63{{this.number}}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
-
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Cooper Howard </h6>
-                                    <p class="mb-0 text-muted small">cooperhoward@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
-
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Hank MacLean</h6>
-                                    <p class="mb-0 text-muted small">hankmaclean@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
-
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Norman MacLean</h6>
-                                    <p class="mb-0 text-muted small">normanmaclean@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
-
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Lee Moldaver</h6>
-                                    <p class="mb-0 text-muted small">leemoldaver@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
-
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Betty Pearson</h6>
-                                    <p class="mb-0 text-muted small">bettypearson@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-4 col-md-6 labtech-card">
-                            <div class="admin-card d-flex align-items-center">
-                                <img src="../pictures/temp.jpeg" class="admin-avatar">
-
-                                <div class="ms-3 labtech-info">
-                                    <h6 class="mb-1 fw-bold">Barb Howard</h6>
-                                    <p class="mb-0 text-muted small">barbhoward@gmail.com</p>
-                                    <p class="mb-0 text-muted small">+63 912 3456 789</p>
-                                </div>
-                            </div>
-                        </div>
-
+                        {{/each}}
                     </div>
                 </div>
 
@@ -230,107 +146,56 @@
 
                         <!-- Technician creation form -->
                         <div class="card shadow-sm p-4">
-                            <form>
+                            <form method="POST" action="/makelabtech">
                                 <div class="row g-3">
-
                                     <!-- Name field-->
                                     <div class="col-md-6">
                                         <label class="form-label">First Name</label>
-                                        <input type="text" class="form-control" required>
+                                        <input name="fname" type="text" class="form-control" required>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" required>
+                                        <input name="lname" type="text" class="form-control" required>
                                     </div>
 
                                     <!-- Contact field -->
                                     <div class="col-md-6">
                                         <label class="form-label">Contact Number</label>
-                                        <input type="tel" class="form-control">
+                                        <input name="number"type="tel" class="form-control">
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" required>
+                                        <input name="email" type="email" class="form-control" required>
                                     </div>
 
                                     <!-- Password field -->
                                     <div class="col-md-6">
                                         <label class="form-label">Password</label>
-                                        <input type="password" class="form-control" placeholder="Password" required>
+                                        <input name="password" type="password" class="form-control" placeholder="Password" required>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="form-label">Confirm Password</label>
-                                        <input type="password" class="form-control" placeholder="Confirm Password" required>
-                                    </div>
-
-                                    <!-- Lab assignment -->
-                                    <div class="col-12">
-                                        <label class="form-label">Assigned Laboratory</label>
-                                        <select class="form-select">
-                                            <option>Computer Lab 1</option>
-                                            <option>Computer Lab 2</option>
-                                        </select>
+                                        <input name="confirmpass" type="password" class="form-control" placeholder="Confirm Password" required>
                                     </div>
 
                                     <!-- Submit button -->
                                     <div class="col-12 text-end">
-                                        <button id="createLabTechBtn" class="btn btn-success btn-labtech px-4">
-                                            Create Account
-                                        </button>
+                                        
+            
+                                        <button type="submit" id="createLabTechBtn" class="btn btn-success btn-labtech px-4">Create Account</button>
                                     </div>
 
                                 </div>
+                                
                             </form>
                         </div>
                     </h5>
                 </div>
             </div>
 
-            <section id="create-labtech-section" class="container my-5 d-none">
-                <h3 class="fw-bold mb-4">Create Laboratory Technician</h3>
-
-                <form class="card p-4 shadow-sm">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">First Name</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" required>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label class="form-label">Contact Number</label>
-                            <input type="tel" class="form-control">
-                        </div>
-
-                        <div class="col-12">
-                            <label class="form-label">Assigned Laboratory</label>
-                            <select class="form-select">
-                                <option>Computer Lab 1</option>
-                                <option>Computer Lab 2</option>
-                                <option>Computer Lab 3</option>
-                            </select>
-                        </div>
-
-                        <div class="col-12 text-end">
-                            <button type="submit" class="btn btn-warning px-4">
-                                Create Lab Tech
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </section>
         </main>
 
         <!-- ===================== PROFILE SIDEBAR =====================

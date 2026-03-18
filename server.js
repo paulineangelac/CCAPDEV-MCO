@@ -18,6 +18,7 @@ import SearchController from './controllers/SearchController.js';
 import LabTech from './models/LabTech.js';
 import bcrypt from 'bcryptjs'; // safely hashes passwords
 import LabTechReserveController from './controllers/LabTechReserveController.js';
+import AdminController from './controllers/AdminController.js';
 
 const app = express();
 
@@ -127,14 +128,19 @@ app.get('/studentdashboard-page', (req, res) => {
     });
 });
 //render admin page
-app.get('/AdminDashboardPage', async (req,res)=>{
-    res.render('AdminDashboardPage');
+app.get('/admindashboard-page', async (req,res)=>{
+    const labtechs = await LabTech.find({}).lean();
+    res.render('AdminDashboardPage',{
+        labtech:labtechs,
+        fname: req.session.user.fname,
+        lname: req.session.user.lname,
+        status: req.session.user.status
+    });
 });
 //render labteech page
 app.get('/labtechdashboard-page', async (req,res)=>{
-    const allRooms = await Room.find({}).lean();
     res.render('LabTechDashboardPage',{
-        rooms:allRooms,
+        
         fname: req.session.user.fname,
         lname: req.session.user.lname,
         status: req.session.user.status
@@ -224,50 +230,6 @@ app.get('/labtechs', async (req, res) => {
     }
 });
 
-// POST create new lab technician
-app.post('/labtechs/create', async (req, res) => {
-    try {
-        const { firstName, lastName, email, contactNumber, password, confirmPassword, assignedLab } = req.body;
-
-        // Check all required fields
-        if (!firstName || !lastName || !email || !password || !confirmPassword || !assignedLab) {
-            return res.status(400).json({ error: "Please fill in all required fields." });
-        }
-
-        // Confirm passwords match
-        if (password !== confirmPassword) {
-            return res.status(400).json({ error: "Passwords do not match." });
-        }
-
-        // Check if email is already in use
-        const existing = await LabTech.findOne({ email });
-        if (existing) {
-            return res.status(400).json({ error: "Email already exists." });
-        }
-
-        // Hash the password before storing
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const newLabTech = new LabTech({
-            firstName,
-            lastName,
-            email,
-            contactNumber,
-            password: hashedPassword,
-            assignedLab
-        });
-
-        await newLabTech.save();
-        res.status(201).json({ message: "Lab technician created successfully." });
-
-    } catch (err) {
-        console.error("Error creating lab technician:", err);
-        res.status(500).json({ error: "Server error. Please try again." });
-    }
-});
-
-
-
 app.get('/logout-page', (req,res)=>{
     res.render('LoginPage');
 })
@@ -353,21 +315,7 @@ app.post('/login', LoginController.login);
 app.post('/reserve', ReserveController.reserve);
 app.post('/reserveforstudent', ReserveForStudentController.reserveforstudent);
 app.post('/labtech-reserve', LabTechReserveController.reserve);
-app.post('/labtech-edit-reserve', async (req, res) => {
-    try {
-        const { bookingId, seat } = req.body;
-        await BookedRooms.findByIdAndUpdate(bookingId, { seat });
-        res.send(`
-            <script>
-                alert('Reservation updated successfully!');
-                window.location.href = '/LabTechDashboardPage';
-            </script>
-        `);
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Server error');
-    }
-});
+app.post('/makelabtech', AdminController.makelabtech);
 
 //connect to mongoose and start the server
 mongoose.connect(dbURL)

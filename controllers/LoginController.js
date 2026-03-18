@@ -22,7 +22,12 @@ const LoginController ={
                 `);
             }else{
                 if(user.status === "admin"){
-                    return res.redirect('AdminDashboardPage');
+                    req.session.user={
+                        fname: user.fname,
+                        lname: user.lname,
+                        status: user.status
+                    }
+                    return res.redirect('admindashboard-page');
                 }else if(user.status === "labtech"){
                     req.session.user={
                         fname: user.fname,
