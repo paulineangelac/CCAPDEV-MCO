@@ -65,16 +65,16 @@
             </div>
             <!-- Student Information Column -->
             <div id="student-information-div">
-                <h1>{{lname}}, {{fname}}</h1>
-                <p><strong>Username:</strong> {{username}}</p>
-                <p><strong>Email:</strong> {{email}}</p>
+                <h1>{{currentUser.lname}}, {{currentUser.fname}}</h1>
+                <p><strong>Username:</strong> {{currentUser.username}}</p>
+                <p><strong>Email:</strong> {{currentUser.email}}</p>
 
             </div>
             <!-- Bio Column -->
             <div id="main-bio-box">
                 <strong>Bio:</strong>
                 <div id="bio-box">
-                    <p id="profile-bio">{{bio}}</p>
+                    <p id="profile-bio">{{currentUser.bio}}</p>
                 </div>
                 <footer id="edit-profile-bio">
                     <button id="bio-btn" onclick="editBio()">Edit Bio</button>
@@ -87,7 +87,7 @@
             <h2>My Reservations</h2>
             <div class="card" id="scroll-card">
                 <div id="booking-list">
-                    {{#each reservations}}
+                    {{#each currentUser.reservations}}
                         <div class="booking-card">
                         <div class="booking-header">
                             <span class="booking-lab">{{this.roomNumber}} - {{this.seat}}</span>

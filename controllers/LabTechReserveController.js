@@ -5,7 +5,7 @@ const LabTechReserveController = {
     reserve: async (req, res) => {
         try {
             const { roomNumber, seat, date, time, username } = req.body;
-
+    
             const booking = await BookedRooms.findOne({ roomNumber, seat, time, date });
 
             if (booking) {
@@ -37,5 +37,4 @@ const LabTechReserveController = {
         }
     }
 };
-
 export default LabTechReserveController;

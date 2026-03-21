@@ -23,6 +23,7 @@ const ReserveController = {
             }else{
                 
                 const newRoomBooking = new BookedRooms({
+                username,
                 roomNumber,
                 seat,
                 time,

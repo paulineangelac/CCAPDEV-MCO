@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const bookedRoomSchema = new mongoose.Schema({
+    user: Number,
     roomNumber: String,
     seat: String,
     time: String,

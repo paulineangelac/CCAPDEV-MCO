@@ -115,12 +115,14 @@ app.get('/login', (req, res) => {
 });
 
 //render studentdashboard page
-app.get('/studentdashboard-page', (req, res) => {
+app.get('/studentdashboard-page', async (req, res) => {
+    const rooms = await Room.find({}).lean();
     if (!req.session.user) {
         return res.redirect('/login');
     }
 
     res.render('StudentDashboardPage',{
+        room:rooms,
         reservations: req.session.user.reservations,
         fname: req.session.user.fname,
         lname: req.session.user.lname,
@@ -177,19 +179,13 @@ app.get('/signup-page', (req, res) => {
     res.render('SignUpPage');
 });
 
-app.get('/studentprofile-page', (req, res) => {
+app.get('/studentprofile-page', async (req, res) => {
     if (!req.session.user) {
         return res.redirect('/login');
     }
-
+    const currentUser = await User.findOne({username: req.session.user.username}).lean();
     res.render('StudentProfilePage',{
-        bio: req.session.user.bio,
-        reservations: req.session.user.reservations,
-        fname: req.session.user.fname,
-        lname: req.session.user.lname,
-        status: req.session.user.status,
-        email: req.session.user.email,
-        username: req.session.user.username,
+        currentUser: currentUser
     });
 });
 

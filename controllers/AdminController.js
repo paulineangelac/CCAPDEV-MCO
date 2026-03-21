@@ -4,7 +4,6 @@ const AdminController ={
     makelabtech: async (req,res)=>{
         try{
             const {fname,lname,number,email,password,confirmpass} = req.body;
-            console.log(fname,lname,number,email,password,confirmpass);
             const labtech = await LabTech.findOne({
                 fname: fname,
                 lname: lname

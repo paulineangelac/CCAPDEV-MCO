@@ -146,9 +146,17 @@
             <!--Reccomended labs for the student -->
             <aside class="col-12 col-lg-4 labs-column">
                 <h3 class="fs-5 fw-bold text-navy mb-3">Recommended Laboratories</h3>
+               {{#each room}}
                 <div id="recommended-rooms">
+                    <a href="/reservation-page" class="lab-card ui-card">
+                        <div class="lab-card__info">
+                            <span class="lab-name">{{this.roomNumber}}</span>
+                            <span class="lab-status small">{{this.seatNumbers.length}} Seats Available</span>
+                        </div>
+                        <span class="chevron">→</span>
+                    </a>
                 </div>
-
+                {{/each}}
             </aside>
         </div>
     </main>
