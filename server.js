@@ -34,6 +34,7 @@ app.use('/', ReservationsRoutes);
 app.use('/', SearchRoutes);
 app.use('/', StudentRoutes);
 
+
 // MongoDB connection & start server
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {

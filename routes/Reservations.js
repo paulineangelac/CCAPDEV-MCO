@@ -6,6 +6,16 @@ import ReserveForStudentController from '../controllers/ReserveForStudentControl
 
 const router = express.Router();
 
+router.get('/reservation-page',  async (req,res)=>{
+    const rooms = await Room.find({});
+
+    res.render('ReservationPage',{
+        rooms: rooms,
+        fname: req.session.user.fname,
+        lname: req.session.user.lname,
+        status: req.session.user.status
+    });
+});
 router.get('/rooms', async (req, res) => {
     const rooms = await Room.find({});
     res.json(rooms);
