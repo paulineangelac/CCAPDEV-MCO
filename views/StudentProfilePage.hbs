@@ -42,7 +42,9 @@
                         data-bs-target="#profileSidebar" aria-controls="profileSidebar" title="Open menu">
                         <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
                         <span class="d-flex flex-column lh-2">
-                            <span id="fullname" class="fw-bold" style="font-size:13px; color: var(--navy);">{{currentUser.lname}}, {{currentUser.fname}}</span>
+                            <span id="fullname" class="fw-bold"
+                                style="font-size:13px; color: var(--navy);">{{currentUser.lname}},
+                                {{currentUser.fname}}</span>
                             <span id="type" class="muted" style="font-size:11px;">{{currentUser.status}}</span>
                         </span>
                     </button>
@@ -88,7 +90,7 @@
             <div class="card" id="scroll-card">
                 <div id="booking-list">
                     {{#each currentUser.reservations}}
-                        <div class="booking-card">
+                    <div class="booking-card">
                         <div class="booking-header">
                             <span class="booking-lab">{{this.roomNumber}} - {{this.seat}}</span>
                             <span class="status-tag">Confirmed</span>
@@ -98,24 +100,24 @@
                         </div>
                         <div class="booking-footer">
                             <a href="/edit/{{this._id}}" class="btn-details text-decoration-none">
-                            Edit Reservation
+                                Edit Reservation
                             </a>
                             <button class="btn-details" style="color:Red;">Cancel Reservation</button>
                         </div>
-                        </div>
+                    </div>
                     {{else}}
-                        <div>
-                            <p>No upcoming reservations found.</p>
-                        </div>
-                            
-                    {{/each}}   
+                    <div>
+                        <p>No upcoming reservations found.</p>
+                    </div>
+
+                    {{/each}}
                 </div>
             </div>
 
         </section>
         <!-- Footer for logout button -->
         <footer>
-            <a href="/login">
+            <a href="/logout">
                 <button id="logout-btn">Logout</button>
             </a>
         </footer>
@@ -147,10 +149,9 @@
                     FAQs
                 </a>
             </nav>
-            <a href="/login">
-                <button class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4" id="logoutBtn">
-                    Logout
-                </button></a>
+            <a href="/logout" class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4">
+                Logout
+            </a>
         </div>
     </div>
 
