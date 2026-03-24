@@ -29,14 +29,15 @@ const ReserveController = {
                 time,
                 date,
                 anon
+                
                 });
                 const result = await newRoomBooking.save();
-
+                console.log(result);
                 await User.findOneAndUpdate(
                     {username: username},
                     {
                         $push:{
-                            reservations:{roomNumber, seat,time,date}
+                            reservations:{username,roomNumber, seat,time,date}
                         }
                     }
                 

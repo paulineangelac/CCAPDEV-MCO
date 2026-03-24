@@ -120,7 +120,6 @@ app.get('/studentdashboard-page', async (req, res) => {
     if (!req.session.user) {
         return res.redirect('/login');
     }
-
     res.render('StudentDashboardPage',{
         room:rooms,
         reservations: req.session.user.reservations,
