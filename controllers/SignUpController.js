@@ -1,31 +1,36 @@
 import User from "../models/User.js";
+import bcrypt from 'bcryptjs';
 
 const SignUpController = {
     signUp: async (req, res) => {
-    try {
-        const { fname, lname, email, username, password, confirmPassword } = req.body;
+        try {
+            const { fname, lname, email, username, password, confirmPassword } = req.body;
 
-        //check if password matches
-        if (password !== confirmPassword) {
-            return res.send(`
+            //check if password matches
+            if (password !== confirmPassword) {
+                return res.send(`
                 <script>
                     alert('Passwords do not match! Please try again.');
                     window.history.back(); 
                 </script>
             `);
-        }
-        const newUser = new User({
-            fname,
-            lname,
-            email,
-            username,
-            password
-        });
+            }
 
-        const result = await newUser.save();
+            const salting = 10;
+            const hashedPassword = await bcrypt.hash(password, salting);
 
-        return res.redirect('/login');
-        
+            const newUser = new User({
+                fname,
+                lname,
+                email,
+                username,
+                password: hashedPassword
+            });
+
+            const result = await newUser.save();
+
+            return res.redirect('/login');
+
         } catch (error) {
             console.log("MongoDB Error:", error.message);
         }
