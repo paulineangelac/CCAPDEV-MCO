@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/search-users', SearchController.searchUsers);
 router.get('/get-user-profile', SearchController.getUserProfile);
-router.get('/viewprofile', SearchController.renderProfilePage);
+router.get('/searchUser', SearchController.renderProfilePage);
+
 
 export default router;

@@ -58,7 +58,10 @@ async function renderProfilePage(req, res) {
         // render the hbs file and pass user object as data
         res.render('ViewProfilePage', {
             title: `${user.fname}'s Profile`,
-            profileUser: user // passes data to .hbs file
+            profileUser: user, // passes data to .hbs file
+            lname: req.session.user.lname,
+            fname: req.session.user.fname,
+            status: req.session.user.status
         });
     } catch (error) {
         res.status(500).send("server error");

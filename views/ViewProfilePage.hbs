@@ -82,7 +82,7 @@
             <h2>My Reservations</h2>
             <div class="card" id="scroll-card">
                 <div id="booking-list">
-                    {{#each reservations}}
+                    {{#each profileUser.reservations}}
                         <div class="booking-card">
                         <div class="booking-header">
                             <span class="booking-lab">{{this.roomNumber}} - {{this.seat}}</span>
