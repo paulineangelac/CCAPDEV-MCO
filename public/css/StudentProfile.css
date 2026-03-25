@@ -88,6 +88,7 @@ footer{
     color: red;
     cursor:pointer;
 }
+
 #bio-btn{
     background-color:white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -113,6 +114,8 @@ footer{
 #input-footer{
     display:flex;
     flex-direction:column;
+    text-align: center;
+    margin-top: 10px;
 }
 #input-footer p{
     margin:5px;
@@ -120,3 +123,21 @@ footer{
     font-size:10px;
     color:var(--muted);
 }
+
+.upload-button {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color:white;
+    color: var(--navy);
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.upload-button:hover {
+    background-color:#f0f0f0;
+}
+

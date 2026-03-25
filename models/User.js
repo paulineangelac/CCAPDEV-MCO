@@ -23,7 +23,11 @@ const userSchema = new mongoose.Schema({
     },
     bio:{
         type: String, default: "This user has no Bio yet."
-    }
+    },
+    profilePic:{
+    type: String,
+    default: '/pictures/temp.jpeg'
+}
     
     
 });

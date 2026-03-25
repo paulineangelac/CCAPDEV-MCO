@@ -1,6 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import mongoose from 'mongoose';
+import hbs from 'hbs';
 import 'dotenv/config';
 
 // Import routes
@@ -14,6 +15,12 @@ import StudentRoutes from './routes/Student.js';
 const app = express();
 
 app.set("view engine", "hbs");
+
+// register handlebars helper
+hbs.registerHelper('eq', function (a, b) {
+    return a == b;
+});
+
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -33,7 +40,6 @@ app.use('/', AdminRoutes);
 app.use('/', ReservationsRoutes);
 app.use('/', SearchRoutes);
 app.use('/', StudentRoutes);
-
 
 // MongoDB connection & start server
 mongoose.connect(process.env.MONGODB_URI)

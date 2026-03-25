@@ -120,19 +120,31 @@ a:hover {
   background: rgba(45, 47, 78, 0.06);
   text-decoration: none; 
 } 
+
  /* profile picture */
-.avatar{
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  object-fit: cover;
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
 }
+
+.profile-chip img.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
+}
+
  .profile-trigger{
   border: none;
   background: transparent;
   cursor: pointer;
 }
+
 .profile-trigger:focus{
   outline: none;
 }

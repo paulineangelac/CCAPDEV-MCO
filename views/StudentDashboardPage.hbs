@@ -40,8 +40,8 @@
                     <!--Profile menu sidebar using bootstrap offcanvas-->
                     <button class="profile-chip profile-trigger" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#profileSidebar" aria-controls="profileSidebar" title="Open menu">
-                        <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
-                        <span class="d-flex flex-column lh-2">
+                            <img class="avatar" src="{{#if profilePic}}{{profilePic}}{{else}}/pictures/temp.jpeg{{/if}}" alt="Profile picture" />
+                            <span class="d-flex flex-column lh-2">
                             <span id="fullname" class="fw-bold" style="font-size:13px; color: var(--navy);">{{lname}}, {{fname}}</span>
                             <span id="type" class="muted" style="font-size:11px;">{{status}}</span>
                         </span>
@@ -117,7 +117,7 @@
 
                         <div class="card" id="scroll-card">
                             <div id="booking-list">
-                            {{#each reservations}}
+                            {{#each bookings}}
                                 <div class="booking-card">
                                     <div class="booking-header">
                                         <span class="booking-lab">{{this.roomNumber}} - {{this.seat}}</span>
@@ -130,7 +130,14 @@
                                         <a href="/edit/{{this._id}}" class="btn-details text-decoration-none">
                                         Edit Reservation
                                         </a>
-                                        <button class="btn-details" style="color:Red;">Cancel Reservation</button>
+                                        <form action="/cancel/{{this._id}}" method="POST" style="display:inline;">
+                                            <button type="submit"
+                                                class="btn-details"
+                                                style="color:Red;"
+                                                onclick="return confirm('Are you sure you want to cancel this reservation?')">
+                                                Cancel Reservation
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             {{else}}
@@ -146,7 +153,7 @@
             <!--Reccomended labs for the student -->
             <aside class="col-12 col-lg-4 labs-column">
                 <h3 class="fs-5 fw-bold text-navy mb-3">Recommended Laboratories</h3>
-               {{#each room}}
+               {{#each rooms}}
                 <div id="recommended-rooms">
                     <a href="/reservation-page" class="lab-card ui-card">
                         <div class="lab-card__info">
