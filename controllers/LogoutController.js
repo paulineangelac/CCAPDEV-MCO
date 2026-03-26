@@ -13,3 +13,5 @@ const LogoutController = {
 };
 
 export default LogoutController;
+
+

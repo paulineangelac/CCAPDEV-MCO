@@ -1,8 +1,11 @@
 import express from 'express';
 import Room from '../models/Rooms.js';
 import LabTechReserveController from '../controllers/LabTechReserveController.js';
+import { isAuthenticated } from '../middleware/auth.js';
 
 const router = express.Router();
+
+router.use(isAuthenticated); // route protection
 
 router.get('/labtechdashboard-page', (req, res) => {
     res.render('LabTechDashboardPage', {

@@ -1,8 +1,11 @@
 import express from 'express';
 import LabTech from '../models/LabTech.js';
 import AdminController from '../controllers/AdminController.js';
+import { isAuthenticated } from '../middleware/auth.js';
 
 const router = express.Router();
+
+router.use(isAuthenticated); // route protection
 
 router.get('/admindashboard-page', async (req, res) => {
     const labtechs = await LabTech.find({}).lean();

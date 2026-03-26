@@ -1,8 +1,11 @@
 import express from 'express';
 import Room from '../models/Rooms.js';
 import User from '../models/User.js';
+import { isAuthenticated } from '../middleware/auth.js';
+
 const router = express.Router();
 
+router.use(isAuthenticated); // route protection
 
 router.get('/studentdashboard-page', async (req, res) => {
     if (!req.session.user) return res.redirect('/login');

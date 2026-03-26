@@ -1,30 +1,30 @@
 import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
-    fname:{
+    fname: {
         type: String, trim: true, required: true
     },
-    lname:{
+    lname: {
         type: String, trim: true, required: true
     },
-    email:{
+    email: {
         type: String, trim: true, required: true
     },
-    username:{
-        type: Number, trim: true,unique: true, required: true
+    username: {
+        type: Number, trim: true, unique: true, required: true
     },
-    password:{
+    password: {
         type: String, trim: true, required: true
     },
     reservations: {
-        type: Array, default:[]
+        type: Array, default: []
     },
-    status:{
+    status: {
         type: String, enum: ['Student', 'Labtech', 'Admin'], default: "Student"
     },
-    bio:{
+    bio: {
         type: String, default: "This user has no Bio yet."
     }
-    
-    
+
+
 });
 export default mongoose.model('User', userSchema);
