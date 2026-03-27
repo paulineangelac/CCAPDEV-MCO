@@ -8,21 +8,26 @@ const LoginController = {
         try {
             const { username, password } = req.body;
 
-            
             const user = await User.findOne({
                 username: username,
             });
-            const match = await bcrypt.compare(password,user.password);
-            if (!match) {
+            
+            if (!user) {
                 return res.send(`
+                    <script>
+                        alert('User not Found');
+                        window.history.back();
+                    </script>
+                `);
+            } else {
+                const match = await bcrypt.compare(password,user.password);
+                if(!match) {
+                    return res.send(`
                     <script>
                         alert('Incorrect password! Please try again.');
                         window.history.back();
                     </script>
                 `);
-            } else {
-                if(!user) {
-                    return res.redirect('/login');
                 }
                 
                 if(user.status === "admin"){
@@ -35,8 +40,8 @@ const LoginController = {
                 } else if(user.status ==="Labtech") {
                         req.session.user = {
                             fname: user.fname,
-                            lname: userLab.lname,
-                            status: userLab.status
+                            lname: user.lname,
+                            status: user.status
                         }
                         return res.redirect('labtechdashboard-page');
                     } else {

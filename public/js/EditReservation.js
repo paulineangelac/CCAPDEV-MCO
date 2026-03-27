@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const button = document.createElement('button');
             button.type = 'button';
             button.className = 'lab-seat';
-            button.dataset.seat = seat.number;
+            button.value = seat.number;
             button.textContent = seat.number;
 
             if (seat.number === previousSeat) {

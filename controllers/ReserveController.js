@@ -6,7 +6,7 @@ const ReserveController = {
         try {
             const { roomNumber, seat, date, time, anon } = req.body;
             const username = req.session.user.username;
-
+            console.log(anon);
             const booking = await BookedRooms.findOne({
                 roomNumber,
                 seat,
@@ -17,14 +17,14 @@ const ReserveController = {
             if (booking) {
                 return res.redirect('/reservation-page?error=Seat%20is%20already%20reserved');
             }
-
+            const fullname = req.session.user.fname +' '+ req.session.user.lname
             const newRoomBooking = new BookedRooms({
                 username,
                 roomNumber,
                 seat,
                 time,
                 date,
-                anon
+                anon: anon || fullname
             });
 
             const result = await newRoomBooking.save();
