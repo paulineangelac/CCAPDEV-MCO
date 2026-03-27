@@ -1,51 +1,19 @@
-const userSearch = document.getElementById("userSearch");
-const resultsContainer = document.getElementById("userSearchResults");
-
-// USER SEARCH behavior
-userSearch.addEventListener("input", searchUser);
-
-async function searchUser() {
-    const query = userSearch.value.trim(); // get whatever user types in the search bar
-
-    if (!query) {
-        resultsContainer.innerHTML = "";
-        return;
-    }
-
+async function loadDashboardInformation() {
     try {
-        const response = await fetch(`/search-users?q=${encodeURIComponent(query)}`);
-        const users = await response.json();
+        const response = await fetch('/get-user');
+        const userData = await response.json();
 
-        displayResults(users);
+        if (userData.loggedIn) {
+            document.getElementById("fullname").textContent = `${userData.lname}, ${userData.fname}`;
+            document.getElementById("type").textContent = `${userData.status}`;
+            document.getElementById("sidebar-fullname").textContent = `${userData.lname}, ${userData.fname}`;
+            document.getElementById("sidebar-usertype").textContent = `${userData.status}`;
+
+            loadRecommendedRoom();
+        }
     } catch (error) {
-        console.log("Search error:", error.message);
+        console.log("MongoDB Error:", error.message);
     }
 }
-
-// user search dropdown
-function displayResults(users) {
-    resultsContainer.innerHTML = "";
-
-    if (users.length == 0) {
-        resultsContainer.innerHTML = "<div>No users found</div>";
-        return;
-    }
-
-    users.forEach(user => {
-        // Pass the username as a query parameter in the href
-        resultsContainer.innerHTML += `
-        <a href="/searchUser?username=${user.username}" class="text-decoration-none">
-            <div class="resultItem">
-                ${user.fname} ${user.lname}
-            </div>
-        </a>
-        `;
-    });
-}
-
-
-
-
 
 window.onload = loadDashboardInformation;
-

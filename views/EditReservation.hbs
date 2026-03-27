@@ -33,13 +33,11 @@
                 <div class="nav-search">
                     <input id="userSearch" class="navbar-search-input" type="search" placeholder="Search Users..."
                         autocomplete="off" aria-expanded="false" aria-controls="userSearchResults" />
-                    <button class="nav-search-btn" type="button" aria-label="Search">
-                        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none" />
-                            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" />
-                        </svg>
+                    <button onclick="searchUser()" class="nav-search-btn" type="button" aria-label="Search">
+                        <i class="bi bi-search"></i>
                     </button>
                 </div>
+                <div id="userSearchResults" class="search-results"></div>
             </div>
 
             <!--right side of navbar: profile/menu-->
@@ -214,6 +212,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/EditReservation.js"></script>
+    <script src="/js/navbarSearch.js"></script>
 </body>
 
 </html>
