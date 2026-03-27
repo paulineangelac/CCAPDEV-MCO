@@ -1,118 +1,167 @@
-
-/* RESERVATIONPAGE.JS
-   - Handles seat selection logic in the seat map
-   - Updates "Selected Seat" display in the reservation sidebar
-   - Enables/disables Confirm button
-   - Redirects user after confirming reservation (Phase 1 placeholder)
-
-   Phase 1:
-   - Seat layout is hardcoded in HTML
-   - Selection is handled purely on the frontend
-   - No backend/database validation yet
-
-*/
-
-// Select all seats that are NOT reserved
-// ".lab-seat:not(.is-reserved)" excludes disabled seats
-const seats = document.querySelectorAll(".lab-seat:not(.is-reserved)");
-
-// sidebar display elements
 const displaySeat = document.getElementById("displaySeat");
 const confirmBtn = document.getElementById("confirmBtn");
+const labSelect = document.getElementById("lab-select");
+const seatSelect = document.getElementById("seat-select");
+const timeSelect = document.getElementById("time-select");
+const seatGrid = document.getElementById("seatGrid");
 
-// Stores currently selected seat element
 let selectedSeat = null;
 
-seats.forEach(seat => {
-    seat.addEventListener("click", function () {
+function showMessage(message, type = 'danger') {
+    const messageBox = document.getElementById('reservationMessage');
+    if (!messageBox) return;
 
-        // if clicking the same seat deselect it
-        if (selectedSeat === seat) {
-            seat.classList.remove("is-selected");
-            selectedSeat = null;
-            displaySeat.textContent = "—";
-            confirmBtn.disabled = true;
-            return;
-        }
+    messageBox.className = `alert alert-${type} mb-3`;
+    messageBox.textContent = message;
+    messageBox.classList.remove('d-none');
+}
 
-        // remove selection from previous seat
-        if (selectedSeat) {
-            selectedSeat.classList.remove("is-selected");
-        }
+function hideMessage() {
+    const messageBox = document.getElementById('reservationMessage');
+    if (!messageBox) return;
 
-        // apply selection styling to clicked seat
-        seat.classList.add("is-selected");
-        selectedSeat = seat;
+    messageBox.textContent = '';
+    messageBox.className = 'alert d-none mb-3';
+}
 
-        // update sidebar display
-        displaySeat.textContent = seat.textContent;
+function updateConfirmButton() {
+    const hasRoom = labSelect.value !== '';
+    const hasSeat = seatSelect.value !== '';
+    const hasTime = timeSelect.value !== '';
 
-        // enable confirm button once a seat is selected
-        confirmBtn.disabled = false;
+    confirmBtn.disabled = !(hasRoom && hasSeat && hasTime);
+}
+
+function renderSeatGrid(roomData) {
+    seatGrid.innerHTML = '';
+
+    if (!roomData || !roomData.seatNumbers) return;
+
+    roomData.seatNumbers.forEach(seat => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'lab-seat';
+        button.textContent = seat.number;
+        button.dataset.seat = seat.number;
+
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.lab-seat').forEach(btn => {
+                btn.classList.remove('is-selected');
+            });
+
+            button.classList.add('is-selected');
+            selectedSeat = seat.number;
+            seatSelect.value = seat.number;
+
+            if (displaySeat) {
+                displaySeat.textContent = seat.number;
+            }
+
+            populateTimeOptions(roomData, seat.number);
+            updateConfirmButton();
+            hideMessage();
+        });
+
+        seatGrid.appendChild(button);
     });
-});
+}
 
-// Phase 1 placeholder to confirm reservation:
-// - Shows alert confirmation
-// - Redirects back to Student Dashboard
-confirmBtn.addEventListener("click", function () {
-    alert(`You have reserved seat ${selectedSeat.textContent}.`);
-    window.location.href = "StudentDashboardPage.html";
-});
+function populateSeatOptions(roomData) {
+    let innerListSeat = '<option value="">--Select a Seat--</option>';
 
-//updates time slots after choosing room
-const labSelect = document.getElementById('lab-select');
-const seatSelect = document.getElementById('seat-select');
-const timeSelect = document.getElementById('time-select');
-const seatGrid = document.getElementById('seatGrid');
-labSelect.addEventListener('change', async (event)=>{
+    if (!roomData || !roomData.seatNumbers) {
+        seatSelect.innerHTML = innerListSeat;
+        return;
+    }
+
+    roomData.seatNumbers.forEach(seat => {
+        innerListSeat += `<option value="${seat.number}">${seat.number}</option>`;
+    });
+
+    seatSelect.innerHTML = innerListSeat;
+}
+
+function populateTimeOptions(roomData, selectedSeatNumber) {
+    let innerListTime = '<option value="">--Select a Time--</option>';
+
+    if (!roomData || !roomData.seatNumbers || !selectedSeatNumber) {
+        timeSelect.innerHTML = innerListTime;
+        return;
+    }
+
+    const seat = roomData.seatNumbers.find(seat => seat.number === selectedSeatNumber);
+
+    if (seat && seat.slots) {
+        seat.slots.forEach(slot => {
+            innerListTime += `<option value="${slot.time}">${slot.time}</option>`;
+        });
+    }
+
+    timeSelect.innerHTML = innerListTime;
+}
+
+labSelect.addEventListener('change', async (event) => {
     const selectedRoom = event.target.value;
-    try{
-        //fetch selected room data
+
+    selectedSeat = null;
+    if (displaySeat) {
+        displaySeat.textContent = "—";
+    }
+
+    seatSelect.innerHTML = '<option value="">--Select a Seat--</option>';
+    timeSelect.innerHTML = '<option value="">--Select a Time--</option>';
+    seatGrid.innerHTML = '';
+    confirmBtn.disabled = true;
+    hideMessage();
+
+    if (!selectedRoom) return;
+
+    try {
         const response = await fetch(`/rooms/${selectedRoom}`);
         const roomData = await response.json();
-        let innerListSeat = '<option value="">--Select a Seat--</option>';
-        roomData.seatNumbers.forEach(seat =>{
-            innerListSeat += `<option value="${seat.number}">${seat.number}</option>`;
-        });
-        seatSelect.innerHTML = innerListSeat;
 
-        let innerListGridSeat ='';
-        
-        
-        roomData.seatNumbers.forEach((seat,num)=>{
-            innerListGridSeat += `<button type="button" class="lab-seat">${seat.number}</button>`;
-        });
-        seatGrid.innerHTML = innerListGridSeat;
-
-        //updates seatmap
-
-
-        //adds seat options
-        seatSelect.addEventListener('change' ,(event)=>{
-            const selectedSeat = event.target.value;
-
-            let innerListTime = '<option value="">--Select a Time--</option>';
-            roomData.seatNumbers.forEach(seat =>{
-                
-                if(seat.number === selectedSeat){
-                    seat.slots.forEach(time =>{
-                        
-                        innerListTime += `<option value="${time.time}">${time.time}</option>`    
-                    });
-                }
-
-                timeSelect.innerHTML = innerListTime;
-            });
-
-            timeSelect.addEventListener('change' ,(event) =>{
-                confirmBtn.disabled = false;
-            });
-        });
-
-    }catch(error){
+        populateSeatOptions(roomData);
+        renderSeatGrid(roomData);
+    } catch (error) {
         console.log(error);
+        showMessage('Failed to load room data.');
     }
+});
+
+seatSelect.addEventListener('change', async (event) => {
+    const selectedRoom = labSelect.value;
+    const selectedSeatNumber = event.target.value;
+
+    if (displaySeat) {
+        displaySeat.textContent = selectedSeatNumber || "—";
+    }
+
+    document.querySelectorAll('.lab-seat').forEach(btn => {
+        btn.classList.toggle('is-selected', btn.dataset.seat === selectedSeatNumber);
+    });
+
+    selectedSeat = selectedSeatNumber || null;
+    hideMessage();
+
+    if (!selectedRoom) {
+        updateConfirmButton();
+        return;
+    }
+
+    try {
+        const response = await fetch(`/rooms/${selectedRoom}`);
+        const roomData = await response.json();
+        populateTimeOptions(roomData, selectedSeatNumber);
+        updateConfirmButton();
+    } catch (error) {
+        console.log(error);
+        showMessage('Failed to load time slots.');
+    }
+});
+
+timeSelect.addEventListener('change', () => {
+    hideMessage();
+    updateConfirmButton();
 });
 
 async function loadDashboardInformation() {
@@ -121,20 +170,16 @@ async function loadDashboardInformation() {
         const userData = await response.json();
 
         if (userData.loggedIn) {
-            //updates top right profile name and type based on the current session's information
             document.getElementById("fullname").textContent = `${userData.lname}, ${userData.fname}`;
             document.getElementById("type").textContent = `${userData.status}`;
-            //updates the sidebar popup
             document.getElementById("sidebar-fullname").textContent = `${userData.lname}, ${userData.fname}`;
             document.getElementById("sidebar-usertype").textContent = `${userData.status}`;
 
-            //generates the list of current reservations for the user
             loadRecommendedRoom();
         }
-
     } catch (error) {
         console.log("MongoDB Error:", error.message);
     }
 }
+
 window.onload = loadDashboardInformation;
-//<button type="button" class="lab-seat is-reserved" data-seat="A1" disabled="">A1</button>

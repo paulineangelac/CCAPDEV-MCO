@@ -8,13 +8,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const timeSelect = document.getElementById('time-select');
     const seatGrid = document.getElementById('seatGrid');
 
-    if (timeSelect && booking.time) {
-        timeSelect.value = booking.time;
-    }
-
     function getSelectedRoom() {
         const selectedRoomNumber = labSelect.value;
         return rooms.find(room => room.roomNumber === selectedRoomNumber);
+    }
+
+    function populateTimeSelect(room, selectedTime = '') {
+        timeSelect.innerHTML = '';
+
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = '--Select a Time--';
+        timeSelect.appendChild(defaultOption);
+
+        if (!room || !room.seatNumbers || room.seatNumbers.length === 0) {
+            return;
+        }
+
+        const uniqueTimes = [];
+        const seen = new Set();
+
+        room.seatNumbers.forEach(seat => {
+            if (!seat.slots) return;
+
+            seat.slots.forEach(slot => {
+                if (slot.time && !seen.has(slot.time)) {
+                    seen.add(slot.time);
+                    uniqueTimes.push(slot.time);
+                }
+            });
+        });
+
+        uniqueTimes.forEach(time => {
+            const option = document.createElement('option');
+            option.value = time;
+            option.textContent = time;
+
+            if (time === selectedTime) {
+                option.selected = true;
+            }
+
+            timeSelect.appendChild(option);
+        });
     }
 
     function populateSeatSelect(room, selectedSeat = '') {
@@ -76,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const previousSeat = useBookingSeatAsPrevious ? booking.seat : '';
 
         populateSeatSelect(room, selectedSeat);
+        populateTimeSelect(room, booking.time || '');
         renderSeatGrid(room, selectedSeat, previousSeat);
     }
 
@@ -84,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     populateSeatSelect(getSelectedRoom(), booking.seat || '');
+    populateTimeSelect(getSelectedRoom(), booking.time || '');
     renderSeatGrid(getSelectedRoom(), booking.seat || '', booking.seat || '');
 
     labSelect.addEventListener('change', () => {
@@ -93,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             : '';
 
         populateSeatSelect(room, firstSeat);
+        populateTimeSelect(room, '');
         renderSeatGrid(room, firstSeat, '');
     });
 
@@ -100,4 +138,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const room = getSelectedRoom();
         renderSeatGrid(room, seatSelect.value, booking.roomNumber === labSelect.value ? booking.seat : '');
     });
+
+
+    function showMessage(message, type = 'danger') {
+        const messageBox = document.getElementById('reservationMessage');
+        if (!messageBox) return;
+
+        messageBox.className = `alert alert-${type}`;
+        messageBox.textContent = message;
+        messageBox.classList.remove('d-none');
+    }
+
+    function hideMessage() {
+        const messageBox = document.getElementById('reservationMessage');
+        if (!messageBox) return;
+
+        messageBox.textContent = '';
+        messageBox.classList.add('d-none');
+    }
 });

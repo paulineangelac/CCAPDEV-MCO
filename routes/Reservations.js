@@ -1,20 +1,35 @@
 import express from 'express';
 import Room from '../models/Rooms.js';
 import BookedRooms from '../models/BookedRooms.js';
+import User from '../models/User.js';
 import ReserveController from '../controllers/ReserveController.js';
 import ReserveForStudentController from '../controllers/ReserveForStudentController.js';
 
 const router = express.Router();
 
-router.get('/reservation-page',  async (req,res)=>{
-    const rooms = await Room.find({});
+router.get('/reservation-page', async (req, res) => {
+    try {
+        if (!req.session.user) return res.redirect('/login');
 
-    res.render('ReservationPage',{
-        rooms: rooms,
-        fname: req.session.user.fname,
-        lname: req.session.user.lname,
-        status: req.session.user.status
-    });
+        const rooms = await Room.find({}).lean();
+
+        const currentUser = await User.findOne({
+            username: req.session.user.username
+        }).lean();
+
+        res.render('ReservationPage', {
+            rooms,
+            fname: currentUser.fname,
+            lname: currentUser.lname,
+            status: currentUser.status,
+            profilePic: currentUser.profilePic || '/pictures/temp.jpeg',
+            error: req.query.error || null,
+            success: req.query.success || null
+        });
+    } catch (err) {
+        console.error('RESERVATION PAGE ERROR:', err);
+        res.status(500).send('Server error');
+    }
 });
 
 router.get('/rooms', async (req, res) => {
@@ -45,6 +60,8 @@ router.get('/get-student-bookings', async (req, res) => {
 
 router.get('/edit/:id', async (req, res) => {
     try {
+        if (!req.session.user) return res.redirect('/login');
+
         const booking = await BookedRooms.findById(req.params.id).lean();
 
         if (!booking) {
@@ -59,6 +76,10 @@ router.get('/edit/:id', async (req, res) => {
 
         const rooms = await Room.find({}).lean();
 
+        const currentUser = await User.findOne({
+            username: req.session.user.username
+        }).lean();
+
         const roomsForView = rooms.map(room => ({
             ...room,
             isSelected: room.roomNumber === booking.roomNumber
@@ -69,9 +90,12 @@ router.get('/edit/:id', async (req, res) => {
             rooms: roomsForView,
             bookingJson: JSON.stringify(booking),
             roomsJson: JSON.stringify(rooms),
-            fname: req.session.user.fname,
-            lname: req.session.user.lname,
-            status: req.session.user.status
+            fname: currentUser.fname,
+            lname: currentUser.lname,
+            status: currentUser.status,
+            profilePic: currentUser.profilePic || '/pictures/temp.jpeg',
+            error: req.query.error || null,
+            success: req.query.success || null
         });
     } catch (err) {
         console.error("EDIT GET ERROR:", err);
@@ -93,17 +117,31 @@ router.post('/edit/:id', async (req, res) => {
             }
         }
 
-        booking.roomNumber = req.body.roomNumber;
-        booking.seat = req.body.seat;
-        booking.date = req.body.date;
-        booking.time = req.body.time;
+        const { roomNumber, seat, date, time } = req.body;
+
+        const conflict = await BookedRooms.findOne({
+            _id: { $ne: req.params.id },
+            roomNumber,
+            seat,
+            date,
+            time
+        });
+
+        if (conflict) {
+            return res.redirect(`/edit/${req.params.id}?error=Seat%20is%20already%20reserved`);
+        }
+
+        booking.roomNumber = roomNumber;
+        booking.seat = seat;
+        booking.date = date;
+        booking.time = time;
 
         await booking.save();
 
-        res.redirect('/studentdashboard-page');
+        res.redirect('/studentdashboard-page?success=Reservation%20updated%20successfully');
     } catch (err) {
         console.error("EDIT POST ERROR:", err);
-        res.status(500).send("Server error");
+        res.redirect(`/edit/${req.params.id}?error=Something%20went%20wrong`);
     }
 });
 

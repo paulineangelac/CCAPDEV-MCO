@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import BookedRooms from "../models/BookedRooms.js";
 
 async function searchUsers(req, res) {
     try {
@@ -32,7 +33,7 @@ async function getUserProfile(req, res) {
         }
 
         const user = await User.findOne({ username: username })
-            .select("fname lname username email status bio");
+            .select("fname lname username email status bio profilePic");
 
         if (!user) {
             return res.status(404).json({ error: "User not found" });
@@ -48,22 +49,41 @@ async function getUserProfile(req, res) {
 
 async function renderProfilePage(req, res) {
     try {
+        if (!req.session.user) {
+            return res.redirect("/login");
+        }
+
         const username = req.query.username;
-        const user = await User.findOne({ username: username }).lean();
+
+        const currentUser = await User.findOne({
+            username: req.session.user.username
+        }).lean();
+
+        const user = await User.findOne({
+            username: username
+        }).lean();
 
         if (!user) {
             return res.status(404).send("User not found");
         }
 
-        // render the hbs file and pass user object as data
-        res.render('ViewProfilePage', {
+        const bookings = await BookedRooms.find({
+            username: user.username
+        }).lean();
+
+        res.render("ViewProfilePage", {
             title: `${user.fname}'s Profile`,
-            profileUser: user, // passes data to .hbs file
-            lname: req.session.user.lname,
-            fname: req.session.user.fname,
-            status: req.session.user.status
+            profileUser: user,
+            bookings,
+
+            // navbar data for logged-in user
+            navProfilePic: currentUser?.profilePic || "/pictures/temp.jpeg",
+            fname: currentUser?.fname || "",
+            lname: currentUser?.lname || "",
+            status: currentUser?.status || ""
         });
     } catch (error) {
+        console.error("Error rendering profile page:", error);
         res.status(500).send("server error");
     }
 }
