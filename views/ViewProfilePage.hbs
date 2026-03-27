@@ -40,7 +40,7 @@
                 <div id="topRightProfile">
                     <button class="profile-chip profile-trigger" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#profileSidebar" aria-controls="profileSidebar" title="Open menu">
-                                <img class="avatar" src="{{navProfilePic}}" alt="Profile picture">
+                                <img class="avatar" src="{{#if navProfilePic}}{{navProfilePic}}{{else}}/pictures/temp.jpeg{{/if}}" alt="Profile picture">
                                 <span class="d-flex flex-column lh-2">
                                 <span id="fullname" class="fw-bold" style="font-size:13px; color: var(--navy);">
                                     {{lname}}, {{fname}}
