@@ -11,6 +11,7 @@ import AdminRoutes from './routes/Admin.js';
 import ReservationsRoutes from './routes/Reservations.js';
 import SearchRoutes from './routes/Search.js';
 import StudentRoutes from './routes/Student.js';
+import LabTechRoutes from './routes/Labtech.js';
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use('/', AdminRoutes);
 app.use('/', ReservationsRoutes);
 app.use('/', SearchRoutes);
 app.use('/', StudentRoutes);
+app.use('/', LabTechRoutes);
 
 // MongoDB connection & start server
 mongoose.connect(process.env.MONGODB_URI)

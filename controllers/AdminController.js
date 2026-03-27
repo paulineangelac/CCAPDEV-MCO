@@ -1,12 +1,12 @@
 import LabTech from "../models/LabTech.js";
-
+import User from "../models/User.js";
+import bcrypt from 'bcryptjs';
 const AdminController ={
     makelabtech: async (req,res)=>{
         try{
-            const {fname,lname,number,email,password,confirmpass} = req.body;
-            const labtech = await LabTech.findOne({
-                fname: fname,
-                lname: lname
+            const {username,fname,lname,number,email,password,confirmpass} = req.body;
+            const labtech = await User.findOne({
+                username:username
             });
 
             if(labtech){
@@ -25,12 +25,18 @@ const AdminController ={
                     window.history.back();
                 </script>
                 `);
-            const newLabTech = new LabTech({
+
+                const salting = 10;
+                const hashedPassword = await bcrypt.hash(password, salting);
+            
+            const newLabTech = new User({
+                username,
                 fname,
                 lname,
                 email,
                 number,
-                password
+                status: "Labtech",
+                password: hashedPassword
             });
             const result = await newLabTech.save();
             return res.redirect('/admindashboard-page');

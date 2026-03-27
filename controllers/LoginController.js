@@ -1,5 +1,6 @@
 
 import User from '../models/User.js';
+import LabTech from '../models/LabTech.js';
 import bcrypt from 'bcryptjs';
 
 const LoginController = {
@@ -7,19 +8,54 @@ const LoginController = {
         try {
             const { username, password } = req.body;
 
-            const user = await User.findOne({
+            
+            const userStudent = await User.findOne({
                 username: username,
             });
+            const userLab = await LabTech.findOne({
+                username:username,
+            });
 
+<<<<<<< Updated upstream
             const rememberMe = req.body.rememberMe === 'on';
 
             if (!user) {
+=======
+
+            if(!userStudent && !userLab) {
+>>>>>>> Stashed changes
                 return res.redirect('/login');
             }
+            
+            if(userStudent.status === "admin"){
+                req.session.user = {
+                        fname: userStudent.fname,
+                        lname: userStudent.lname,
+                        status: userStudent.status
+                    }
+                return res.redirect('admindashboard-page');
+            }
+            if(userLab && await bcrypt.compare(password, userLab.password)) {
+                    req.session.user = {
+                        fname: userLab.fname,
+                        lname: userLab.lname,
+                        status: userLab.status
+                    }
+                    return res.redirect('labtechdashboard-page');
+                } else {
+                    req.session.user = {
 
-            const passwordMatch = await bcrypt.compare(password, user.password)
+                        fname: userStudent.fname,
+                        lname: userStudent.lname,
+                        email: userStudent.email,
+                        username: userStudent.username,
+                        reservations: userStudent.reservations,
+                        status: userStudent.status
+                    }
+                    return res.redirect('studentdashboard-page');
+                }
 
-            if (!passwordMatch) {
+            if (!passwordMatch && !passwordMatchLab) {
                 return res.send(`
                     <script>
                         alert('Incorrect password! Please try again.');
@@ -27,12 +63,16 @@ const LoginController = {
                     </script>
                 `);
             } else {
+<<<<<<< Updated upstream
 
                 const cookieExpire = 3 * 7 * 24 * 60 * 60 * 1000; // 3 weeks
 
                 //const cookieExpire = 60 * 1000; // for testing, 1 min
 
                 if (user.status === "admin") {
+=======
+                if (userAdmin) {
+>>>>>>> Stashed changes
                     req.session.user = {
                         fname: user.fname,
                         lname: user.lname,
@@ -44,8 +84,12 @@ const LoginController = {
                         req.session.cookie.maxAge = null;
                     }
                     return res.redirect('admindashboard-page');
+<<<<<<< Updated upstream
 
                 } else if (user.status === "labtech") {
+=======
+                } else if (userLab) {
+>>>>>>> Stashed changes
                     req.session.user = {
                         fname: user.fname,
                         lname: user.lname,
