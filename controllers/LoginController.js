@@ -11,6 +11,8 @@ const LoginController = {
                 username: username,
             });
 
+            const rememberMe = req.body.rememberMe === 'on';
+
             if (!user) {
                 return res.redirect('/login');
             }
@@ -25,18 +27,34 @@ const LoginController = {
                     </script>
                 `);
             } else {
+
+                const cookieExpire = 3 * 7 * 24 * 60 * 60 * 1000; // 3 weeks
+
+                //const cookieExpire = 60 * 1000; // for testing, 1 min
+
                 if (user.status === "admin") {
                     req.session.user = {
                         fname: user.fname,
                         lname: user.lname,
                         status: user.status
+                    };
+                    if (rememberMe) {
+                        req.session.cookie.maxAge = cookieExpire;
+                    } else {
+                        req.session.cookie.maxAge = null;
                     }
                     return res.redirect('admindashboard-page');
+
                 } else if (user.status === "labtech") {
                     req.session.user = {
                         fname: user.fname,
                         lname: user.lname,
                         status: user.status
+                    };
+                    if (rememberMe) {
+                        req.session.cookie.maxAge = cookieExpire;
+                    } else {
+                        req.session.cookie.maxAge = null;
                     }
                     return res.redirect('labtechdashboard-page');
                 } else {
@@ -48,10 +66,16 @@ const LoginController = {
                         username: user.username,
                         reservations: user.reservations,
                         status: user.status
+                    };
+                    if (rememberMe) {
+                        req.session.cookie.maxAge = cookieExpire;
+                    } else {
+                        req.session.cookie.maxAge = null;
                     }
                     return res.redirect('studentdashboard-page');
                 }
             }
+
         } catch (error) {
             console.log("MongoDB Error:", error.message);
         }

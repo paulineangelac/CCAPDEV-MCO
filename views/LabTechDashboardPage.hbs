@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lab Technician Dashboard</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../css/LabTechDashboardPage.css"/>
+    <link rel="stylesheet" href="../css/LabTechDashboardPage.css" />
 </head>
 
 <body>
@@ -17,11 +17,11 @@
         <div class="nav-inner">
 
             <a class="brand" href="../src/IndexPage.html">
-            <span class="brand-logo"></span>
-            <span>Lab Reservation</span>
+                <span class="brand-logo"></span>
+                <span>Lab Reservation</span>
             </a>
 
-            
+
 
             <div class="d-flex align-items-center gap-2 flex-shrink-0">
                 <div id="topRightProfile">
@@ -30,7 +30,8 @@
                         data-bs-target="#profileSidebar" aria-controls="profileSidebar" title="Open menu">
                         <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
                         <span class="d-flex flex-column lh-2">
-                            <span id="fullname" class="fw-bold" style="font-size:13px; color: var(--navy);">{{lname}}, {{fname}}</span>
+                            <span id="fullname" class="fw-bold" style="font-size:13px; color: var(--navy);">{{lname}},
+                                {{fname}}</span>
                             <span id="type" class="muted" style="font-size:11px;">{{status}}</span>
                         </span>
                     </button>
@@ -42,7 +43,7 @@
     <!-- MAIN CONTENT -->
     <main class="container-xl py-3">
         <div class="row g-4 mt-4">
-        <!-- LAB LIST -->
+            <!-- LAB LIST -->
             <section class="col-lg-8">
                 <h3 class="fw-bold text-navy">Choose an Option:</h3>
                 <a href="/makereservation-page">
@@ -50,72 +51,74 @@
                 </a>
 
                 <a href="/editreservation-page">
-                    <button id="makereservationbtn" style="background-color:gray;"><strong>Edit a reservation for a Student</strong></button>
+                    <button id="makereservationbtn" style="background-color:gray;"><strong>Edit a reservation for a
+                            Student</strong></button>
                 </a>
 
                 <a href="/makereservation-page">
-                    <button id="makereservationbtn" style="background-color:red;"><strong>Cancel a reservation for a Student</strong></button>
+                    <button id="makereservationbtn" style="background-color:red;"><strong>Cancel a reservation for a
+                            Student</strong></button>
                 </a>
-            
+
             </section>
 
 
-        <!-- ITS UPDATES RIGHT SIDE -->
-        <aside class="col-lg-4">
+            <!-- ITS UPDATES RIGHT SIDE -->
+            <aside class="col-lg-4">
 
-        <div class="d-flex justify-content-between align-items-center mb-2">
-            <h3 class="fw-bold text-navy m-0">ITS Updates</h3>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h3 class="fw-bold text-navy m-0">ITS Updates</h3>
 
-            <div class="d-flex align-items-center gap-2">
-                <span class="badge bg-success">New</span>
-                <a href="#" class="muted small">See all</a>
-            </div>
-        </div>
-
-
-        <div class="news-updates">
-
-            <!-- ITEM -->
-            <div class="news-item item-blue">
-                <div class="news-meta">
-                    <span class="news-category">SYSTEM</span>
-                    <span class="news-date">Feb 10</span>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge bg-success">New</span>
+                        <a href="#" class="muted small">See all</a>
+                    </div>
                 </div>
 
-                <div class="news-content">
-                    Gokongwei Wi-Fi Upgrade.
+
+                <div class="news-updates">
+
+                    <!-- ITEM -->
+                    <div class="news-item item-blue">
+                        <div class="news-meta">
+                            <span class="news-category">SYSTEM</span>
+                            <span class="news-date">Feb 10</span>
+                        </div>
+
+                        <div class="news-content">
+                            Gokongwei Wi-Fi Upgrade.
+                        </div>
+                    </div>
+
+
+                    <!-- ITEM -->
+                    <div class="news-item item-red">
+                        <div class="news-meta">
+                            <span class="news-category">URGENT</span>
+                            <span class="news-date">Jan 29</span>
+                        </div>
+
+                        <div class="news-content">
+                            Phishing Alert: Check emails.
+                        </div>
+                    </div>
+
+
+                    <!-- ITEM -->
+                    <div class="news-item item-green">
+                        <div class="news-meta">
+                            <span class="news-category">NOTICE</span>
+                            <span class="news-date">Feb 10</span>
+                        </div>
+
+                        <div class="news-content">
+                            Lab 402 Aircon Maintenance scheduled for this weekend.
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-
-            <!-- ITEM -->
-            <div class="news-item item-red">
-                <div class="news-meta">
-                    <span class="news-category">URGENT</span>
-                    <span class="news-date">Jan 29</span>
-                </div>
-
-                <div class="news-content">
-                    Phishing Alert: Check emails.
-                </div>
-            </div>
-
-
-            <!-- ITEM -->
-            <div class="news-item item-green">
-                <div class="news-meta">
-                    <span class="news-category">NOTICE</span>
-                    <span class="news-date">Feb 10</span>
-                </div>
-
-                <div class="news-content">
-                    Lab 402 Aircon Maintenance scheduled for this weekend.
-                </div>
-            </div>
-
-        </div>
-
-        </aside>
+            </aside>
 
 
         </div>
@@ -141,10 +144,9 @@
                     FAQs
                 </a>
             </nav>
-            <a href="/logout-page">
-                <button class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4">
-                    Logout
-                </button></a>
+            <a href="/logout" class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4">
+                Logout
+            </a>
         </div>
     </div>
 
@@ -152,4 +154,5 @@
     <script src="../js/LabTechDashboardPage.js"></script>
 
 </body>
+
 </html>

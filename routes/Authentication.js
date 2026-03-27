@@ -3,6 +3,7 @@ console.log('Authentication routes loaded');
 import express from 'express';
 import SignUpController from '../controllers/SignUpController.js';
 import LoginController from '../controllers/LoginController.js';
+import LogoutController from '../controllers/LogoutController.js';
 
 const router = express.Router();
 
@@ -11,5 +12,7 @@ router.get('/signup-page', (req, res) => res.render('SignUpPage'));
 
 router.post('/signup-page', SignUpController.signUp);
 router.post('/login', LoginController.login);
+
+router.get('/logout', LogoutController.logout);
 
 export default router;

@@ -84,21 +84,36 @@
             <h2>My Reservations</h2>
             <div class="card" id="scroll-card">
                 <div id="booking-list">
-                    {{#each bookings}}
-                        <div class="booking-card">
-                            <div class="booking-header">
-                                <span class="booking-lab">{{this.roomNumber}} - {{this.seat}}</span>
-                                <span class="status-tag">Confirmed</span>
-                            </div>
-                            <div class="booking-summary">
-                                <p>{{this.date}}, {{this.time}}</p>
-                            </div>
+                {{#each bookings}}
+                    <div class="booking-card">
+                        <div class="booking-header">
+                            <span class="booking-lab">{{this.roomNumber}} - {{this.seat}}</span>
+                            <span class="status-tag">Confirmed</span>
                         </div>
+                        <div class="booking-summary">
+                            <p>{{this.date}}, {{this.time}}</p>
+                        </div>
+                        <div class="booking-footer">
+                            <a href="/edit/{{this._id}}" class="btn-details text-decoration-none">
+                                Edit Reservation
+                            </a>
+                            <form action="/cancel/{{this._id}}" method="POST" style="display:inline;">
+                                <button
+                                    type="submit"
+                                    class="btn-details"
+                                    style="color:Red;"
+                                    onclick="return confirm('Are you sure you want to cancel this reservation?')">
+                                    Cancel Reservation
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                {{/each}}
                     {{else}}
-                        <div>
-                            <p>No upcoming reservations found.</p>
-                        </div>
-                            
+                    <div>
+                        <p>No upcoming reservations found.</p>
+                    </div>
+
                     {{/each}}
                 </div>
             </div>
@@ -131,10 +146,9 @@
                     FAQs
                 </a>
             </nav>
-            <a href="/logout-page">
-                <button class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4">
-                    Logout
-                </button></a>
+            <a href="/logout" class="btn btn-dark border-0 opacity-75 w-100 py-2 rounded-3 mt-4">
+                Logout
+            </a>
         </div>
     </div>
 
