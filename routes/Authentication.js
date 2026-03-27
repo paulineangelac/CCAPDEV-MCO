@@ -1,5 +1,3 @@
-console.log('Authentication routes loaded');
-
 import express from 'express';
 import SignUpController from '../controllers/SignUpController.js';
 import LoginController from '../controllers/LoginController.js';
