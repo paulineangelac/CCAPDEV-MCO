@@ -4,6 +4,7 @@ import path from 'path';
 import Room from '../models/Rooms.js';
 import User from '../models/User.js';
 import { isAuthenticated } from '../middleware/auth.js';
+import BookedRooms from '../models/BookedRooms.js';
 
 const router = express.Router();
 
@@ -124,14 +125,13 @@ router.get('/view-profile/:username', async (req, res) => {
             return res.status(404).send('User not found');
         }
 
-        const bookings = await BookedRooms.find({
-            username: profileUser.username
-        }).lean();
+        // const bookings = await BookedRooms.find({
+        //     username: profileUser.username
+        // }).lean();
 
         res.render('ViewProfilePage', {
             currentUser,
             profileUser,
-            bookings,
             navProfilePic: currentUser?.profilePic || '/pictures/temp.jpeg',
             navFname: currentUser?.fname || '',
             navLname: currentUser?.lname || '',

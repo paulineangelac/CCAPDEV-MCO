@@ -84,38 +84,22 @@
             <h2>My Reservations</h2>
             <div class="card" id="scroll-card">
                 <div id="booking-list">
-                {{#each bookings}}
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <span class="booking-lab">{{this.roomNumber}} - {{this.seat}}</span>
-                            <span class="status-tag">Confirmed</span>
-                        </div>
-                        <div class="booking-summary">
-                            <p>{{this.date}}, {{this.time}}</p>
-                        </div>
-                        <div class="booking-footer">
-                            <a href="/edit/{{this._id}}" class="btn-details text-decoration-none">
-                                Edit Reservation
-                            </a>
-                            <form action="/cancel/{{this._id}}" method="POST" style="display:inline;">
-                                <button
-                                    type="submit"
-                                    class="btn-details"
-                                    style="color:Red;"
-                                    onclick="return confirm('Are you sure you want to cancel this reservation?')">
-                                    Cancel Reservation
-                                </button>
-                            </form>
-                        </div>
+                
+                {{#each profileUser.reservations}}
+                <div class="booking-card">
+                    <div class="booking-header">
+                        <span class="booking-lab">{{this.roomNumber}} - {{this.seat}}</span>
+                        <span class="status-tag">Confirmed</span>
                     </div>
-                {{/each}}
-                    {{else}}
-                    <div>
-                        <p>No upcoming reservations found.</p>
+                    <div class="booking-summary">
+                        <p>{{this.date}}, {{this.time}}</p>
                     </div>
-
-                    {{/each}}
                 </div>
+            {{else}} 
+                <div>
+                    <p>No upcoming reservations found.</p>
+                </div>
+            {{/each}}
             </div>
 
         </section>
