@@ -432,3 +432,15 @@ display:none;
 #makereservationbtn:hover{
   background-color:#2e6d41;
 }
+
+#deletereservationbtn{
+  height: 50px;
+  width:275px;
+  border-radius:10px;
+  background-color:#006B20;
+  color:#F6F7FB;
+  border-style:none;
+}
+#deletereservationbtn:hover{
+  background-color:#2e6d41;
+}

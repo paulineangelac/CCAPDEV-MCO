@@ -41,6 +41,7 @@ const LoginController = {
                         req.session.user = {
                             fname: user.fname,
                             lname: user.lname,
+                            username: user.username,
                             status: user.status
                         }
                         return res.redirect('labtechdashboard-page');

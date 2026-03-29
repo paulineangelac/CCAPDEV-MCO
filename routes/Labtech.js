@@ -54,6 +54,19 @@ router.get('/editreservation-page', async (req, res) => {
     }
 });
 
+    router.get('/deletereservation-page', async (req, res) => {
+        try {
+            res.render('LabTechDeleteReservation', {
+                fname: req.session.user.fname,
+                lname: req.session.user.lname,
+                status: req.session.user.status
+            });
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Server error');
+        }
+    });
+
 router.get('/get-all-users', async (req, res) => {
     try {
         const users = await User.find({ status: 'Student' }).lean();
