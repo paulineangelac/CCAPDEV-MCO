@@ -4,6 +4,7 @@ import User from '../models/User.js';
 const LabTechReserveController = {
     reserve: async (req, res) => {
         try {
+            console.log(req.body);
             const { roomNumber, seat, date, time, username } = req.body;
     
             const booking = await BookedRooms.findOne({ roomNumber, seat, time, date });

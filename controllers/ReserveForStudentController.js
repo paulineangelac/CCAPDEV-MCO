@@ -5,7 +5,7 @@ const ReserveForStudentController = {
     reserveforstudent: async(req,res)=>{
         try{
             const {username,roomNumber, seat, date,time, anon} = req.body;
-            const user = await User.findOne({username:username});
+            const user = await User.findOne({ username: Number(username) });
             const booking = await BookedRooms.findOne({
                 roomNumber: roomNumber,
                 seat: seat,
@@ -21,6 +21,22 @@ const ReserveForStudentController = {
                     </script>
                 `);
             }
+            
+            const userConflict = await BookedRooms.findOne({
+                username: Number(username),
+                date: date,
+                time: time
+            });
+
+            if (userConflict) {
+                return res.send(`
+                    <script>
+                        alert('Student already has a reservation at that date and time');
+                        window.location.href = '/labtechdashboard-page';
+                    </script>
+                `);
+            }
+
             else if(!user){
                 return res.send(`
                     <script>
@@ -31,12 +47,14 @@ const ReserveForStudentController = {
             }else{
                 
                 const newRoomBooking = new BookedRooms({
-                roomNumber,
-                seat,
-                time,
-                date,
-                anon
+                    roomNumber,
+                    seat,
+                    time,
+                    date,
+                    anon,
+                    username: Number(username)  // add this
                 });
+
                 const result = await newRoomBooking.save();
 
                 await User.findOneAndUpdate(

@@ -42,8 +42,8 @@
                         data-bs-target="#profileSidebar" aria-controls="profileSidebar" title="Open menu">
                         <img class="avatar" src="/pictures/temp.jpeg" alt="Profile picture" />
                         <span class="d-flex flex-column lh-2">
-                            <span class="fw-bold" style="font-size:13px; color: var(--navy);">Juan Dela Cruz</span>
-                            <span class="text-muted" style="font-size:11px;">Lab Technician</span>
+                            <span class="fw-bold" style="font-size:13px; color: var(--navy);">{{lname}}, {{fname}}</span>
+                            <span class="text-muted" style="font-size:11px;">{{status}}</span>
                         </span>
                     </button>
                 </div>
@@ -60,6 +60,9 @@
                     <label for="username-select" class="form-label fw-bold text-navy">Choose Student</label>
                     <select id="username-select" class="form-select">
                         <option value="">-- Select a Student --</option>
+                        {{#each students}}
+                        <option value="{{this.username}}">{{this.lname}}, {{this.fname}} ({{this.username}})</option>
+                        {{/each}}
                     </select>
                 </div>
                 <div class="col-3">
@@ -246,7 +249,7 @@
 
         <div class="offcanvas-body d-flex flex-column p-3">
             <nav class="nav nav-pills flex-column gap-2 mb-auto">
-                <a class="nav-link text-white active-green shadow-sm" href="/LabTechDashboardPage">
+                <a class="nav-link text-white active-green shadow-sm" href="/labtechdashboard-page">
                     Dashboard
                 </a>
                 <a class="nav-link text-white text-decoration-none hover-opacity" href="/LabTechProfilePage">
