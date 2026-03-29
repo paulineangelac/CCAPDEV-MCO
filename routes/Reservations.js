@@ -88,8 +88,11 @@ router.get('/edit/:id', async (req, res) => {
         res.render('EditReservation', {
             booking,
             rooms: roomsForView,
-            bookingJson: JSON.stringify(booking),
+
+            // convert these variables into json since it will break
+            bookingJson: JSON.stringify(booking), 
             roomsJson: JSON.stringify(rooms),
+            
             fname: currentUser.fname,
             lname: currentUser.lname,
             status: currentUser.status,
