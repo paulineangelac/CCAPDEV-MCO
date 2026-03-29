@@ -7,14 +7,6 @@ const router = express.Router();
 
 router.use(isAuthenticated); // route protection
 
-router.get('/labtechdashboard-page', (req, res) => {
-    res.render('LabTechDashboardPage', {
-        fname: req.session.user.fname,
-        lname: req.session.user.lname,
-        status: req.session.user.status
-    });
-});
-
 router.get('/makereservation-page', async (req, res) => {
     const allRooms = await Room.find({}).lean();
     res.render('LabTechMakeReservation', {
