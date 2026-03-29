@@ -143,4 +143,40 @@ router.get('/view-profile/:username', async (req, res) => {
     }
 });
 
+router.get('/delete-account', (req, res) => {
+    res.send(`
+        <script>
+            if (confirm('Are you sure you want to delete your account? This cannot be undone.')) {
+                
+                window.location.href = '/confirm-delete';
+            } else {
+                window.location.href = '/studentdashboard-page';
+            }
+        </script>
+    `);
+});
+
+router.get('/confirm-delete', async (req, res) => {
+    try {
+        if (!req.session.user) {
+            return res.redirect('/login');
+        }
+
+        
+        await User.findOneAndDelete({ username: req.session.user.username });
+
+        
+        req.session.destroy((err) => {
+            if (err) {
+                return res.send("Error logging out after deletion");
+            }
+            
+            res.send("<script>alert('Account deleted successfully.'); window.location.href='/';</script>");
+        });
+
+    } catch (error) {
+        res.status(500).send("An error occurred during deletion.");
+    }
+});
+
 export default router;
