@@ -12,7 +12,7 @@ function isWithin10Minutes(timeStr) {
     const reservationMinutes = hours * 60 + minutes;
     const nowMinutes = now.getHours() * 60 + now.getMinutes();
 
-    return nowMinutes >= reservationMinutes && nowMinutes <= reservationMinutes + 30;
+    return nowMinutes >= reservationMinutes && nowMinutes <= reservationMinutes + 10;
 }
 
 // load students on page load
