@@ -2,19 +2,17 @@
 <html lang="en">
 
 <head>
-    <!-- RESERVATION / SEAT SELECTION PAGE
-  - Lets students choose a lab/date/time and select an available seat
-  - Shows a seat map (available vs reserved vs selected)
-  - Displays reservation details summary (lab/date/time/seat)
-  - Allows anonymous reservation option (checkbox)
-  - Confirms reservation (button enabled only when seat is selected)
+<!-- LAB TECHNICIAN MAKE RESERVATION PAGE
+  - Allows labtech to make a reservation on behalf of a student
+  - Labtech types/selects a student username, picks a lab, seat, date, and time
+  - Submits to /reserveforstudent which saves booking under the student's username
 
   Main features:
   - Shared navbar + Bootstrap Offcanvas profile sidebar
-  - Filter form (lab/date/time) using Bootstrap grid + form controls
-  - Seat map grid (buttons) with reserved/selected states
-  - Sticky reservation details panel (right column)
-  - JS: handles seat selection + updates detail panel + confirm button  -->
+  - Seat map grid (buttons) populated dynamically via JS on lab change
+  - Reservation details panel (right column) with student username input + datalist
+  - Anonymous reservation checkbox option
+  - JS: ReservationPage.js handles seat grid + time slots, inline script loads student usernames -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lab Reservation - Seat Selection</title>
@@ -67,12 +65,11 @@
     </header>
 
     <main class="container-xl py-3">
-        <!--FILTER FORM 
-            Currently used as a UI filter (Phase 1).
-            Bootstrap used:
-            - row + col-* for responsive form layout
-            - g-3 for consistent spacing between fields
-            - form-select / form-control for consistent styling -->
+    <!-- RESERVATION DETAILS PANEL:
+        Right column form submitted to /reserveforstudent via POST.
+        Bootstrap used:
+        - row + col-* for responsive layout
+        - form-select / form-control for consistent styling -->
 
 
         <!-- PAGE LAYOUT: 
@@ -106,7 +103,7 @@
                         </div>
                     </div>
 
-                    <!--seat selection (hardcoded for now)-->
+                    <!--seat selection populated by JS on lab change-->
                     <!-- Seat grid container:
                     - JS attaches click listeners to .lab-seat buttons -->
                     <div id="seatGrid" class="seat-grid" aria-label="Seat map">
@@ -207,8 +204,8 @@
     </main>
 
     <!--sidebar-->
-    <!--PROFILE SIDEBAR: 
-        Bootstrap Offcanvas component used as the student menu sidebar, 
+    <!--PROFILE SIDEBAR:
+        Bootstrap Offcanvas component used as the labtech menu sidebar,
         contains navigation links and logout button. -->
     <div class="offcanvas offcanvas-end sidebar border-0 shadow" tabindex="-1" id="profileSidebar">
 

@@ -2,6 +2,18 @@
 <html lang="en">
 
 <head>
+    <!-- LAB TECHNICIAN EDIT RESERVATION PAGE
+    - Allows labtech to edit an existing student reservation
+    - Cascading dropdowns: student → lab → date → time, populated from DB
+    - Find Seats button loads the seat map for the selected room/date/time
+    - Previous seat highlighted in blue, reserved seats greyed out
+
+    Main features:
+    - Shared navbar + Bootstrap Offcanvas profile sidebar
+    - Filter form (student/lab/date/time) populated dynamically via fetch
+    - Seat map grid (buttons) with previous/reserved/selected states
+    - Sticky reservation details panel (right column)
+    - JS: LabTechReservationPage.js handles cascading dropdowns, seat grid, and confirm -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lab Reservation - Seat Selection</title>
@@ -13,7 +25,7 @@
 </head>
 
 <body>
-    <!--navigation bar-->
+    <!--Navigation bar reused from LabTech dashboard-->
     <header class="app-navbar">
         <div class="nav-inner">
 
@@ -38,9 +50,16 @@
         </div>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="container-xl py-3">
 
-
+        <!-- FILTER FORM:
+            Cascading dropdowns — each depends on the previous selection:
+            1. Choose Student: populated from /get-all-users on page load
+            2. Laboratory: populated from student's bookings via /get-student-bookings
+            3. Date: filtered from bookings by selected lab
+            4. Time: filtered from bookings by selected lab + date
+            Find Seats button fetches room data and renders the seat grid -->
         <section class="hero-card ui-card mt-1">
             <div class="row g-3 align-items-end">
                 <div class="col-3">
@@ -80,7 +99,13 @@
         <h1 class="fs-1 fw-bold text-navy mb-3 mt-5">Editing Reservation</h1>
 
         <div class="row g-4 mt-0">
-            <!--seat map -->
+        <!--SEAT MAP:
+            Seat map is displayed as a grid of buttons populated by JS.
+            Each button represents a seat with one of four states:
+            - is-previous (blue): student's current seat for this booking
+            - is-reserved (grey): taken by another student at same time
+            - is-selected (green): currently selected by labtech
+            - default: available -->
             <section class="col-12 col-lg-8">
                 <div class="ui-card seatmap-card">
                     <div class="seatmap-top">
@@ -107,7 +132,12 @@
                 </div>
             </section>
 
-            <!-- reservation details -->
+            <!--RESERVATION DETAILS:
+            Summary panel showing selected lab/date/time.
+            Seat dropdown syncs with seat map grid selection.
+            Confirm Changes button enabled only when a seat is selected.
+            Bootstrap used:
+            - sticky-top keeps this panel visible while scrolling -->
             <aside class="col-12 col-lg-4">
                 <div class="ui-card sticky-top reservation-sidebar">
                     <h3 class="fs-3 fw-bold text-navy mb-3">Reservation Details</h3>
@@ -161,7 +191,9 @@
         </div>
     </main>
 
-    <!--sidebar-->
+    <!--PROFILE SIDEBAR:
+    Bootstrap Offcanvas component used as the labtech menu sidebar,
+    contains navigation links and logout button. -->
     <div class="offcanvas offcanvas-end sidebar border-0 shadow" tabindex="-1" id="profileSidebar">
 
         <div class="sidebar-top d-flex justify-content-between align-items-start p-4">

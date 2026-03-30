@@ -2,6 +2,17 @@
 <html lang="en">
 
 <head>
+<!-- LAB TECHNICIAN DELETE RESERVATION PAGE
+  - Allows labtech to cancel a student's reservation
+  - Only shows reservations eligible for deletion (within 10 minutes of reservation time, today only)
+  - Selecting a booking auto-fills date, lab, and seat fields
+
+  Main features:
+  - Shared navbar + Bootstrap Offcanvas profile sidebar
+  - Single dropdown populated from today's eligible bookings via /get-todays-bookings
+  - Auto-fill fields (date, lab, seat) on booking selection
+  - Delete button disabled until a booking is selected
+  - JS: LabTechDeleteReservation.js handles eligibility filtering and deletion -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Delete Reservation</title>
@@ -13,7 +24,7 @@
 </head>
 
 <body>
-    <!--navigation bar-->
+    <!--Navigation bar reused from LabTech dashboard-->
     <header class="app-navbar">
         <div class="nav-inner">
 
@@ -38,8 +49,14 @@
         </div>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="container-xl py-3">
 
+        <!-- FILTER FORM:
+            Bootstrap grid layout with 4 equal columns (col-3 each)
+            - Choose Student: populated dynamically from eligible bookings
+            - Date / Lab / Seat: auto-filled on student selection, read-only
+            - Delete/Cancel buttons in a second row below -->
         <section class="hero-card ui-card mt-1">
             <div class="row g-3 align-items-end">
                 <div class="col-3">
@@ -77,7 +94,9 @@
 
     </main>
 
-    <!--sidebar-->
+    <!--PROFILE SIDEBAR:
+        Bootstrap Offcanvas component used as the labtech menu sidebar,
+        contains navigation links and logout button. -->
     <div class="offcanvas offcanvas-end sidebar border-0 shadow" tabindex="-1" id="profileSidebar">
 
         <div class="sidebar-top d-flex justify-content-between align-items-start p-4">
