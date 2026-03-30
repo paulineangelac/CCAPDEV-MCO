@@ -7,14 +7,14 @@ const SignUpController = {
             const { fname, lname, email, username, password, confirmPassword } = req.body;
 
             //checks if username is a valid id number (8 digits)
-            
-            if(username < 10000000 || username > 99999999){
+            if (username < 10000000 || username > 99999999) {
                 return res.send(
-                `<script>
+                    `<script>
                     alert('Enter a Valid DLSU ID Number. Please try again.');
                     window.history.back(); 
                 </script>`)
             } // ex: 12411299
+
             //check if password matches
             if (password !== confirmPassword) {
                 return res.send(`
@@ -22,6 +22,16 @@ const SignUpController = {
                     alert('Passwords do not match! Please try again.');
                     window.history.back(); 
                 </script>
+            `);
+            }
+
+            // check if email is dlsu email or no
+            if (!email.endsWith("@dlsu.edu.ph")) {
+                return res.send(`
+                    <script>
+                        alert('You are onnly allowed to enter a valid DLSU email. Please try again.');
+                        window.history.back();
+                    </script>
             `);
             }
 
