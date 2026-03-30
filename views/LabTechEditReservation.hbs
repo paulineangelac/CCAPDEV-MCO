@@ -17,24 +17,11 @@
     <header class="app-navbar">
         <div class="nav-inner">
 
-            <a class="brand" href="../src/IndexPage.html">
-                <span class="brand-logo" aria-hidden="true"></span>
-                <span>Lab Reservation</span>
-            </a>
+        <a class="brand" href="/labtechdashboard-page">
+            <span class="brand-logo" aria-hidden="true"></span>
+            <span>Lab Reservation</span>
+        </a>
 
-            <!--navbar search-->
-            <div class="flex-grow-1" role="search" style="max-width: 420px;">
-                <div class="nav-search">
-                    <input id="userSearch" class="navbar-search-input" type="search" placeholder="Search Users..."
-                        autocomplete="off" aria-expanded="false" aria-controls="userSearchResults" />
-                    <button class="nav-search-btn" type="button" aria-label="Search">
-                        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none" />
-                            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
             <!--right side of navbar: profile/menu-->
             <div class="d-flex align-items-center gap-2 flex-shrink-0">
                 <div id="topRightProfile">
@@ -60,23 +47,19 @@
                     <label for="username-select" class="form-label fw-bold text-navy">Choose Student</label>
                     <select id="username-select" class="form-select">
                         <option value="">-- Select a Student --</option>
-                        {{#each students}}
-                        <option value="{{this.username}}">{{this.lname}}, {{this.fname}} ({{this.username}})</option>
-                        {{/each}}
                     </select>
                 </div>
                 <div class="col-3">
                     <label for="lab-select" class="form-label fw-bold text-navy">Laboratory</label>
                     <select id="lab-select" class="form-select">
                         <option value="">Select Laboratory</option>
-                        {{#each rooms}}
-                        <option value="{{this.roomNumber}}">{{this.roomNumber}}</option>
-                        {{/each}}
                     </select>
                 </div>
                 <div class="col-3">
                     <label for="date-select" class="form-label fw-bold text-navy">Date</label>
-                    <input type="date" id="date-select" class="form-control">
+                    <select id="date-select" class="form-select">
+                        <option value="">Select Date</option>
+                    </select>
                 </div>
                 <div class="col-2">
                     <label for="time-select" class="form-label fw-bold text-navy">Time</label>
@@ -102,11 +85,9 @@
                 <div class="ui-card seatmap-card">
                     <div class="seatmap-top">
                         <h3 class="fs-3 fw-bold text-navy mb-3">Seat Map</h3>
-
-                        <!--legend for the map -->
                         <div class="seat-legend">
                             <span class="legend-item">
-                                <span class="legend-swatch legend-current"></span> Previous Seat
+                                <span class="legend-swatch" style="background-color:#E3F2FD;"></span> Previous Seat
                             </span>
                             <span class="legend-item">
                                 <span class="legend-swatch"></span> Available
@@ -119,65 +100,9 @@
                             </span>
                         </div>
                     </div>
-
-                    <!--seat selection (hardcoded for now)-->
+                    <!--seat selection populated by JS-->
                     <div id="seatGrid" class="seat-grid" aria-label="Seat map">
-                        <!--1st row-->
-                        <button type="button" class="lab-seat is-reserved" data-seat="A1" disabled>A1</button>
-                        <button type="button" class="lab-seat" data-seat="A2" disabled
-                            style="background-color:#E3F2FD">A2</button>
-                        <button type="button" class="lab-seat is-current" data-seat="A3">A3</button>
-                        <!--hardcoded for now, previously selected seat-->
-                        <button type="button" class="lab-seat" data-seat="A4">A4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat is-reserved" data-seat="A5" disabled>A5</button>
-                        <button type="button" class="lab-seat" data-seat="A6">A6</button>
-                        <button type="button" class="lab-seat" data-seat="A7">A7</button>
-                        <button type="button" class="lab-seat" data-seat="A8">A8</button>
-
-                        <!--2nd row-->
-                        <button type="button" class="lab-seat is-reserved" data-seat="B1" disabled>B1</button>
-                        <button type="button" class="lab-seat" data-seat="B2">B2</button>
-                        <button type="button" class="lab-seat" data-seat="B3">B3</button>
-                        <button type="button" class="lab-seat" data-seat="B4">B4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="B5">B5</button>
-                        <button type="button" class="lab-seat" data-seat="B6">B6</button>
-                        <button type="button" class="lab-seat" data-seat="B7">B7</button>
-                        <button type="button" class="lab-seat" data-seat="B8">B8</button>
-
-                        <!--3rd row-->
-                        <button type="button" class="lab-seat" data-seat="C1">C1</button>
-                        <button type="button" class="lab-seat" data-seat="C2">C2</button>
-                        <button type="button" class="lab-seat" data-seat="C3">C3</button>
-                        <button type="button" class="lab-seat" data-seat="C4">C4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="C5">C5</button>
-                        <button type="button" class="lab-seat" data-seat="C6">C6</button>
-                        <button type="button" class="lab-seat" data-seat="C7">C7</button>
-                        <button type="button" class="lab-seat is-reserved" data-seat="C8" disabled>C8</button>
-
-                        <!--4th row-->
-                        <button type="button" class="lab-seat" data-seat="D1">D1</button>
-                        <button type="button" class="lab-seat" data-seat="D2">D2</button>
-                        <button type="button" class="lab-seat" data-seat="D3">D3</button>
-                        <button type="button" class="lab-seat is-reserved" data-seat="D4" disabled>D4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="D5">D5</button>
-                        <button type="button" class="lab-seat" data-seat="D6">D6</button>
-                        <button type="button" class="lab-seat" data-seat="D7">D7</button>
-                        <button type="button" class="lab-seat" data-seat="D8">D8</button>
-
-                        <!--5th row-->
-                        <button type="button" class="lab-seat" data-seat="E1">E1</button>
-                        <button type="button" class="lab-seat is-reserved" data-seat="E2" disabled>E2</button>
-                        <button type="button" class="lab-seat" data-seat="E3">E3</button>
-                        <button type="button" class="lab-seat" data-seat="E4">E4</button>
-                        <div class="seat-aisle" aria-hidden="true"></div>
-                        <button type="button" class="lab-seat" data-seat="E5">E5</button>
-                        <button type="button" class="lab-seat" data-seat="E6">E6</button>
-                        <button type="button" class="lab-seat" data-seat="E7">E7</button>
-                        <button type="button" class="lab-seat" data-seat="E8">E8</button>
+                        <!--seats loaded dynamically-->
                     </div>
                 </div>
             </section>
@@ -241,21 +166,21 @@
 
         <div class="sidebar-top d-flex justify-content-between align-items-start p-4">
             <div class="text-white">
-                <div id="sidebar-fullname" class="fw-bold fs-5 lh-sm"></div>
-                <div id="sidebar-usertype" class="small opacity-75"></div>
+                <div id="sidebar-fullname" class="fw-bold fs-5 lh-sm">{{lname}}, {{fname}}</div>
+                <div id="sidebar-usertype" class="small opacity-75">{{status}}</div>
             </div>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
 
         <div class="offcanvas-body d-flex flex-column p-3">
             <nav class="nav nav-pills flex-column gap-2 mb-auto">
-                <a class="nav-link text-white active-green shadow-sm" href="/labtechdashboard-page">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/labtechdashboard-page">
                     Dashboard
                 </a>
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="/LabTechProfilePage">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/labtechprofile-page">
                     View Profile
                 </a>
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="../src/FAQsPage.html">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/faqs-page">
                     FAQs
                 </a>
             </nav>

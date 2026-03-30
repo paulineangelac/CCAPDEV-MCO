@@ -182,4 +182,11 @@ async function loadDashboardInformation() {
     }
 }
 
+const cancelBtn = document.getElementById('cancelBtn');
+if (cancelBtn) {
+    cancelBtn.addEventListener('click', function() {
+        window.location.href = '/labtechdashboard-page';
+    });
+}
+
 window.onload = loadDashboardInformation;

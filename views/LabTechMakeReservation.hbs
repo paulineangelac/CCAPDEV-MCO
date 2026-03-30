@@ -31,7 +31,7 @@
     <header class="app-navbar">
         <div class="nav-inner">
 
-            <a class="brand" href="../src/IndexPage.html">
+            <a class="brand" href="/labtechdashboard-page">
                 <span class="brand-logo" aria-hidden="true"></span>
                 <span>Lab Reservation</span>
             </a>
@@ -191,6 +191,10 @@
                             Confirm Reservation
                         </button>
 
+                        <button type="button" class="ui-btn btn-cancel w-100 mt-3" id="cancelBtn">
+                            Cancel
+                        </button>
+
                     </form>
 
                     <p class="muted mt-3 small mb-0 text-center">
@@ -218,8 +222,11 @@
 
         <div class="offcanvas-body d-flex flex-column p-3">
             <nav class="nav nav-pills flex-column gap-2 mb-auto">
-                <a class="nav-link text-white active-green shadow-sm" href="/studentdashboard-page">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/labtechdashboard-page">
                     Dashboard
+                </a>
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/labtechprofile-page">
+                    View Profile
                 </a>
                 <a class="nav-link text-white text-decoration-none hover-opacity" href="/faqs-page">
                     FAQs

@@ -84,7 +84,11 @@ router.post('/upload-profile-pic', upload.single('profilePic'), async (req, res)
 
         req.session.user.profilePic = imagePath;
 
-        res.redirect('/studentprofile-page');
+        if (req.session.user.status === 'Labtech') {
+            res.redirect('/labtechprofile-page');
+        } else {
+            res.redirect('/studentprofile-page');
+        }
     } catch (err) {
         console.error(err);
         res.status(500).send("Server error");

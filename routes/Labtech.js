@@ -54,18 +54,33 @@ router.get('/editreservation-page', async (req, res) => {
     }
 });
 
-    router.get('/deletereservation-page', async (req, res) => {
-        try {
-            res.render('LabTechDeleteReservation', {
-                fname: req.session.user.fname,
-                lname: req.session.user.lname,
-                status: req.session.user.status
-            });
-        } catch (err) {
-            console.error(err);
-            res.status(500).send('Server error');
-        }
-    });
+router.get('/deletereservation-page', async (req, res) => {
+    try {
+        res.render('LabTechDeleteReservation', {
+            fname: req.session.user.fname,
+            lname: req.session.user.lname,
+            status: req.session.user.status
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});
+
+router.get('/labtechprofile-page', async (req, res) => {
+    try {
+        const currentUser = await User.findOne({ username: req.session.user.username }).lean();
+        res.render('LabTechProfilePage', {
+            currentUser,
+            fname: req.session.user.fname,
+            lname: req.session.user.lname,
+            status: req.session.user.status
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});    
 
 router.get('/get-all-users', async (req, res) => {
     try {

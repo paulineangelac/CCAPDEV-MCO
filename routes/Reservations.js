@@ -171,4 +171,17 @@ router.post('/cancel/:id', async (req, res) => {
     }
 });
 
+router.get('/get-reserved-seats', async (req, res) => {
+    const { roomNumber, date, time } = req.query;
+    const bookings = await BookedRooms.find({ roomNumber, date, time }).lean();
+    const seats = bookings.map(b => b.seat);
+    res.json(seats);
+});
+
+router.get('/get-todays-bookings', async (req, res) => {
+    const today = new Date().toISOString().split('T')[0];
+    const bookings = await BookedRooms.find({ date: today }).lean();
+    res.json(bookings);
+});
+
 export default router;

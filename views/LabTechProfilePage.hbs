@@ -19,7 +19,7 @@
     <header class="app-navbar">
         <div class="nav-inner">
 
-            <a class="brand" href="../src/IndexPage.html">
+            <a class="brand" href="/labtechdashboard-page">
                 <span class="brand-logo" aria-hidden="true"></span>
                 <span>Lab Reservation</span>
             </a>
@@ -41,8 +41,8 @@
                         data-bs-target="#profileSidebar" aria-controls="profileSidebar" title="Open menu">
                         <img class="avatar" src="../pictures/temp.jpeg" alt="Profile picture" />
                         <span class="d-flex flex-column lh-2">
-                            <span class="fw-bold" style="font-size:13px; color: var(--navy);">Juan Dela Cruz</span>
-                            <span class="muted" style="font-size:11px;">Lab Technician</span>
+                            <span class="fw-bold" style="font-size:13px; color: var(--navy);">{{lname}}, {{fname}}</span>
+                            <span class="muted" style="font-size:11px;">{{status}}</span>
                         </span>
                     </button>
                 </div>
@@ -53,30 +53,31 @@
     <div class="main-container">
         <header class="profile-pic-header">
             <div id="profile-pic-div">
-                <img id="profile-pic" src="../pictures/temp.jpeg" alt="Profile Picture">
+                <img id="profile-pic" src="{{#if currentUser.profilePic}}{{currentUser.profilePic}}{{else}}/pictures/temp.jpeg{{/if}}" alt="Profile Picture">
                 <footer id="input-footer">
-                    <label for="file-input" class="upload-button">Edit Profile Picture</label>
-                    <input type="file" id="upload-profile-pic" accept="image/*">
+                    <form action="/upload-profile-pic" method="POST" enctype="multipart/form-data">
+                        <label for="upload-profile-pic" class="upload-button">Edit Profile Picture</label>
+                        <input
+                            type="file"
+                            id="upload-profile-pic"
+                            name="profilePic"
+                            accept="image/*"
+                            hidden
+                            onchange="this.form.submit()">
+                    </form>
                     <p><i>Suggested: 200x200 pixels</i></p>
                 </footer>
             </div>
             <div id="student-information-div">
-                <h1>Dela Cruz, Juan</h1>
-                <p><strong>Username:</strong> juandelacruz</p>
-                <p><strong>Email:</strong> juandelacruz@example.com</p>
+                <h1>{{currentUser.lname}}, {{currentUser.fname}}</h1>
+                <p><strong>Username:</strong> {{currentUser.username}}</p>
+                <p><strong>Email:</strong> {{currentUser.email}}</p>
 
             </div>
             <div id="main-bio-box">
                 <strong>Bio:</strong>
                 <div id="bio-box">
-                    <p id="profile-bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit quod placeat omnis
-                        consequuntur et minima quia quidem tempore assumenda obcaecati, rerum, quas amet blanditiis
-                        natus! Odio quibusdam, dolores laboriosam labore harum animi recusandae quam sunt nisi quae qui
-                        libero culpa eos officiis sint vel voluptate exercitationem consectetur dolore! Harum quia nemo
-                        sequi deleniti ullam aspernatur saepe. Incidunt consequatur aliquam obcaecati vitae quos magni
-                        quas, cum, tenetur quidem repellendus corrupti id harum ratione animi consectetur reiciendis,
-                        neque numquam impedit minima modi aliquid cumque eligendi! Nobis nemo rem repellendus tempora
-                        quos iure veritatis, nulla, cum eveniet repellat, saepe dolores tempore ducimus. Obcaecati!</p>
+                    <p id="profile-bio">{{currentUser.bio}}</p>
                 </div>
                 <footer id="edit-profile-bio">
                     <button id="bio-btn" onclick="editBio()">Edit Bio</button>
@@ -88,9 +89,7 @@
 
 
         <footer>
-            <form>
-                <input id="logout-btn" type="submit" value="Logout">
-            </form>
+            <a href="/logout" id="logout-btn">Logout</a>
         </footer>
     </div>
 
@@ -99,21 +98,21 @@
 
         <div class="sidebar-top d-flex justify-content-between align-items-start p-4">
             <div class="text-white">
-                <div id="sidebar-fullname" class="fw-bold fs-5 lh-sm"></div>
-                <div id="sidebar-usertype" class="small opacity-75"></div>
+                <div id="sidebar-fullname" class="fw-bold fs-5 lh-sm">{{lname}}, {{fname}}</div>
+                <div id="sidebar-usertype" class="small opacity-75">{{status}}</div>
             </div>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
 
         <div class="offcanvas-body d-flex flex-column p-3">
             <nav class="nav nav-pills flex-column gap-2 mb-auto">
-                <a class="nav-link text-white active-green shadow-sm" href="/LabTechDashboardPage">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/labtechdashboard-page">
                     Dashboard
                 </a>
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="/LabTechProfilePage">
+                <a class="nav-link text-white active-green shadow-sm" href="/labtechprofile-page">
                     View Profile
                 </a>
-                <a class="nav-link text-white text-decoration-none hover-opacity" href="../src/FAQsPage.html">
+                <a class="nav-link text-white text-decoration-none hover-opacity" href="/faqs-page">
                     FAQs
                 </a>
             </nav>

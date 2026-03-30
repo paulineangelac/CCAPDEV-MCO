@@ -215,3 +215,9 @@
   padding: 6px 12px;
   width: 155px;
 }
+
+.lab-seat.is-previous {
+    background-color: #E3F2FD;
+    cursor: not-allowed;
+}
+

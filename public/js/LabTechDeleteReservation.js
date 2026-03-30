@@ -1,72 +1,54 @@
 let currentBookingId = null;
 
+
+function isWithin10Minutes(timeStr) {
+    const now = new Date();
+    const [time, modifier] = timeStr.split(' ');
+    let [hours, minutes] = time.split(':').map(Number);
+
+    if (modifier === 'PM' && hours !== 12) hours += 12;
+    if (modifier === 'AM' && hours === 12) hours = 0;
+
+    const reservationMinutes = hours * 60 + minutes;
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+
+    return nowMinutes >= reservationMinutes && nowMinutes <= reservationMinutes + 30;
+}
+
 // load students on page load
 async function loadStudents() {
-    const res = await fetch('/get-all-users');
-    const users = await res.json();
+    const res = await fetch('/get-todays-bookings');
+    const bookings = await res.json();
+
+    const eligible = bookings.filter(b => isWithin10Minutes(b.time));
+
     const select = document.getElementById('student-select');
-    users.forEach(user => {
-        select.innerHTML += `<option value="${user.username}">${user.fname} ${user.lname} (${user.username})</option>`;
+    select.innerHTML = '<option value="">-- Select a Student --</option>';
+    eligible.forEach(b => {
+        select.innerHTML += `<option value="${b._id}">${b.username} - ${b.roomNumber} - ${b.time}</option>`;
     });
+
+    // store for later
+    select.dataset.bookings = JSON.stringify(eligible);
 }
 
 // when student is selected, load their dates
-document.getElementById('student-select').addEventListener('change', async function () {
-    const username = this.value;
-    resetFrom('date');
-
-    if (!username) return;
-
-    const res = await fetch(`/get-student-bookings?username=${username}`);
-    const bookings = await res.json();
-
-    const dateSelect = document.getElementById('date-select');
-    dateSelect.innerHTML = '<option value="">-- Select a Date --</option>';
-
-    // get unique dates
-    const dates = [...new Set(bookings.map(b => b.date))];
-    dates.forEach(date => {
-        dateSelect.innerHTML += `<option value="${date}">${date}</option>`;
-    });
-    dateSelect.disabled = false;
-
-    // store bookings for later
-    dateSelect.dataset.bookings = JSON.stringify(bookings);
-});
-
-// when date is selected, load times
-document.getElementById('date-select').addEventListener('change', function () {
-    const selectedDate = this.value;
-    resetFrom('time');
-
-    if (!selectedDate) return;
-
+document.getElementById('student-select').addEventListener('change', function () {
     const bookings = JSON.parse(this.dataset.bookings || '[]');
-    const filtered = bookings.filter(b => b.date === selectedDate);
+    const selected = bookings.find(b => b._id === this.value);
 
-    const timeSelect = document.getElementById('time-select');
-    timeSelect.innerHTML = '<option value="">-- Select a Time --</option>';
-    filtered.forEach(b => {
-        timeSelect.innerHTML += `<option value="${b._id}">${b.time}</option>`;
-    });
-    timeSelect.disabled = false;
-});
-
-// when time is selected, autofill lab and seat
-document.getElementById('time-select').addEventListener('change', function () {
-    const bookingId = this.value;
-    resetFrom('details');
-
-    if (!bookingId) return;
-
-    const bookings = JSON.parse(document.getElementById('date-select').dataset.bookings || '[]');
-    const booking = bookings.find(b => b._id === bookingId);
-
-    if (booking) {
-        document.getElementById('lab-display').value = booking.roomNumber;
-        document.getElementById('seat-display').value = booking.seat;
+    if (selected) {
+        document.getElementById('date-select').value = selected.date;
+        document.getElementById('lab-display').value = selected.roomNumber;
+        document.getElementById('seat-display').value = selected.seat;
         document.getElementById('deleteBtn').disabled = false;
-        currentBookingId = bookingId;
+        currentBookingId = selected._id;
+    } else {
+        document.getElementById('date-select').value = '';
+        document.getElementById('lab-display').value = '';
+        document.getElementById('seat-display').value = '';
+        document.getElementById('deleteBtn').disabled = true;
+        currentBookingId = null;
     }
 });
 
@@ -78,31 +60,11 @@ document.getElementById('deleteBtn').addEventListener('click', async function ()
     const res = await fetch(`/cancel/${currentBookingId}`, { method: 'POST' });
     if (res.ok) {
         alert('Reservation deleted successfully.');
-        window.location.reload();
+        window.location.href = '/labtechdashboard-page';
     } else {
         alert('Something went wrong.');
     }
 });
-
-// reset helper
-function resetFrom(level) {
-    if (level === 'date') {
-        const dateSelect = document.getElementById('date-select');
-        dateSelect.innerHTML = '<option value="">-- Select a Date --</option>';
-        dateSelect.disabled = true;
-    }
-    if (level === 'date' || level === 'time') {
-        const timeSelect = document.getElementById('time-select');
-        timeSelect.innerHTML = '<option value="">-- Select a Time --</option>';
-        timeSelect.disabled = true;
-    }
-    if (level === 'date' || level === 'time' || level === 'details') {
-        document.getElementById('lab-display').value = '';
-        document.getElementById('seat-display').value = '';
-        document.getElementById('deleteBtn').disabled = true;
-        currentBookingId = null;
-    }
-}
 
 document.getElementById('cancelBtn').addEventListener('click', function() {
     window.location.href = '/labtechdashboard-page';
