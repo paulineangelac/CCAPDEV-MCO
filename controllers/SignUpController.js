@@ -14,13 +14,6 @@ const SignUpController = {
                     window.history.back(); 
                 </script>`)
             } // ex: 12411299
-            if(!email.endsWith('@dlsu.edu.ph')){
-                return res.send(
-                    `<script>
-                    alert('Enter a Valid DLSU email. Please try again.');
-                    window.history.back(); 
-                </script>`);
-            }
             //check if password matches
             if (password !== confirmPassword) {
                 return res.send(`
