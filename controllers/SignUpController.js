@@ -14,7 +14,6 @@ const SignUpController = {
                     window.history.back(); 
                 </script>`)
             } // ex: 12411299
-
             //check if password matches
             if (password !== confirmPassword) {
                 return res.send(`

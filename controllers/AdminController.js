@@ -37,6 +37,15 @@ const AdminController = {
                     </script>
                 `);
             }
+            // check if email is dlsu email or no
+            if (!email.endsWith("@dlsu.edu.ph")) {
+                return res.send(`
+                    <script>
+                        alert('You are onnly allowed to enter a valid DLSU email. Please try again.');
+                        window.history.back();
+                    </script>
+            `);
+            }
 
             // Salt rounds determine hashing complexity (10 is standard balance)
             const salting = 10;
